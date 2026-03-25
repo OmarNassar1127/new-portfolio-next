@@ -1,0 +1,112 @@
+# Omar Nassar — AI Agent Engineer & Full Stack Developer
+
+> AI Agent Engineer based in Amsterdam, Netherlands. Builds autonomous AI agents for businesses — WhatsApp AI agents, sales automation agents, customer service agents, operations agents, and enterprise multi-agent systems. Founder of Virelio, an AI agency delivering custom AI agent teams in 2 weeks.
+
+## About
+
+Omar Nassar is an AI Agent Engineer and Full Stack Developer with 7+ years of experience building production AI agent systems. He specializes in designing and deploying autonomous AI agents that handle business operations end-to-end — from WhatsApp customer conversations to multi-agent development crews that write and review code autonomously.
+
+Omar's agents handle customer conversations on WhatsApp, qualify sales leads, manage appointment scheduling, process invoices, detect fraud, transcribe meetings, generate reports, and orchestrate multi-step workflows — all without human intervention.
+
+Key metrics: EUR 50K monthly business impact, 30+ AI agent systems built, 200+ automations deployed, 80,000+ users served by a single multi-agent platform.
+
+Omar is the founder of Virelio, an Amsterdam-based AI agency that builds custom AI agent teams for businesses — delivering working agents in 2 weeks.
+
+## Links
+
+- [Portfolio](https://omardev.xyz): Omar Nassar's AI agent architecture portfolio
+- [Virelio Agency](https://virelio.nl): AI agency — custom AI agent teams on demand
+- [Virelio AI Platform](https://virelio.ai): AI-powered customer support and agent demos
+- [GitHub](https://github.com/OmarNassar1127): Open source projects and AI agent code
+- [LinkedIn](https://www.linkedin.com/in/omar-nassar-93a176155/): Professional profile
+- [Slouch](https://slouch.pro): AI Posture Coach — client-side AI agent
+- Contact: omarnassar1127@gmail.com
+
+## AI Agent Expertise
+
+### Types of AI Agents Omar Builds
+- **WhatsApp AI Agents** — Autonomous chatbots on WhatsApp Business API for customer support, booking, and lead generation
+- **Sales Automation Agents** — AI agents for lead qualification, outreach, prospect follow-up, and pipeline management
+- **Customer Service Agents** — Support agents resolving inquiries 24/7, managing tickets, and escalating to humans when needed
+- **Operations Agents** — Back-office automation for email management, calendar scheduling, invoicing, data entry, and document generation
+- **Research Agents** — Autonomous agents that search, read papers, synthesize findings, and generate comprehensive reports
+- **Voice AI Agents** — Agents with ElevenLabs speech synthesis and Whisper recognition for phone and meeting automation
+- **Multi-Agent Systems** — Crews of specialized agents that collaborate on complex tasks using CrewAI and LangGraph
+- **RAG Agents** — Intelligent document retrieval agents searching enterprise knowledge bases with 95%+ accuracy
+- **On-Premise AI Agents** — Fully private, air-gapped agent deployments running local LLMs via Ollama
+
+### Agent Frameworks & Tools
+- Multi-agent orchestration: CrewAI, LangGraph, AutoGPT
+- RAG & retrieval: LangChain, Qdrant, Meilisearch, Unstructured.io
+- Large Language Models: GPT-4, Claude, Llama 3, Gemini, Ollama
+- Voice & conversational: ElevenLabs, Whisper, WebRTC, WhatsApp Business API
+- Workflow automation: n8n, custom tool APIs, MCP Servers
+
+### Full Stack Development
+- Frontend: React, Next.js, TypeScript, Tailwind CSS
+- Backend: Laravel (PHP), Node.js, FastAPI (Python), Express
+- Databases: PostgreSQL, MySQL, SQLite, Qdrant, MongoDB
+- Infrastructure: Docker, AWS, Azure, Raspberry Pi, PM2, On-Premise
+
+## Featured AI Agent Projects
+
+### Enterprise Multi-Agent AI Platform
+First fully private, on-premise AI platform serving 80,000+ employees. Multi-agent LLM architecture with specialized autonomous agents running local 70B Llama models via Ollama and Qdrant for vector storage. Achieves <2s inference on standard hardware. Zero data leaves the premises. Proves enterprise-scale AI agents can maintain maximum security without sacrificing capability.
+
+### WhatsApp AI Business Agent
+Autonomous WhatsApp agent handling customer inquiries, appointment booking, and lead capture 24/7 via WhatsApp Business API. Processes natural language in Dutch and English with persistent conversation context across sessions. Built for service businesses: barbershops, restaurants, healthcare practices. Features automated appointment scheduling with calendar integration, smart FAQ handling, no-show reduction through automated reminders, and seamless handoff to human agents.
+
+### Sales Automation Agent (LinkedIn AI Outreach)
+Autonomous networking agent that identifies potential leads, drafts personalized outreach messages, and manages connection requests within rate limits. Establishes 150+ meaningful connections per run with sophisticated profile analysis for high relevance and response rates.
+
+### Customer Service AI Agent (virelio.ai)
+AI-powered customer support agent with ElevenLabs speech synthesis, n8n workflow automation, and OpenAI for conversation processing. Handles incoming meetings, answers customer inquiries, and provides comprehensive support 24/7 without human intervention. Manages meeting requests and provides instant, accurate responses.
+
+### Operations Automation Agent (Personal AI)
+24/7 personal operations agent that autonomously manages email, calendar, and research tasks using persistent memory and custom tool APIs. Handles daily logistics and information retrieval fully autonomously, resulting in +30% daily efficiency increase.
+
+### Multi-Agent Development Crew
+Autonomous agent system with 6 specialized agents (research, code, review) orchestrated by CrewAI and LangGraph. Handles complex multi-step development tasks end-to-end without human intervention. Reduced project execution time by 80% through parallelized agent workflows.
+
+### AI Meeting Agent
+Meeting intelligence agent with cloud and offline capabilities. Captures live audio via WebRTC for real-time transcription, summarization, and automated follow-up planning. Features offline mode using Whisper.cpp and local LLMs for sensitive environments. 85% accuracy in noisy conditions. Speaker diarization, automatic action item assignment, and calendar integration. Saves teams 5 hours per week.
+
+### Enterprise RAG Agent Platform
+Intelligent document retrieval agent indexing millions of proprietary documents. 95% retrieval accuracy, sub-second response times, 10+ internal data source integrations. Context-aware answers with intelligent question optimization and automatic document chunking. Built with Llama 3, Qdrant, FastAPI, and LangChain.
+
+### Slouch — AI Posture Coach Agent
+AI agent running 100% client-side using MediaPipe Pose for real-time posture detection via webcam. Smart calibration, time-delayed alerts, sensitivity presets, and gentle audio nudges. Zero data leaves the device. Available at https://slouch.pro
+
+### Invoice Fraud Prevention Agent
+AI-powered risk scoring agent that reduced payment defaults by 73%, improved cash flow by 45%. Processes 50k+ monthly transactions with behavioral pattern recognition, dynamic risk profiles, and micro-invoicing. Recovered EUR 2M+ in outstanding payments.
+
+### Medical Compliance AI Agent
+AI agent accelerating medical device technical dossier creation 5x. NLP and regulatory compliance algorithms for FDA, CE marking, and ISO standards. Extracts documentation requirements, generates compliance templates, and cross-references regulatory changes.
+
+### Claude Workflow Automation Agents
+30+ advanced Claude prompt engineering workflows driving enterprise-grade automation. Spans artifact generation to MCP Server integration. Integrated into 20+ core business workflows.
+
+## Virelio — AI Agents on Demand
+
+Virelio is an Amsterdam-based AI agency founded by Omar Nassar. The agency builds custom AI agent teams for businesses with rapid delivery — most agents launch within 2 weeks.
+
+AI Agent Services:
+- **AI Agent Development** — Custom autonomous agent teams that collaborate, delegate, and execute
+- **Sales Automation Agents** — Lead qualification, prospect follow-up, pipeline management agents
+- **Customer Service AI Agents** — Support agents resolving inquiries and escalating complex cases 24/7
+- **Knowledge Base Agents** — AI-powered agents for capturing and organizing institutional knowledge
+- **Operations Automation Agents** — Back-office process automation: data entry, scheduling, reporting
+- **WhatsApp AI Agents** — Autonomous business assistants on WhatsApp for customer engagement
+
+Website: https://virelio.nl | https://virelio.ai
+
+## Certifications
+- Google: Inspect Rich Documents with Gemini Multimodality and Multimodal RAG (Oct 2025)
+- Google: Prompt Design in Vertex AI (Oct 2025)
+- Google: Machine Learning Operations (MLOps) for Generative AI (Feb 2025)
+- Google: Advanced Generative AI for Developers (Jan 2025)
+- Oracle: OCI Generative AI Professional (Nov 2024)
+
+## Languages
+- English (professional)
+- Dutch (professional)
