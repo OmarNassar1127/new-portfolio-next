@@ -132,7 +132,19 @@ export default function Experience() {
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="text-xs text-[var(--text-muted)]">{entry.subtitle}</span>
                           <span className="text-[var(--text-muted)] opacity-40">·</span>
-                          <span className="text-xs font-semibold text-[var(--primary)]">{company}</span>
+                          {entry.companyUrl ? (
+                            <a
+                              href={entry.companyUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs font-semibold text-[var(--primary)] hover:text-[var(--accent-cyan)] transition-colors inline-flex items-center gap-1"
+                            >
+                              {company}
+                              <i className="ri-external-link-line text-[10px] opacity-60" />
+                            </a>
+                          ) : (
+                            <span className="text-xs font-semibold text-[var(--primary)]">{company}</span>
+                          )}
                         </div>
                       </div>
 

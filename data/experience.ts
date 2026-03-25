@@ -16,6 +16,8 @@ export interface ExperienceEntry {
   };
   /** Path relative to /public/images/ */
   icon: string;
+  /** Company website URL */
+  companyUrl: string | null;
   color: string;
   technologies: string[];
   description: {
@@ -43,6 +45,7 @@ export const experienceData: ExperienceEntry[] = [
       nl: "MBO Amstelland",
     },
     icon: "/images/front-end.png",
+    companyUrl: null,
     color: "from-blue-500 to-blue-600",
     technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL", "C#", "WordPress"],
     description: {
@@ -68,6 +71,7 @@ export const experienceData: ExperienceEntry[] = [
       nl: "CSDM",
     },
     icon: "/images/backend.png",
+    companyUrl: "https://www.csdigitalmedia.nl/",
     color: "from-green-500 to-green-600",
     technologies: ["ReactJS", "GraphQL", "Frontend Architecture"],
     description: {
@@ -93,6 +97,7 @@ export const experienceData: ExperienceEntry[] = [
       nl: "Zelfstandige Studie",
     },
     icon: "/images/apps.png",
+    companyUrl: null,
     color: "from-purple-500 to-purple-600",
     technologies: ["Blockchain", "Smart Contracts", "Cryptography", "Web3"],
     description: {
@@ -118,6 +123,7 @@ export const experienceData: ExperienceEntry[] = [
       nl: "Bitsliced",
     },
     icon: "/images/design.png",
+    companyUrl: null,
     color: "from-orange-500 to-orange-600",
     technologies: ["NFT", "Product Strategy", "Team Leadership", "Teaching"],
     description: {
@@ -143,6 +149,7 @@ export const experienceData: ExperienceEntry[] = [
       nl: "Vloto B.V.",
     },
     icon: "/images/apps.png",
+    companyUrl: "https://vloto.nl/",
     color: "from-teal-500 to-teal-600",
     technologies: [
       "Laravel",
@@ -175,6 +182,7 @@ export const experienceData: ExperienceEntry[] = [
       nl: "Virelio Agency",
     },
     icon: "/images/front-end.png",
+    companyUrl: "https://virelio.nl/",
     color: "from-purple-600 to-pink-600",
     technologies: [
       "LangChain",
