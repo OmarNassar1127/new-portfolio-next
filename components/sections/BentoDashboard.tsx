@@ -31,20 +31,19 @@ function AnimatedCounter({
 
 /* ─── Tech stack pills ────────────────────────────────────────────────── */
 const techStack = [
+  { name: "Anthropic", color: "rgba(204,115,68,0.15)", text: "#cc7344" },
+  { name: "OpenAI", color: "rgba(16,163,127,0.15)", text: "#10a37f" },
+  { name: "LangChain", color: "rgba(136,115,239,0.15)", text: "var(--primary)" },
+  { name: "CrewAI", color: "rgba(255,100,100,0.15)", text: "#ff6464" },
   { name: "React", color: "rgba(97,218,251,0.15)", text: "#61dafb" },
   { name: "Python", color: "rgba(255,212,59,0.12)", text: "#ffd43b" },
   { name: "Node.js", color: "rgba(104,183,68,0.15)", text: "#68b744" },
   { name: "Next.js", color: "rgba(232,234,240,0.08)", text: "var(--text)" },
   { name: "Laravel", color: "rgba(255,77,55,0.12)", text: "#ff4d37" },
   { name: "TypeScript", color: "rgba(49,120,198,0.15)", text: "#3178c6" },
+  { name: "Azure", color: "rgba(0,120,212,0.15)", text: "#0078d4" },
   { name: "Docker", color: "rgba(32,159,223,0.15)", text: "#209fdf" },
-  {
-    name: "LangChain",
-    color: "rgba(136,115,239,0.15)",
-    text: "var(--primary)",
-  },
   { name: "FastAPI", color: "rgba(0,150,136,0.15)", text: "#009688" },
-  { name: "OpenAI", color: "rgba(16,163,127,0.15)", text: "#10a37f" },
   { name: "Supabase", color: "rgba(62,207,142,0.15)", text: "#3ecf8e" },
   { name: "Tailwind", color: "rgba(56,189,248,0.15)", text: "#38bdf8" },
 ];
