@@ -17,138 +17,76 @@
       padding: 60px 70px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     }
-    /* Gradient blobs */
     .blob1 {
-      position: absolute;
-      top: -80px;
-      left: -80px;
-      width: 400px;
-      height: 400px;
-      background: rgba(136, 115, 239, 0.2);
-      border-radius: 50%;
-      filter: blur(100px);
+      position: absolute; top: -80px; left: -80px;
+      width: 400px; height: 400px;
+      background: rgba(136, 115, 239, 0.2); border-radius: 50%; filter: blur(100px);
     }
     .blob2 {
-      position: absolute;
-      bottom: -100px;
-      right: -100px;
-      width: 450px;
-      height: 450px;
-      background: rgba(0, 212, 255, 0.15);
-      border-radius: 50%;
-      filter: blur(120px);
+      position: absolute; bottom: -100px; right: -100px;
+      width: 450px; height: 450px;
+      background: rgba(0, 212, 255, 0.15); border-radius: 50%; filter: blur(120px);
     }
-    .blob3 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 500px;
-      background: rgba(136, 115, 239, 0.06);
-      border-radius: 50%;
-      filter: blur(100px);
-    }
-    /* Grid pattern */
     .grid {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background-image:
         linear-gradient(rgba(136, 115, 239, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(136, 115, 239, 0.03) 1px, transparent 1px);
       background-size: 60px 60px;
     }
-    .content { position: relative; z-index: 1; }
-    .top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .content { position: relative; z-index: 2; }
+    .top { display: flex; align-items: center; justify-content: space-between; }
     .domain {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #8873ef;
-      font-size: 18px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 10px;
+      color: #8873ef; font-size: 18px;
+      font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 0.05em;
     }
-    .domain-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #8873ef;
-    }
+    .domain-dot { width: 10px; height: 10px; border-radius: 50%; background: #8873ef; }
     .status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      border-radius: 100px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.2);
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: 100px;
+      background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);
     }
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-    }
-    .status-text {
-      color: #4ade80;
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .middle { position: relative; z-index: 1; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    .status-text { color: #4ade80; font-size: 14px; font-weight: 600; }
+    .middle { position: relative; z-index: 2; }
     .name {
-      font-size: 76px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      margin-bottom: 12px;
+      font-size: 76px; font-weight: 800; color: #ffffff;
+      letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 12px;
     }
     .title {
-      font-size: 32px;
-      font-weight: 300;
-      letter-spacing: -0.01em;
+      font-size: 32px; font-weight: 300; letter-spacing: -0.01em;
       background: linear-gradient(135deg, #8873ef, #00d4ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .bottom {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      position: relative;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      position: relative; z-index: 2;
+    }
+    .stats { display: flex; gap: 40px; }
+    .stat-value { font-size: 28px; font-weight: 800; color: #fff; }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .tags { display: flex; gap: 10px; }
+    .tag {
+      padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 500;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* JARVIS AI Brain visualization */
+    .jarvis {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 340px;
+      height: 340px;
       z-index: 1;
     }
-    .stats {
-      display: flex;
-      gap: 40px;
-    }
-    .stat-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: #fff;
-    }
-    .stat-label {
-      font-size: 13px;
-      color: rgba(255,255,255,0.4);
-      margin-top: 2px;
-    }
-    .tags {
-      display: flex;
-      gap: 10px;
-    }
-    .tag {
-      padding: 8px 16px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 500;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.6);
+    .jarvis svg {
+      width: 100%;
+      height: 100%;
+      opacity: 0.85;
     }
   </style>
 </head>
@@ -156,8 +94,122 @@
   <div class="og">
     <div class="blob1"></div>
     <div class="blob2"></div>
-    <div class="blob3"></div>
     <div class="grid"></div>
+
+    <!-- JARVIS-style AI brain -->
+    <div class="jarvis">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="200" cy="200" r="170" stroke="url(#grad1)" stroke-width="1" opacity="0.3"/>
+        <circle cx="200" cy="200" r="155" stroke="url(#grad1)" stroke-width="0.5" opacity="0.2" stroke-dasharray="8 6"/>
+
+        <!-- Middle rings -->
+        <circle cx="200" cy="200" r="130" stroke="#00d4ff" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="200" cy="200" r="115" stroke="#8873ef" stroke-width="0.5" opacity="0.3" stroke-dasharray="4 8"/>
+
+        <!-- Inner core ring -->
+        <circle cx="200" cy="200" r="85" stroke="url(#grad2)" stroke-width="2" opacity="0.6"/>
+        <circle cx="200" cy="200" r="60" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+
+        <!-- Core glow -->
+        <circle cx="200" cy="200" r="35" fill="url(#coreGlow)" opacity="0.8"/>
+        <circle cx="200" cy="200" r="18" fill="url(#coreCenter)" opacity="0.9"/>
+        <circle cx="200" cy="200" r="6" fill="#ffffff" opacity="0.9"/>
+
+        <!-- Neural connection lines radiating from center -->
+        <!-- Top -->
+        <line x1="200" y1="165" x2="200" y2="45" stroke="url(#lineGrad)" stroke-width="0.8" opacity="0.4"/>
+        <line x1="200" y1="165" x2="145" y2="55" stroke="url(#lineGrad)" stroke-width="0.5" opacity="0.25"/>
+        <line x1="200" y1="165" x2="255" y2="55" stroke="url(#lineGrad)" stroke-width="0.5" opacity="0.25"/>
+
+        <!-- Right -->
+        <line x1="235" y1="200" x2="355" y2="200" stroke="url(#lineGrad2)" stroke-width="0.8" opacity="0.4"/>
+        <line x1="235" y1="200" x2="345" y2="145" stroke="url(#lineGrad2)" stroke-width="0.5" opacity="0.25"/>
+        <line x1="235" y1="200" x2="345" y2="255" stroke="url(#lineGrad2)" stroke-width="0.5" opacity="0.25"/>
+
+        <!-- Bottom -->
+        <line x1="200" y1="235" x2="200" y2="355" stroke="url(#lineGrad)" stroke-width="0.8" opacity="0.4"/>
+        <line x1="200" y1="235" x2="145" y2="345" stroke="url(#lineGrad)" stroke-width="0.5" opacity="0.25"/>
+        <line x1="200" y1="235" x2="255" y2="345" stroke="url(#lineGrad)" stroke-width="0.5" opacity="0.25"/>
+
+        <!-- Left -->
+        <line x1="165" y1="200" x2="45" y2="200" stroke="url(#lineGrad2)" stroke-width="0.8" opacity="0.4"/>
+        <line x1="165" y1="200" x2="55" y2="145" stroke="url(#lineGrad2)" stroke-width="0.5" opacity="0.25"/>
+        <line x1="165" y1="200" x2="55" y2="255" stroke="url(#lineGrad2)" stroke-width="0.5" opacity="0.25"/>
+
+        <!-- Diagonal lines -->
+        <line x1="225" y1="175" x2="320" y2="80" stroke="#8873ef" stroke-width="0.5" opacity="0.2"/>
+        <line x1="175" y1="175" x2="80" y2="80" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
+        <line x1="225" y1="225" x2="320" y2="320" stroke="#00d4ff" stroke-width="0.5" opacity="0.2"/>
+        <line x1="175" y1="225" x2="80" y2="320" stroke="#8873ef" stroke-width="0.5" opacity="0.2"/>
+
+        <!-- Neural nodes on the rings -->
+        <circle cx="200" cy="30" r="4" fill="#00d4ff" opacity="0.7"/>
+        <circle cx="200" cy="370" r="4" fill="#00d4ff" opacity="0.7"/>
+        <circle cx="30" cy="200" r="4" fill="#8873ef" opacity="0.7"/>
+        <circle cx="370" cy="200" r="4" fill="#8873ef" opacity="0.7"/>
+
+        <circle cx="320" cy="80" r="3" fill="#00d4ff" opacity="0.5"/>
+        <circle cx="80" cy="80" r="3" fill="#8873ef" opacity="0.5"/>
+        <circle cx="320" cy="320" r="3" fill="#8873ef" opacity="0.5"/>
+        <circle cx="80" cy="320" r="3" fill="#00d4ff" opacity="0.5"/>
+
+        <!-- Nodes on middle ring -->
+        <circle cx="270" cy="70" r="2.5" fill="#00d4ff" opacity="0.6"/>
+        <circle cx="130" cy="70" r="2.5" fill="#8873ef" opacity="0.6"/>
+        <circle cx="330" cy="150" r="2.5" fill="#8873ef" opacity="0.5"/>
+        <circle cx="70" cy="150" r="2.5" fill="#00d4ff" opacity="0.5"/>
+        <circle cx="330" cy="250" r="2.5" fill="#00d4ff" opacity="0.5"/>
+        <circle cx="70" cy="250" r="2.5" fill="#8873ef" opacity="0.5"/>
+        <circle cx="270" cy="330" r="2.5" fill="#8873ef" opacity="0.6"/>
+        <circle cx="130" cy="330" r="2.5" fill="#00d4ff" opacity="0.6"/>
+
+        <!-- Arc segments on outer ring -->
+        <path d="M 310 65 A 170 170 0 0 1 370 175" stroke="#00d4ff" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
+        <path d="M 90 335 A 170 170 0 0 1 30 225" stroke="#8873ef" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
+        <path d="M 65 90 A 170 170 0 0 1 175 30" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.25" stroke-linecap="round"/>
+        <path d="M 335 310 A 170 170 0 0 1 225 370" stroke="#8873ef" stroke-width="1.5" fill="none" opacity="0.25" stroke-linecap="round"/>
+
+        <!-- Hexagon in the core -->
+        <polygon points="200,152 241,176 241,224 200,248 159,224 159,176" stroke="#00d4ff" stroke-width="1" fill="none" opacity="0.25"/>
+
+        <!-- Small data text labels -->
+        <text x="355" y="197" fill="#00d4ff" font-size="8" font-family="monospace" opacity="0.4">LLM</text>
+        <text x="30" y="197" fill="#8873ef" font-size="8" font-family="monospace" opacity="0.4">RAG</text>
+        <text x="188" y="25" fill="#00d4ff" font-size="8" font-family="monospace" opacity="0.4">NLP</text>
+        <text x="182" y="390" fill="#8873ef" font-size="8" font-family="monospace" opacity="0.4">AGENT</text>
+
+        <!-- Gradients -->
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8873ef"/>
+            <stop offset="100%" stop-color="#00d4ff"/>
+          </linearGradient>
+          <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00d4ff"/>
+            <stop offset="100%" stop-color="#8873ef"/>
+          </linearGradient>
+          <linearGradient id="lineGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8873ef" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#8873ef" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.4"/>
+            <stop offset="60%" stop-color="#8873ef" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#8873ef" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="coreCenter" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+            <stop offset="50%" stop-color="#00d4ff" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#8873ef" stop-opacity="0.1"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
 
     <div class="top content">
       <div class="domain">
@@ -186,8 +238,8 @@
           <div class="stat-label">Automations</div>
         </div>
         <div>
-          <div class="stat-value">80K+</div>
-          <div class="stat-label">Users Served</div>
+          <div class="stat-value">7+</div>
+          <div class="stat-label">Years in Tech</div>
         </div>
       </div>
       <div class="tags">
