@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .og {
+      width: 1200px;
+      height: 630px;
+      background: #0a0f1c;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 70px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+    /* Gradient blobs */
+    .blob1 {
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 400px;
+      height: 400px;
+      background: rgba(136, 115, 239, 0.2);
+      border-radius: 50%;
+      filter: blur(100px);
+    }
+    .blob2 {
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: rgba(0, 212, 255, 0.15);
+      border-radius: 50%;
+      filter: blur(120px);
+    }
+    .blob3 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: rgba(136, 115, 239, 0.06);
+      border-radius: 50%;
+      filter: blur(100px);
+    }
+    /* Grid pattern */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(136, 115, 239, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(136, 115, 239, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .content { position: relative; z-index: 1; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .domain {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #8873ef;
+      font-size: 18px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      letter-spacing: 0.05em;
+    }
+    .domain-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #8873ef;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+    .status-text {
+      color: #4ade80;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .middle { position: relative; z-index: 1; }
+    .name {
+      font-size: 76px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+    .title {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, #8873ef, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+    .stats {
+      display: flex;
+      gap: 40px;
+    }
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 2px;
+    }
+    .tags {
+      display: flex;
+      gap: 10px;
+    }
+    .tag {
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <div class="blob3"></div>
+    <div class="grid"></div>
+
+    <div class="top content">
+      <div class="domain">
+        <div class="domain-dot"></div>
+        omardev.xyz
+      </div>
+      <div class="status">
+        <div class="status-dot"></div>
+        <div class="status-text">Available for AI Projects</div>
+      </div>
+    </div>
+
+    <div class="middle content">
+      <div class="name">Omar Nassar</div>
+      <div class="title">AI Engineer & Full Stack Developer</div>
+    </div>
+
+    <div class="bottom content">
+      <div class="stats">
+        <div>
+          <div class="stat-value">30+</div>
+          <div class="stat-label">AI Systems</div>
+        </div>
+        <div>
+          <div class="stat-value">200+</div>
+          <div class="stat-label">Automations</div>
+        </div>
+        <div>
+          <div class="stat-value">80K+</div>
+          <div class="stat-label">Users Served</div>
+        </div>
+      </div>
+      <div class="tags">
+        <div class="tag">Multi-Agent Systems</div>
+        <div class="tag">RAG</div>
+        <div class="tag">WhatsApp AI</div>
+        <div class="tag">LangChain</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

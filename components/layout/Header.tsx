@@ -71,13 +71,13 @@ export default function Header() {
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setScrollProgress(progress);
 
-      // Show/hide on scroll direction
-      if (scrollTop < 60) {
+      // Show/hide on scroll direction — wider threshold to avoid flicker
+      if (scrollTop < 100) {
         setIsVisible(true);
-      } else if (scrollTop > lastScrollY.current + 8) {
+      } else if (scrollTop > lastScrollY.current + 40) {
         setIsVisible(false);
         setIsMenuOpen(false);
-      } else if (scrollTop < lastScrollY.current - 8) {
+      } else if (scrollTop < lastScrollY.current - 20) {
         setIsVisible(true);
       }
       lastScrollY.current = scrollTop;
@@ -162,8 +162,8 @@ export default function Header() {
         aria-label="Site navigation"
         className={cn(
           'hidden lg:block fixed top-0 left-0 w-full z-50 pointer-events-none',
-          'transition-transform duration-300 ease-out',
-          isVisible ? 'translate-y-0' : '-translate-y-full',
+          'transition-all duration-300 ease-out',
+          isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0',
         )}
       >
         <div className="flex justify-center px-4 pt-5">
@@ -250,8 +250,8 @@ export default function Header() {
         className={cn(
           'lg:hidden fixed top-0 left-0 right-0 z-50',
           'bg-[var(--card)]/90 backdrop-blur-xl border-b border-[var(--border)]',
-          'transition-transform duration-300 ease-out',
-          isVisible ? 'translate-y-0' : '-translate-y-full',
+          'transition-all duration-300 ease-out',
+          isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none',
         )}
       >
         <div className="flex items-center justify-between h-14 px-4">

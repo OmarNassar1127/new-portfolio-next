@@ -56,10 +56,10 @@ export const metadata: Metadata = {
       "AI Agent Engineer building autonomous multi-agent systems, WhatsApp AI agents, sales agents, customer service agents, and enterprise RAG platforms. 30+ AI systems deployed, 200+ automations, serving 80,000+ users. Amsterdam.",
     images: [
       {
-        url: "/images/me2.png",
-        width: 512,
-        height: 512,
-        alt: "Omar Nassar - AI Agent Engineer",
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Omar Nassar — AI Engineer & Full Stack Developer | 30+ AI Systems, 200+ Automations, 80K+ Users Served",
       },
     ],
     locale: "en_US",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "Omar Nassar | AI Agent Engineer — Autonomous AI Systems",
     description:
       "Building autonomous AI agents: WhatsApp agents, sales agents, customer service agents, operations agents, multi-agent systems. 30+ AI systems deployed. Amsterdam.",
-    images: ["/images/me2.png"],
+    images: ["/og-image.png"],
     site: "@GodelTrabuco69",
     creator: "@GodelTrabuco69",
   },
