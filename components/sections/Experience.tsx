@@ -103,9 +103,10 @@ export default function Experience() {
                       <Image
                         src={entry.icon}
                         alt={title}
-                        width={24}
-                        height={24}
-                        className="object-contain brightness-0 invert"
+                        width={28}
+                        height={28}
+                        className="object-contain brightness-0 invert drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]"
+                        style={{ filter: 'brightness(0) invert(1) drop-shadow(0 0 1px white)', opacity: 1 }}
                       />
                     </div>
                   </div>

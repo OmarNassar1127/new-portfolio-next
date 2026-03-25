@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import { personal } from '@/data/personal';
-import { useLanguage } from '@/hooks/useLanguage';
-import { cn } from '@/lib/utils';
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import { personal } from "@/data/personal";
+import { useLanguage } from "@/hooks/useLanguage";
+import { cn } from "@/lib/utils";
 
 /* ─── Content data ────────────────────────────────────────────────────── */
 const paragraphs = {
@@ -22,56 +22,70 @@ const paragraphs = {
 const socialProof = [
   {
     href: personal.github,
-    icon: 'ri-github-fill',
-    label: { en: 'GitHub', nl: 'GitHub' },
+    icon: "ri-github-fill",
+    label: { en: "GitHub", nl: "GitHub" },
   },
   {
     href: personal.linkedin,
-    icon: 'ri-linkedin-fill',
-    label: { en: 'LinkedIn', nl: 'LinkedIn' },
+    icon: "ri-linkedin-fill",
+    label: { en: "LinkedIn", nl: "LinkedIn" },
   },
   {
-    href: personal.virelio.ai,
-    icon: 'ri-rocket-2-line',
-    label: { en: 'Virelio', nl: 'Virelio' },
+    href: personal.virelio.nl,
+    icon: "ri-rocket-2-line",
+    label: { en: "Virelio", nl: "Virelio" },
   },
 ];
 
 /* ─── Skill chips ─────────────────────────────────────────────────────── */
 const highlights = [
-  { icon: 'ri-cpu-line', text: { en: 'On-premise AI', nl: 'On-premise AI' } },
-  { icon: 'ri-team-line', text: { en: 'Multi-agent Systems', nl: 'Multi-agent Systemen' } },
-  { icon: 'ri-database-2-line', text: { en: 'RAG Architectures', nl: 'RAG Architecturen' } },
-  { icon: 'ri-chat-voice-line', text: { en: 'Voice AI', nl: 'Voice AI' } },
+  { icon: "ri-cpu-line", text: { en: "On-premise AI", nl: "On-premise AI" } },
+  {
+    icon: "ri-team-line",
+    text: { en: "Multi-agent Systems", nl: "Multi-agent Systemen" },
+  },
+  {
+    icon: "ri-database-2-line",
+    text: { en: "RAG Architectures", nl: "RAG Architecturen" },
+  },
+  { icon: "ri-chat-voice-line", text: { en: "Voice AI", nl: "Voice AI" } },
 ];
 
 /* ─── About Section ───────────────────────────────────────────────────── */
 export default function About() {
   const { language, t } = useLanguage();
-  const lang = language === 'NL' ? 'nl' : 'en';
+  const lang = language === "NL" ? "nl" : "en";
 
   /* Subtle parallax on photo */
   const photoContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: photoContainerRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
-  const photoY = useTransform(scrollYProgress, [0, 1], ['4%', '-4%']);
-  const photoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.97, 1, 0.97]);
+  const photoY = useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]);
+  const photoScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.97, 1, 0.97],
+  );
 
   /* Entrance variants */
   const slideLeft = {
     initial: { opacity: 0, x: -40 },
     whileInView: { opacity: 1, x: 0 },
-    viewport: { once: true, margin: '-80px' },
+    viewport: { once: true, margin: "-80px" },
     transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
   };
 
   const slideRight = {
     initial: { opacity: 0, x: 40 },
     whileInView: { opacity: 1, x: 0 },
-    viewport: { once: true, margin: '-80px' },
-    transition: { duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const },
+    viewport: { once: true, margin: "-80px" },
+    transition: {
+      duration: 0.75,
+      delay: 0.1,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   };
 
   return (
@@ -85,25 +99,24 @@ export default function About() {
         aria-hidden="true"
         style={{
           background:
-            'radial-gradient(ellipse 55% 60% at 0% 50%, rgba(136,115,239,0.06) 0%, transparent 60%)',
+            "radial-gradient(ellipse 55% 60% at 0% 50%, rgba(136,115,239,0.06) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
-
           {/* ── Left column: text ──────────────────────────────────────── */}
           <motion.div {...slideLeft} className="flex flex-col gap-6">
             {/* Label */}
             <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
-              {t('About', 'Over Mij')}
+              {t("About", "Over Mij")}
             </p>
 
             {/* Heading */}
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-4xl lg:text-5xl">
-              {t('Building AI that ', 'AI bouwen die ')}
+              {t("Building AI that ", "AI bouwen die ")}
               <span className="gradient-text-static">
-                {t('actually works.', 'echt werkt.')}
+                {t("actually works.", "echt werkt.")}
               </span>
             </h2>
 
@@ -125,12 +138,12 @@ export default function About() {
                 <span
                   key={h.text.en}
                   className={cn(
-                    'inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5',
-                    'text-xs font-medium text-[var(--text-muted)] transition-all duration-200',
-                    'hover:border-[rgba(136,115,239,0.35)] hover:text-[var(--primary)]',
+                    "inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5",
+                    "text-xs font-medium text-[var(--text-muted)] transition-all duration-200",
+                    "hover:border-[rgba(136,115,239,0.35)] hover:text-[var(--primary)]",
                   )}
                 >
-                  <i className={cn(h.icon, 'text-sm text-[var(--primary)]')} />
+                  <i className={cn(h.icon, "text-sm text-[var(--primary)]")} />
                   {h.text[lang]}
                 </span>
               ))}
@@ -145,14 +158,14 @@ export default function About() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    'group inline-flex items-center gap-2 text-sm font-semibold',
-                    'text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--primary)]',
+                    "group inline-flex items-center gap-2 text-sm font-semibold",
+                    "text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--primary)]",
                   )}
                 >
                   <i
                     className={cn(
                       link.icon,
-                      'text-lg transition-transform duration-200 group-hover:scale-110',
+                      "text-lg transition-transform duration-200 group-hover:scale-110",
                     )}
                   />
                   {link.label[lang]}
@@ -174,7 +187,7 @@ export default function About() {
                 className="absolute -inset-3 rounded-3xl opacity-50 blur-2xl"
                 style={{
                   background:
-                    'radial-gradient(ellipse at center, rgba(136,115,239,0.25) 0%, rgba(0,212,255,0.1) 60%, transparent 100%)',
+                    "radial-gradient(ellipse at center, rgba(136,115,239,0.25) 0%, rgba(0,212,255,0.1) 60%, transparent 100%)",
                 }}
                 aria-hidden="true"
               />
@@ -183,9 +196,9 @@ export default function About() {
               <motion.div
                 style={{ y: photoY, scale: photoScale }}
                 className={cn(
-                  'relative h-[380px] w-[300px] overflow-hidden rounded-3xl sm:h-[460px] sm:w-[360px]',
-                  'border border-[rgba(136,115,239,0.25)]',
-                  'shadow-[0_32px_80px_-16px_rgba(0,0,0,0.4)]',
+                  "relative h-[380px] w-[300px] overflow-hidden rounded-3xl sm:h-[460px] sm:w-[360px]",
+                  "border border-[rgba(136,115,239,0.25)]",
+                  "shadow-[0_32px_80px_-16px_rgba(0,0,0,0.4)]",
                 )}
               >
                 <Image
@@ -205,10 +218,14 @@ export default function About() {
                 initial={{ opacity: 0, scale: 0.8, y: 10 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] as const }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.45,
+                  ease: [0.22, 1, 0.36, 1] as const,
+                }}
                 className={cn(
-                  'absolute -bottom-4 -left-4 flex items-center gap-2 rounded-2xl px-4 py-2.5',
-                  'glass border border-[var(--border)] shadow-lg',
+                  "absolute -bottom-4 -left-4 flex items-center gap-2 rounded-2xl px-4 py-2.5",
+                  "glass border border-[var(--border)] shadow-lg",
                 )}
               >
                 <span className="relative flex h-2.5 w-2.5">
@@ -216,7 +233,7 @@ export default function About() {
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
                 </span>
                 <span className="text-xs font-semibold text-[var(--text)]">
-                  {t('Open to work', 'Beschikbaar')}
+                  {t("Open to work", "Beschikbaar")}
                 </span>
               </motion.div>
 
@@ -225,14 +242,20 @@ export default function About() {
                 initial={{ opacity: 0, scale: 0.8, y: -10 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] as const }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.55,
+                  ease: [0.22, 1, 0.36, 1] as const,
+                }}
                 className={cn(
-                  'absolute -right-5 top-6 flex items-center gap-2 rounded-2xl px-4 py-2.5',
-                  'glass border border-[var(--border)] shadow-lg',
+                  "absolute -right-5 top-6 flex items-center gap-2 rounded-2xl px-4 py-2.5",
+                  "glass border border-[var(--border)] shadow-lg",
                 )}
               >
                 <i className="ri-map-pin-2-fill text-sm text-[var(--primary)]" />
-                <span className="text-xs font-semibold text-[var(--text)]">Amsterdam</span>
+                <span className="text-xs font-semibold text-[var(--text)]">
+                  Amsterdam
+                </span>
               </motion.div>
             </div>
           </motion.div>

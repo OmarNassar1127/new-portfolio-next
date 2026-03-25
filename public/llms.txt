@@ -16,7 +16,7 @@ Omar is the founder of Virelio, an Amsterdam-based AI agency that builds custom 
 
 - [Portfolio](https://omardev.xyz): Omar Nassar's AI agent architecture portfolio
 - [Virelio Agency](https://virelio.nl): AI agency — custom AI agent teams on demand
-- [Virelio AI Platform](https://virelio.ai): AI-powered customer support and agent demos
+- [Virelio AI Platform](https://virelio.nl): AI-powered customer support and agent demos
 - [GitHub](https://github.com/OmarNassar1127): Open source projects and AI agent code
 - [LinkedIn](https://www.linkedin.com/in/omar-nassar-93a176155/): Professional profile
 - [Slouch](https://slouch.pro): AI Posture Coach — client-side AI agent
@@ -59,7 +59,7 @@ Autonomous WhatsApp agent handling customer inquiries, appointment booking, and 
 ### Sales Automation Agent (LinkedIn AI Outreach)
 Autonomous networking agent that identifies potential leads, drafts personalized outreach messages, and manages connection requests within rate limits. Establishes 150+ meaningful connections per run with sophisticated profile analysis for high relevance and response rates.
 
-### Customer Service AI Agent (virelio.ai)
+### Customer Service AI Agent (virelio.nl)
 AI-powered customer support agent with ElevenLabs speech synthesis, n8n workflow automation, and OpenAI for conversation processing. Handles incoming meetings, answers customer inquiries, and provides comprehensive support 24/7 without human intervention. Manages meeting requests and provides instant, accurate responses.
 
 ### Operations Automation Agent (Personal AI)
@@ -98,7 +98,7 @@ AI Agent Services:
 - **Operations Automation Agents** — Back-office process automation: data entry, scheduling, reporting
 - **WhatsApp AI Agents** — Autonomous business assistants on WhatsApp for customer engagement
 
-Website: https://virelio.nl | https://virelio.ai
+Website: https://virelio.nl | https://virelio.nl
 
 ## Certifications
 - Google: Inspect Rich Documents with Gemini Multimodality and Multimodal RAG (Oct 2025)

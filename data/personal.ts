@@ -50,7 +50,7 @@ export const personal: Personal = {
   twitter: "https://twitter.com/GodelTrabuco69",
   virelio: {
     site: "https://virelio.nl",
-    ai: "https://virelio.ai",
+    ai: "https://virelio.nl",
   },
   formspreeId: "mqaqryyn",
   ga4Id: "G-4YTLRETV9G",

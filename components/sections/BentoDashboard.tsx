@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { SpotlightCard } from '@/components/ui/SpotlightCard';
-import { useLanguage } from '@/hooks/useLanguage';
-import { cn } from '@/lib/utils';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
+import { motion } from "framer-motion";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { useLanguage } from "@/hooks/useLanguage";
+import { cn } from "@/lib/utils";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 /* ─── AnimatedCounter ─────────────────────────────────────────────────── */
 function AnimatedCounter({
   end,
-  suffix = '',
-  prefix = '',
+  suffix = "",
+  prefix = "",
   duration = 2,
 }: {
   end: number;
@@ -23,7 +23,7 @@ function AnimatedCounter({
   return (
     <span ref={ref}>
       {prefix}
-      {inView ? <CountUp end={end} duration={duration} separator="," /> : '0'}
+      {inView ? <CountUp end={end} duration={duration} separator="," /> : "0"}
       {suffix}
     </span>
   );
@@ -31,18 +31,22 @@ function AnimatedCounter({
 
 /* ─── Tech stack pills ────────────────────────────────────────────────── */
 const techStack = [
-  { name: 'React', color: 'rgba(97,218,251,0.15)', text: '#61dafb' },
-  { name: 'Python', color: 'rgba(255,212,59,0.12)', text: '#ffd43b' },
-  { name: 'Node.js', color: 'rgba(104,183,68,0.15)', text: '#68b744' },
-  { name: 'Next.js', color: 'rgba(232,234,240,0.08)', text: 'var(--text)' },
-  { name: 'Laravel', color: 'rgba(255,77,55,0.12)', text: '#ff4d37' },
-  { name: 'TypeScript', color: 'rgba(49,120,198,0.15)', text: '#3178c6' },
-  { name: 'Docker', color: 'rgba(32,159,223,0.15)', text: '#209fdf' },
-  { name: 'LangChain', color: 'rgba(136,115,239,0.15)', text: 'var(--primary)' },
-  { name: 'FastAPI', color: 'rgba(0,150,136,0.15)', text: '#009688' },
-  { name: 'OpenAI', color: 'rgba(16,163,127,0.15)', text: '#10a37f' },
-  { name: 'Supabase', color: 'rgba(62,207,142,0.15)', text: '#3ecf8e' },
-  { name: 'Tailwind', color: 'rgba(56,189,248,0.15)', text: '#38bdf8' },
+  { name: "React", color: "rgba(97,218,251,0.15)", text: "#61dafb" },
+  { name: "Python", color: "rgba(255,212,59,0.12)", text: "#ffd43b" },
+  { name: "Node.js", color: "rgba(104,183,68,0.15)", text: "#68b744" },
+  { name: "Next.js", color: "rgba(232,234,240,0.08)", text: "var(--text)" },
+  { name: "Laravel", color: "rgba(255,77,55,0.12)", text: "#ff4d37" },
+  { name: "TypeScript", color: "rgba(49,120,198,0.15)", text: "#3178c6" },
+  { name: "Docker", color: "rgba(32,159,223,0.15)", text: "#209fdf" },
+  {
+    name: "LangChain",
+    color: "rgba(136,115,239,0.15)",
+    text: "var(--primary)",
+  },
+  { name: "FastAPI", color: "rgba(0,150,136,0.15)", text: "#009688" },
+  { name: "OpenAI", color: "rgba(16,163,127,0.15)", text: "#10a37f" },
+  { name: "Supabase", color: "rgba(62,207,142,0.15)", text: "#3ecf8e" },
+  { name: "Tailwind", color: "rgba(56,189,248,0.15)", text: "#38bdf8" },
 ];
 
 /* ─── Stagger animation config ────────────────────────────────────────── */
@@ -80,7 +84,7 @@ export default function BentoDashboard() {
         aria-hidden="true"
         style={{
           background:
-            'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(136,115,239,0.05) 0%, transparent 70%)',
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(136,115,239,0.05) 0%, transparent 70%)",
         }}
       />
 
@@ -94,11 +98,13 @@ export default function BentoDashboard() {
           className="mb-12 text-center"
         >
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            {t('Overview', 'Overzicht')}
+            {t("Overview", "Overzicht")}
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-[var(--text)] sm:text-4xl">
-            {t('At a ', 'In één')}
-            <span className="gradient-text-static">{t('Glance', 'Oogopslag')}</span>
+            {t("At a ", "In één")}
+            <span className="gradient-text-static">
+              {t("Glance", "Oogopslag")}
+            </span>
           </h2>
         </motion.div>
 
@@ -107,7 +113,7 @@ export default function BentoDashboard() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: true, margin: "-60px" }}
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4"
         >
           {/* Card 1 — Current role (2 cols) */}
@@ -120,16 +126,18 @@ export default function BentoDashboard() {
                   </span>
                   <div>
                     <p className="mb-0.5 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
-                      {t('Current Role', 'Huidige Rol')}
+                      {t("Current Role", "Huidige Rol")}
                     </p>
                     <h3 className="text-base font-bold leading-snug text-[var(--text)]">
-                      AI Engineer{' '}
-                      <span className="text-[var(--primary)]">@ Vloto B.V.</span>
+                      AI Engineer{" "}
+                      <span className="text-[var(--primary)]">
+                        @ Vloto B.V.
+                      </span>
                     </h3>
                     <p className="mt-0.5 text-sm text-[var(--text-muted)]">
-                      {t('Co-founder', 'Mede-oprichter')} —{' '}
+                      {t("Co-founder", "Mede-oprichter")} —{" "}
                       <a
-                        href="https://virelio.ai"
+                        href="https://virelio.nl"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[var(--accent-cyan)] underline-offset-2 hover:underline"
@@ -141,8 +149,8 @@ export default function BentoDashboard() {
                 </div>
                 <p className="text-sm leading-relaxed text-[var(--text-muted)]">
                   {t(
-                    'Building production AI systems that power 80,000+ users. Deploying on-premise LLM platforms and custom AI agents.',
-                    'Productie AI-systemen bouwen voor 80.000+ gebruikers. On-premise LLM-platforms en custom AI-agents implementeren.',
+                    "Building production AI systems that power 80,000+ users. Deploying on-premise LLM platforms and custom AI agents.",
+                    "Productie AI-systemen bouwen voor 80.000+ gebruikers. On-premise LLM-platforms en custom AI-agents implementeren.",
                   )}
                 </p>
               </div>
@@ -161,7 +169,7 @@ export default function BentoDashboard() {
                     <AnimatedCounter end={7} suffix="+" />
                   </p>
                   <p className="mt-1 font-mono text-xs uppercase tracking-widest text-[var(--text-muted)]">
-                    {t('Years in Tech', 'Jaar in Tech')}
+                    {t("Years in Tech", "Jaar in Tech")}
                   </p>
                 </div>
               </div>
@@ -180,7 +188,7 @@ export default function BentoDashboard() {
                     <AnimatedCounter end={30} suffix="+" />
                   </p>
                   <p className="mt-1 font-mono text-xs uppercase tracking-widest text-[var(--text-muted)]">
-                    {t('AI Systems Built', 'AI Systemen Gebouwd')}
+                    {t("AI Systems Built", "AI Systemen Gebouwd")}
                   </p>
                 </div>
               </div>
@@ -191,7 +199,7 @@ export default function BentoDashboard() {
           <motion.div variants={cardVariants} className="sm:col-span-2">
             <SpotlightCard className="h-full p-6">
               <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
-                {t('Tech Stack', 'Technologieën')}
+                {t("Tech Stack", "Technologieën")}
               </p>
               <div className="flex flex-wrap gap-2">
                 {techStack.map((tech) => (
@@ -201,7 +209,7 @@ export default function BentoDashboard() {
                     style={{
                       background: tech.color,
                       color: tech.text,
-                      border: `1px solid ${tech.color.replace(/[\d.]+\)$/, '0.35)')}`,
+                      border: `1px solid ${tech.color.replace(/[\d.]+\)$/, "0.35)")}`,
                     }}
                   >
                     {tech.name}
@@ -219,7 +227,9 @@ export default function BentoDashboard() {
                   <i className="ri-map-pin-2-line text-lg text-[var(--primary)]" />
                 </span>
                 <div>
-                  <p className="text-lg font-bold text-[var(--text)]">Amsterdam</p>
+                  <p className="text-lg font-bold text-[var(--text)]">
+                    Amsterdam
+                  </p>
                   <div className="mt-1 flex items-center gap-1.5">
                     {/* Netherlands flag accent */}
                     <span className="flex h-3 w-5 overflow-hidden rounded-sm">
@@ -227,7 +237,9 @@ export default function BentoDashboard() {
                       <span className="flex-1 bg-white" />
                       <span className="flex-1 bg-[#21468b]" />
                     </span>
-                    <p className="text-xs text-[var(--text-muted)]">Netherlands</p>
+                    <p className="text-xs text-[var(--text-muted)]">
+                      Netherlands
+                    </p>
                   </div>
                 </div>
               </div>
@@ -248,15 +260,15 @@ export default function BentoDashboard() {
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
                   </span>
                   <span className="text-xs font-semibold uppercase tracking-widest text-emerald-500">
-                    {t('Available', 'Beschikbaar')}
+                    {t("Available", "Beschikbaar")}
                   </span>
                 </div>
                 <div>
                   <p className="text-base font-bold leading-snug text-[var(--text)]">
-                    {t('Open to AI Projects', 'Beschikbaar voor AI Projecten')}
+                    {t("Open to AI Projects", "Beschikbaar voor AI Projecten")}
                   </p>
                   <p className="mt-1 text-xs text-[var(--text-muted)]">
-                    {t('Freelance & consulting', 'Freelance & consulting')}
+                    {t("Freelance & consulting", "Freelance & consulting")}
                   </p>
                 </div>
               </div>
@@ -264,7 +276,10 @@ export default function BentoDashboard() {
           </motion.div>
 
           {/* Card 7 — Monthly impact stat (full width on mobile, 2 cols) */}
-          <motion.div variants={cardVariants} className="sm:col-span-2 md:col-span-4">
+          <motion.div
+            variants={cardVariants}
+            className="sm:col-span-2 md:col-span-4"
+          >
             <SpotlightCard
               className="p-6"
               spotlightColor="rgba(136,115,239,0.12)"
@@ -276,12 +291,15 @@ export default function BentoDashboard() {
                   </span>
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
-                      {t('Monthly Business Impact', 'Maandelijkse Bedrijfsimpact')}
+                      {t(
+                        "Monthly Business Impact",
+                        "Maandelijkse Bedrijfsimpact",
+                      )}
                     </p>
                     <p className="mt-0.5 text-sm text-[var(--text-muted)]">
                       {t(
-                        'Generated through AI automation and deployed systems',
-                        'Gegenereerd via AI-automatisering en geïmplementeerde systemen',
+                        "Generated through AI automation and deployed systems",
+                        "Gegenereerd via AI-automatisering en geïmplementeerde systemen",
                       )}
                     </p>
                   </div>

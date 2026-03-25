@@ -51,8 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://omardev.xyz/",
-    title:
-      "Omar Nassar | AI Agent Engineer — Building Autonomous AI Systems",
+    title: "Omar Nassar | AI Agent Engineer — Building Autonomous AI Systems",
     description:
       "AI Agent Engineer building autonomous multi-agent systems, WhatsApp AI agents, sales agents, customer service agents, and enterprise RAG platforms. 30+ AI systems deployed, 200+ automations, serving 80,000+ users. Amsterdam.",
     images: [
@@ -140,7 +139,7 @@ const jsonLd = {
         "https://www.linkedin.com/in/omar-nassar-93a176155/",
         "https://twitter.com/GodelTrabuco69",
         "https://virelio.nl",
-        "https://virelio.ai",
+        "https://virelio.nl",
       ],
       worksFor: {
         "@type": "Organization",
@@ -186,7 +185,7 @@ const jsonLd = {
       founder: { "@id": "https://omardev.xyz/#person" },
       foundingDate: "2023",
       areaServed: "Europe",
-      sameAs: ["https://virelio.ai", "https://virelio.nl"],
+      sameAs: ["https://virelio.nl", "https://virelio.nl"],
     },
   ],
 };
