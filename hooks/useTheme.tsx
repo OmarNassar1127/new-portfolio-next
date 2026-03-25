@@ -10,15 +10,15 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Start with true (dark) to match the server-rendered default.
+  // Start with false (light) to match the server-rendered default.
   // The real preference is applied in the effect below after mount.
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem('theme');
     // If the user has explicitly stored a preference, honour it.
-    // Otherwise keep dark as the default.
-    const prefersDark = stored ? stored === 'dark' : true;
+    // Otherwise keep light as the default.
+    const prefersDark = stored ? stored === 'dark' : false;
     setIsDarkMode(prefersDark);
     document.documentElement.classList.toggle('dark', prefersDark);
   }, []);
