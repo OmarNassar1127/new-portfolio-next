@@ -230,8 +230,8 @@ export default function BentoDashboard() {
                     Amsterdam
                   </p>
                   <div className="mt-1 flex items-center gap-1.5">
-                    {/* Netherlands flag accent */}
-                    <span className="flex h-3 w-5 overflow-hidden rounded-sm">
+                    {/* Netherlands flag — horizontal stripes */}
+                    <span className="flex flex-col h-3 w-5 overflow-hidden rounded-sm">
                       <span className="flex-1 bg-[#ae1c28]" />
                       <span className="flex-1 bg-white" />
                       <span className="flex-1 bg-[#21468b]" />
