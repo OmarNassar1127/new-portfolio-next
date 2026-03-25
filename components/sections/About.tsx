@@ -224,15 +224,15 @@ export default function About() {
                   ease: [0.22, 1, 0.36, 1] as const,
                 }}
                 className={cn(
-                  "absolute -bottom-4 -left-4 flex items-center gap-2 rounded-2xl px-4 py-2.5",
-                  "glass border border-[var(--border)] shadow-lg",
+                  "absolute -bottom-4 -left-4 flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg",
+                  "bg-emerald-600 border border-emerald-500/30",
                 )}
               >
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-60" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
                 </span>
-                <span className="text-xs font-semibold text-[var(--text)]">
+                <span className="text-sm font-bold text-white">
                   {t("Open to work", "Beschikbaar")}
                 </span>
               </motion.div>
