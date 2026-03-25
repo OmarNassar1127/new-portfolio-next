@@ -1,26 +1,301 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN SYSTEM — GLOBAL TOKENS & THEME
+   Elite Next.js 15 Portfolio
+   ============================================================ */
+
+/* ── Color tokens & base variables ─────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --primary:        #8873ef;
+  --primary-glow:   rgba(136, 115, 239, 0.35);
+  --accent-cyan:    #00d4ff;
+  --accent-cyan-glow: rgba(0, 212, 255, 0.30);
+  --accent-pink:    #ff006e;
+  --accent-pink-glow: rgba(255, 0, 110, 0.30);
+
+  /* Light mode surfaces */
+  --bg:             #ffffff;
+  --card:           #f8f9fa;
+  --card-hover:     #f0f1f5;
+  --border:         rgba(0, 0, 0, 0.08);
+  --text:           #081e21;
+  --text-muted:     rgba(8, 30, 33, 0.55);
+  --scrollbar-thumb: rgba(136, 115, 239, 0.40);
+  --scrollbar-track: rgba(0, 0, 0, 0.05);
+
+  /* Shared layout */
+  --radius:         0.75rem;
+  --radius-lg:      1.25rem;
+  --section-scroll-mt: 80px;
 }
 
+/* ── Dark mode (class-based, `.dark` on <html>) ─────────────── */
+.dark {
+  --bg:             #0a0f1c;
+  --card:           #12121a;
+  --card-hover:     #1a1a28;
+  --border:         #1e1e2e;
+  --text:           #e8eaf0;
+  --text-muted:     rgba(232, 234, 240, 0.50);
+  --scrollbar-thumb: rgba(136, 115, 239, 0.50);
+  --scrollbar-track: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Tailwind v4 theme registration ─────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background:    var(--bg);
+  --color-foreground:    var(--text);
+  --color-muted:         var(--text-muted);
+  --color-primary:       var(--primary);
+  --color-accent-cyan:   var(--accent-cyan);
+  --color-accent-pink:   var(--accent-pink);
+  --color-card:          var(--card);
+  --color-card-hover:    var(--card-hover);
+  --color-border:        var(--border);
+
+  --font-sans:  var(--font-geist-sans);
+  --font-mono:  var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+@keyframes glow {
+  from {
+    box-shadow:
+      0 0 10px var(--primary-glow),
+      0 0 20px var(--primary-glow);
+  }
+  to {
+    box-shadow:
+      0 0 22px var(--primary-glow),
+      0 0 48px var(--primary-glow),
+      0 0 72px rgba(136, 115, 239, 0.12);
   }
 }
 
+@keyframes blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%       { border-radius: 50% 60% 30% 60% / 30% 40% 60% 50%; }
+  75%       { border-radius: 60% 30% 60% 40% / 70% 50% 40% 60%; }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Section anchor offset for fixed navbar */
+section[id],
+div[id] {
+  scroll-margin-top: var(--section-scroll-mt);
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 100px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+/* Glassmorphism card */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+}
+
+.dark .glass {
+  background: rgba(18, 18, 26, 0.60);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Animated gradient text */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--primary)    0%,
+    var(--accent-cyan) 40%,
+    var(--accent-pink) 80%,
+    var(--primary)    100%
+  );
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-shift 3s linear infinite;
+}
+
+/* Static gradient text variant (no animation) */
+.gradient-text-static {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent-cyan) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: relative;
+  isolation: isolate;
+}
+
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 192px 192px;
+  pointer-events: none;
+}
+
+.dark .noise-overlay::before {
+  opacity: 0.055;
+}
+
+/* Bento card with hover glow */
+.bento-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color 0.25s ease,
+    box-shadow   0.25s ease,
+    transform    0.25s ease,
+    background   0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+.bento-card:hover {
+  background: var(--card-hover);
+  border-color: rgba(136, 115, 239, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(136, 115, 239, 0.15),
+    0 8px 32px -8px var(--primary-glow),
+    0 24px 48px -16px rgba(0, 0, 0, 0.30);
+  transform: translateY(-2px);
+}
+
+/* Ambient blob shape (use as decorative bg element) */
+.blob {
+  animation: blob 7s ease-in-out infinite;
+}
+
+/* Floating element */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glowing box */
+.glow-box {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Slide-up entrance */
+.slide-up {
+  animation: slide-up 0.5s ease forwards;
+}
+
+/* Pulsing indicator dot */
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Focus ring consistent with palette */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection highlight */
+::selection {
+  background: rgba(136, 115, 239, 0.30);
+  color: var(--text);
 }
