@@ -251,9 +251,9 @@ export default function Hero() {
               className="absolute bottom-1 left-4 right-4 h-px origin-left scale-x-0 bg-[var(--primary)] transition-transform duration-300 group-hover:scale-x-100"
               aria-hidden="true"
             />
-            <i className="ri-download-2-line text-base transition-transform duration-300 group-hover:-translate-y-0.5" />
+            {/* <i className="ri-download-2-line text-base transition-transform duration-300 group-hover:-translate-y-0.5" />
             Download CV
-            <i className="ri-arrow-right-up-line text-xs opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <i className="ri-arrow-right-up-line text-xs opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /> */}
           </a>
         </motion.div>
 

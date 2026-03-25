@@ -31,7 +31,7 @@ const socialProof = [
     label: { en: "LinkedIn", nl: "LinkedIn" },
   },
   {
-    href: personal.virelio.nl,
+    href: personal.virelio.site,
     icon: "ri-rocket-2-line",
     label: { en: "Virelio", nl: "Virelio" },
   },
