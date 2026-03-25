@@ -16,11 +16,26 @@ Omar is the founder of Virelio, an Amsterdam-based AI agency that builds custom 
 
 - [Portfolio](https://omardev.xyz): Omar Nassar's AI agent architecture portfolio
 - [Virelio Agency](https://virelio.nl): AI agency — custom AI agent teams on demand
-- [Virelio AI Platform](https://virelio.nl): AI-powered customer support and agent demos
 - [GitHub](https://github.com/OmarNassar1127): Open source projects and AI agent code
 - [LinkedIn](https://www.linkedin.com/in/omar-nassar-93a176155/): Professional profile
 - [Slouch](https://slouch.pro): AI Posture Coach — client-side AI agent
 - Contact: omarnassar1127@gmail.com
+
+## Project Pages
+
+- [Enterprise AI Platform](https://omardev.xyz/projects/enterprise-ai-platform): On-premise multi-agent LLM platform serving 80,000+ employees
+- [WhatsApp AI Business Agent](https://omardev.xyz/projects/whatsapp-ai-business-agent): Autonomous WhatsApp agent for customer support and booking
+- [Slouch - AI Posture Coach](https://omardev.xyz/projects/slouch-ai-posture-coach): Client-side AI posture detection using MediaPipe
+- [Enterprise RAG Platform](https://omardev.xyz/projects/enterprise-rag-platform): Document retrieval with 95% accuracy across 10+ data sources
+- [AI Customer Support](https://omardev.xyz/projects/ai-customer-support): Voice AI + workflow automation for Virelio
+- [Medical Technical File Builder](https://omardev.xyz/projects/medical-technical-file-builder): AI-powered medical device compliance platform
+- [Multi-Agent System](https://omardev.xyz/projects/full-stack-multi-agent): 6-agent autonomous crew via CrewAI and LangGraph
+- [Claude Workflow Automator](https://omardev.xyz/projects/claude-workflow-automator): 30+ Claude workflows integrated into business processes
+- [AI Meeting Assistant](https://omardev.xyz/projects/ai-meeting-assistant-voice-automation): Real-time transcription with offline Whisper.cpp mode
+- [Invoice Fraud Prevention](https://omardev.xyz/projects/invoice-fraud-prevention-platform): AI risk scoring reducing defaults by 73%
+- [House Scraper Platform](https://omardev.xyz/projects/house-scraper-platform): Real-estate aggregation for Dutch housing market
+- [LinkedIn AI Outreach](https://omardev.xyz/projects/linkedin-ai-outreach): Autonomous lead generation and networking bot
+- [All Projects](https://omardev.xyz/projects): View all 27 projects
 
 ## AI Agent Expertise
 

@@ -23,9 +23,13 @@ export async function generateMetadata({
   return {
     title: project.title,
     description,
+    alternates: {
+      canonical: `https://omardev.xyz/projects/${slug}`,
+    },
     openGraph: {
       title: `${project.title} | Omar Nassar`,
       description,
+      url: `https://omardev.xyz/projects/${slug}`,
       images: [
         {
           url: project.image,
@@ -73,6 +77,8 @@ export default async function ProjectPage({
     dateCreated: project.date,
     author: { '@id': 'https://omardev.xyz/#person' },
     keywords: project.technologies,
+    inLanguage: 'en',
+    mainEntityOfPage: `https://omardev.xyz/projects/${slug}`,
     ...(project.siteUrl ? { url: project.siteUrl } : {}),
   };
 
