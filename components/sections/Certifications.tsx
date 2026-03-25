@@ -52,7 +52,8 @@ function IssuerLogo({ cert }: { cert: Certification }) {
         alt={cert.issuer}
         width={40}
         height={40}
-        className={cn('object-contain', cert.logo === 'anthropic' && 'rounded-lg')}
+        className={cn('object-contain w-auto h-auto', cert.logo === 'anthropic' && 'rounded-lg')}
+        style={{ maxWidth: 40, maxHeight: 40 }}
       />
     );
   }

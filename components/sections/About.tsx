@@ -10,12 +10,12 @@ import { cn } from "@/lib/utils";
 /* ─── Content data ────────────────────────────────────────────────────── */
 const paragraphs = {
   en: [
-    "I'm an AI Engineer based in Amsterdam who believes most AI demos are vaporware. I build the ones that aren't. Currently building production AI systems at Vloto B.V. — where I've deployed an on-premise AI platform serving 80,000+ employees — and running Virelio, an AI agency that delivers custom agent teams in 2 weeks.",
-    "My sweet spot is turning complex AI capabilities into products real people use. Multi-agent orchestration, RAG architectures, WhatsApp bots, voice AI — if it involves LLMs and needs to work in production, that's my playground.",
+    "I'm an AI Engineer in Amsterdam who believes most AI demos are vaporware — I build the ones that aren't. At Vloto B.V., I've shipped on-premise AI solutions and automations that serve both the company and our users — our WhatsApp agent alone resolves over 55% of all customer conversations autonomously. On the side, I co-founded Virelio to bring that same production-grade AI to other companies.",
+    "Multi-agent orchestration, RAG architectures, WhatsApp agents, voice AI — if it involves LLMs and needs to work in production, that's my playground.",
   ],
   nl: [
-    "Ik ben een AI Engineer gevestigd in Amsterdam die gelooft dat de meeste AI-demo's niets meer zijn dan lucht. Ik bouw de exemplaren die dat niet zijn. Momenteel bouw ik productie-AI-systemen bij Vloto B.V. — waar ik een on-premise AI-platform heb uitgerold voor 80.000+ medewerkers — en run ik Virelio, een AI-bureau dat custom agent-teams levert in 2 weken.",
-    "Mijn specialiteit is het omzetten van complexe AI-mogelijkheden in producten die echte mensen gebruiken. Multi-agent orchestratie, RAG-architecturen, WhatsApp-bots, voice AI — als het LLM's omvat en in productie moet werken, is dat mijn speeltuin.",
+    "Ik ben een AI Engineer in Amsterdam die gelooft dat de meeste AI-demo's lucht zijn — ik bouw de exemplaren die dat niet zijn. Bij Vloto B.V. heb ik on-premise AI-oplossingen en automatiseringen opgeleverd die zowel het bedrijf als onze gebruikers dienen — onze WhatsApp-agent lost inmiddels meer dan 55% van alle klantgesprekken zelfstandig op. Daarnaast heb ik Virelio mede-opgericht om diezelfde productie-AI naar andere bedrijven te brengen.",
+    "Multi-agent orchestratie, RAG-architecturen, WhatsApp-agents, voice AI — als het LLM's omvat en in productie moet werken, is dat mijn speeltuin.",
   ],
 };
 
@@ -179,7 +179,7 @@ export default function About() {
           <motion.div
             {...slideRight}
             ref={photoContainerRef}
-            className="flex items-center justify-center lg:justify-end"
+            className="relative flex items-center justify-center lg:justify-end"
           >
             <div className="relative">
               {/* Glow ring behind the photo */}

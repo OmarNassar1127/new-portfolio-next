@@ -21,8 +21,9 @@ interface NavItem {
 
 const SECTION_IDS = [
   'about',
-  'experience',
   'portfolio',
+  'about-me',
+  'journey',
   'skills',
   'certifications',
   'contact',
@@ -48,9 +49,10 @@ export default function Header() {
 
   // Build nav items from translations
   const navItems: NavItem[] = [
-    { id: 'about',          href: '#about',          label: t('About', 'Over mij'),        icon: 'ri-user-line' },
-    { id: 'experience',     href: '#experience',     label: t('Experience', 'Ervaring'),   icon: 'ri-road-map-line' },
+    { id: 'about',          href: '#about',          label: t('Home', 'Home'),             icon: 'ri-home-line' },
     { id: 'portfolio',      href: '#portfolio',      label: t('Projects', 'Projecten'),    icon: 'ri-briefcase-line' },
+    { id: 'about-me',       href: '#about-me',       label: t('About', 'Over mij'),        icon: 'ri-user-line' },
+    { id: 'journey',        href: '#journey',        label: t('Experience', 'Ervaring'),   icon: 'ri-road-map-line' },
     { id: 'skills',         href: '#skills',         label: t('Skills', 'Vaardigheden'),   icon: 'ri-code-line' },
     { id: 'certifications', href: '#certifications', label: t('Certs', 'Certs'),           icon: 'ri-award-line' },
     { id: 'contact',        href: '#contact',        label: t('Contact', 'Contact'),       icon: 'ri-mail-line' },
