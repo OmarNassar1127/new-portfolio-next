@@ -362,17 +362,15 @@ export default function Contact() {
 
                   {/* Submit — extra bottom margin ensures it's never cut off */}
                   <div className="pb-1">
-                    <motion.button
+                    <button
                       type="submit"
                       disabled={loading}
-                      whileHover={!loading ? { scale: 1.02 } : {}}
-                      whileTap={!loading ? { scale: 0.98 } : {}}
                       className={cn(
                         'w-full flex items-center justify-center gap-2.5',
                         'py-3.5 px-6 rounded-xl text-sm font-semibold text-white',
                         'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)]',
                         'shadow-lg hover:shadow-[var(--primary)]/30',
-                        'transition-all duration-250',
+                        'transition-all duration-250 hover:scale-[1.02] active:scale-[0.98]',
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]',
                         'disabled:opacity-60 disabled:cursor-not-allowed',
                       )}
@@ -388,7 +386,7 @@ export default function Contact() {
                           {t('Send Message', 'Verstuur Bericht')}
                         </>
                       )}
-                    </motion.button>
+                    </button>
                   </div>
                 </form>
               </div>
