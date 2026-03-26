@@ -44,27 +44,14 @@ function AnimatedCounter({ value, suffix }: { value: string; suffix?: string }) 
 
 /* ─── Blob background ─────────────────────────────────────────────────── */
 function BackgroundBlobs() {
-  const isMobile = useMediaQuery('(max-width: 768px)');
-
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      {/* Primary purple blob — static on mobile to avoid animation jank */}
-      <div
-        className="absolute -top-32 right-[5%] h-[480px] w-[480px] rounded-full bg-[var(--primary)] opacity-[0.13] blur-[120px]"
-        style={isMobile ? undefined : { animation: 'blob 14s ease-in-out infinite' }}
-      />
+      {/* Primary purple blob */}
+      <div className="absolute -top-32 right-[5%] h-[480px] w-[480px] rounded-full bg-[var(--primary)] opacity-[0.13] blur-[120px] blob" />
       {/* Cyan blob */}
-      <div
-        className="absolute top-[35%] -left-24 h-[380px] w-[380px] rounded-full bg-[var(--accent-cyan)] opacity-[0.09] blur-[110px]"
-        style={isMobile ? undefined : { animation: 'blob 18s ease-in-out infinite', animationDelay: '3s' }}
-      />
-      {/* Pink blob — hidden on mobile to reduce paint cost */}
-      {!isMobile && (
-        <div
-          className="absolute bottom-16 right-[15%] h-[320px] w-[320px] rounded-full bg-[var(--accent-pink)] opacity-[0.08] blur-[100px]"
-          style={{ animation: 'blob 22s ease-in-out infinite', animationDelay: '6s' }}
-        />
-      )}
+      <div className="absolute top-[35%] -left-24 h-[380px] w-[380px] rounded-full bg-[var(--accent-cyan)] opacity-[0.09] blur-[110px] blob" style={{ animationDelay: '3s' }} />
+      {/* Pink blob — hidden on mobile via CSS */}
+      <div className="hidden md:block absolute bottom-16 right-[15%] h-[320px] w-[320px] rounded-full bg-[var(--accent-pink)] opacity-[0.08] blur-[100px] blob" style={{ animationDelay: '6s' }} />
       {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 opacity-[0.025]"
