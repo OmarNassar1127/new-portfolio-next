@@ -9,6 +9,19 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
 
+/* ─── Shared animation preset — simple fade+slide, works on all devices ── */
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] as const },
+});
+
+const fadeIn = (delay = 0) => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.4, delay },
+});
+
 /* ─── AnimatedCounter ─────────────────────────────────────────────────── */
 function AnimatedCounter({ value, suffix }: { value: string; suffix?: string }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
@@ -71,23 +84,34 @@ function RoleCycler({ roles }: { roles: string[] }) {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
-    // Slower cycle on mobile to reduce re-render pressure
-    const interval = isMobile ? 4000 : 3000;
     const id = setInterval(() => {
       setIndex((prev) => (prev + 1) % roles.length);
-    }, interval);
+    }, 3000);
     return () => clearInterval(id);
-  }, [roles.length, isMobile]);
+  }, [roles.length]);
+
+  /* On mobile, skip AnimatePresence entirely — just show static text.
+     The AnimatePresence exit/enter cycle was causing elements to flash
+     because the motion props changed after hydration. */
+  if (isMobile) {
+    return (
+      <div className="flex h-[38px] items-center justify-center">
+        <span className="bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl">
+          {roles[index]}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex h-[38px] items-center justify-center overflow-hidden sm:h-[44px]">
       <AnimatePresence mode="wait">
         <motion.span
           key={roles[index]}
-          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 16 }}
-          animate={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          exit={isMobile ? { opacity: 0 } : { opacity: 0, y: -16 }}
-          transition={isMobile ? { duration: 0.3 } : { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
           className="absolute bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl"
           style={{ backgroundSize: '200% 100%' }}
         >
@@ -139,7 +163,6 @@ export default function Hero() {
   const { language } = useLanguage();
   const lang = language === 'NL' ? 'nl' : 'en';
   const roles = personal.roles[lang];
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const socialLinks = [
     { href: personal.github, icon: 'ri-github-fill', label: 'GitHub' },
@@ -147,21 +170,6 @@ export default function Hero() {
     { href: personal.twitter, icon: 'ri-twitter-fill', label: 'Twitter' },
     { href: `mailto:${personal.email}`, icon: 'ri-mail-line', label: 'Email' },
   ];
-
-  /* stagger helpers — on mobile, fade only with no y offset and no stagger delay */
-  const fadeUp = (delay: number) => ({
-    initial: isMobile ? { opacity: 0 } : { opacity: 0, y: 28 },
-    animate: isMobile ? { opacity: 1 } : { opacity: 1, y: 0 },
-    transition: isMobile
-      ? { duration: 0.3 }
-      : { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
-  });
-
-  const fadeIn = (delay: number) => ({
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: isMobile ? { duration: 0.3 } : { duration: 0.6, delay },
-  });
 
   return (
     <section
@@ -264,9 +272,6 @@ export default function Hero() {
               className="absolute bottom-1 left-4 right-4 h-px origin-left scale-x-0 bg-[var(--primary)] transition-transform duration-300 group-hover:scale-x-100"
               aria-hidden="true"
             />
-            {/* <i className="ri-download-2-line text-base transition-transform duration-300 group-hover:-translate-y-0.5" />
-            Download CV
-            <i className="ri-arrow-right-up-line text-xs opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /> */}
           </a>
         </motion.div>
 

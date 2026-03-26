@@ -6,13 +6,11 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { certificationsData, type Certification } from '@/data/certifications';
 
 /* ─── Deterministic shuffle (seeded by day so it changes daily) ───────────── */
 function shuffleArray<T>(arr: T[]): T[] {
   const copy = [...arr];
-  // Seed: day of year so order is stable per session but rotates daily
   const now = new Date();
   let seed = now.getFullYear() * 1000 + Math.floor(
     (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000
@@ -25,9 +23,10 @@ function shuffleArray<T>(arr: T[]): T[] {
   return copy;
 }
 
-/* ─── Fixed card height ───────────────────────────────────────────────────── */
-const CARD_W = 340; // px — consistent width for every card
-const CARD_H = 280; // px — consistent height for every card
+/* ─── Card dimensions ─────────────────────────────────────────────────────── */
+// Desktop card width. On mobile we use 85vw via CSS — see CertCarouselCard.
+const CARD_W_DESKTOP = 340; // px
+const CARD_H = 280; // px
 const GAP = 24;
 const AUTO_SCROLL_SPEED = 4000; // ms between auto-scrolls
 
@@ -65,7 +64,7 @@ function IssuerLogo({ cert }: { cert: Certification }) {
   );
 }
 
-/* ─── Carousel Card (fixed dimensions) ────────────────────────────────────── */
+/* ─── Carousel Card ────────────────────────────────────────────────────────── */
 function CertCarouselCard({ cert }: { cert: Certification }) {
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
@@ -73,14 +72,17 @@ function CertCarouselCard({ cert }: { cert: Certification }) {
 
   return (
     <div
-      style={{ width: CARD_W, height: CARD_H, minWidth: CARD_W }}
       className={cn(
+        // On mobile: 85vw wide so one card fills most of the screen with a peek.
+        // On sm+ (≥640px): fixed 340px matching the original CARD_W_DESKTOP.
         'group relative flex flex-col overflow-hidden shrink-0 snap-center',
         'rounded-2xl border transition-all duration-300',
+        'w-[85vw] sm:w-[340px]',
         isDarkMode
           ? 'bg-[var(--card)] border-[var(--border)] hover:border-[var(--primary)]/40 hover:shadow-[0_0_30px_-5px_var(--primary-glow)]'
           : 'bg-white border-gray-200 hover:border-[var(--primary)]/30 hover:shadow-xl'
       )}
+      style={{ height: CARD_H, minWidth: undefined /* handled by w- classes above */ }}
     >
       {/* Top accent bar */}
       <div className={cn('h-1 w-full bg-gradient-to-r flex-shrink-0', cert.color)} />
@@ -166,11 +168,9 @@ function CertCarouselCard({ cert }: { cert: Certification }) {
 }
 
 /* ─── Main: Certifications Carousel with Auto-Scroll ──────────────────────── */
-
 export default function Certifications() {
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
-  const isMobile = useMediaQuery('(max-width: 768px)');
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -186,8 +186,10 @@ export default function Certifications() {
     setCanScrollLeft(el.scrollLeft > 4);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
 
-    // Update active dot
-    const idx = Math.round(el.scrollLeft / (CARD_W + GAP));
+    // Update active dot — use actual rendered card width for accuracy
+    const cardEl = el.firstElementChild as HTMLElement | null;
+    const cardWidth = cardEl ? cardEl.offsetWidth + GAP : CARD_W_DESKTOP + GAP;
+    const idx = Math.round(el.scrollLeft / cardWidth);
     setActiveIndex(Math.min(idx, shuffled.length - 1));
   }, [shuffled.length]);
 
@@ -212,10 +214,11 @@ export default function Certifications() {
 
       const atEnd = el.scrollLeft >= el.scrollWidth - el.clientWidth - 4;
       if (atEnd) {
-        // Loop back to start
         el.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        el.scrollBy({ left: CARD_W + GAP, behavior: 'smooth' });
+        const cardEl = el.firstElementChild as HTMLElement | null;
+        const cardWidth = cardEl ? cardEl.offsetWidth + GAP : CARD_W_DESKTOP + GAP;
+        el.scrollBy({ left: cardWidth, behavior: 'smooth' });
       }
     }, AUTO_SCROLL_SPEED);
 
@@ -225,8 +228,10 @@ export default function Certifications() {
   const scroll = (direction: 'left' | 'right') => {
     const el = scrollRef.current;
     if (!el) return;
+    const cardEl = el.firstElementChild as HTMLElement | null;
+    const cardWidth = cardEl ? cardEl.offsetWidth + GAP : CARD_W_DESKTOP + GAP;
     el.scrollBy({
-      left: direction === 'left' ? -(CARD_W + GAP) : CARD_W + GAP,
+      left: direction === 'left' ? -cardWidth : cardWidth,
       behavior: 'smooth',
     });
   };
@@ -234,7 +239,9 @@ export default function Certifications() {
   const scrollToCard = (index: number) => {
     const el = scrollRef.current;
     if (!el) return;
-    el.scrollTo({ left: index * (CARD_W + GAP), behavior: 'smooth' });
+    const cardEl = el.firstElementChild as HTMLElement | null;
+    const cardWidth = cardEl ? cardEl.offsetWidth + GAP : CARD_W_DESKTOP + GAP;
+    el.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
   };
 
   return (
@@ -246,78 +253,80 @@ export default function Certifications() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header + Controls */}
+        {/* Header */}
         <motion.div
-          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 28 }}
-          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 md:mb-12"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+          className="mb-8 md:mb-12"
         >
-          <div>
-            <span
-              className={cn(
-                'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-5',
-                'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)] text-white'
-              )}
-            >
-              <i className="ri-award-line" />
-              {t('My Achievements', 'Mijn Prestaties')}
-            </span>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span
+                className={cn(
+                  'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-5',
+                  'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)] text-white'
+                )}
+              >
+                <i className="ri-award-line" />
+                {t('My Achievements', 'Mijn Prestaties')}
+              </span>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-3">
-              <span className="gradient-text-static">{t('Certifications', 'Certificeringen')}</span>
-            </h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-3">
+                <span className="gradient-text-static">{t('Certifications', 'Certificeringen')}</span>
+              </h2>
 
-            <p className="text-[var(--text-muted)] max-w-xl text-sm md:text-base leading-relaxed">
-              {t(
-                'Professional certifications earned through continuous learning and hands-on practice.',
-                'Professionele certificeringen verdiend door voortdurend leren en hands-on praktijk.'
-              )}
-            </p>
-          </div>
+              <p className="text-[var(--text-muted)] max-w-xl text-sm md:text-base leading-relaxed">
+                {t(
+                  'Professional certifications earned through continuous learning and hands-on practice.',
+                  'Professionele certificeringen verdiend door voortdurend leren en hands-on praktijk.'
+                )}
+              </p>
+            </div>
 
-          {/* Carousel arrows */}
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => scroll('left')}
-              disabled={!canScrollLeft}
-              aria-label="Scroll left"
-              className={cn(
-                'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border',
-                canScrollLeft
-                  ? isDarkMode
-                    ? 'border-[var(--border)] bg-[var(--card)] text-[var(--text)] hover:border-[var(--primary)] hover:text-[var(--primary)]'
-                    : 'border-gray-200 bg-white text-gray-700 hover:border-[var(--primary)] hover:text-[var(--primary)]'
-                  : 'border-transparent opacity-30 cursor-not-allowed'
-              )}
-            >
-              <i className="ri-arrow-left-s-line text-lg" />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              disabled={!canScrollRight}
-              aria-label="Scroll right"
-              className={cn(
-                'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border',
-                canScrollRight
-                  ? isDarkMode
-                    ? 'border-[var(--border)] bg-[var(--card)] text-[var(--text)] hover:border-[var(--primary)] hover:text-[var(--primary)]'
-                    : 'border-gray-200 bg-white text-gray-700 hover:border-[var(--primary)] hover:text-[var(--primary)]'
-                  : 'border-transparent opacity-30 cursor-not-allowed'
-              )}
-            >
-              <i className="ri-arrow-right-s-line text-lg" />
-            </button>
+            {/* Carousel arrows — hidden on mobile (swipe instead) */}
+            <div className="hidden sm:flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => scroll('left')}
+                disabled={!canScrollLeft}
+                aria-label="Scroll left"
+                className={cn(
+                  'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border',
+                  canScrollLeft
+                    ? isDarkMode
+                      ? 'border-[var(--border)] bg-[var(--card)] text-[var(--text)] hover:border-[var(--primary)] hover:text-[var(--primary)]'
+                      : 'border-gray-200 bg-white text-gray-700 hover:border-[var(--primary)] hover:text-[var(--primary)]'
+                    : 'border-transparent opacity-30 cursor-not-allowed'
+                )}
+              >
+                <i className="ri-arrow-left-s-line text-lg" />
+              </button>
+              <button
+                onClick={() => scroll('right')}
+                disabled={!canScrollRight}
+                aria-label="Scroll right"
+                className={cn(
+                  'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border',
+                  canScrollRight
+                    ? isDarkMode
+                      ? 'border-[var(--border)] bg-[var(--card)] text-[var(--text)] hover:border-[var(--primary)] hover:text-[var(--primary)]'
+                      : 'border-gray-200 bg-white text-gray-700 hover:border-[var(--primary)] hover:text-[var(--primary)]'
+                    : 'border-transparent opacity-30 cursor-not-allowed'
+                )}
+              >
+                <i className="ri-arrow-right-s-line text-lg" />
+              </button>
+            </div>
           </div>
         </motion.div>
 
         {/* Carousel */}
         <motion.div
-          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
-          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={isMobile ? { duration: 0.3 } : { duration: 0.5, delay: 0.1 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           className="relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -328,7 +337,7 @@ export default function Certifications() {
           {canScrollLeft && (
             <div
               className={cn(
-                'absolute left-0 top-0 bottom-0 w-12 md:w-20 z-10 pointer-events-none',
+                'absolute left-0 top-0 bottom-0 w-8 sm:w-16 z-10 pointer-events-none',
                 isDarkMode
                   ? 'bg-gradient-to-r from-[var(--bg)] to-transparent'
                   : 'bg-gradient-to-r from-white to-transparent'
@@ -338,7 +347,7 @@ export default function Certifications() {
           {canScrollRight && (
             <div
               className={cn(
-                'absolute right-0 top-0 bottom-0 w-12 md:w-20 z-10 pointer-events-none',
+                'absolute right-0 top-0 bottom-0 w-8 sm:w-16 z-10 pointer-events-none',
                 isDarkMode
                   ? 'bg-gradient-to-l from-[var(--bg)] to-transparent'
                   : 'bg-gradient-to-l from-white to-transparent'
@@ -363,7 +372,7 @@ export default function Certifications() {
           </div>
         </motion.div>
 
-        {/* Dot indicators — active dot highlighted */}
+        {/* Dot indicators */}
         <div className="flex justify-center gap-2 mt-8">
           {shuffled.map((cert, i) => (
             <button

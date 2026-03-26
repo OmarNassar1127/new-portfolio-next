@@ -6,7 +6,6 @@ import { toast, Toaster } from 'sonner';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { personal } from '@/data/personal';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -111,7 +110,6 @@ function FormTextarea({ label, icon, isDarkMode, error, ...rest }: TextareaProps
 export default function Contact() {
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
@@ -154,7 +152,6 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Mark all fields as touched to show validation
     setTouched({ name: true, email: true, subject: true, message: true });
     if (!isFormValid) return;
 
@@ -248,10 +245,10 @@ export default function Contact() {
 
           {/* ── Header ───────────────────────────────────────────────────── */}
           <motion.div
-            initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 28 }}
-            whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
             className="text-center mb-12 md:mb-16"
           >
             <span
@@ -284,10 +281,10 @@ export default function Contact() {
 
             {/* ── Left: Contact form ──────────────────────────────────────── */}
             <motion.div
-              initial={isMobile ? { opacity: 0 } : { opacity: 0, x: -32 }}
-              whileInView={isMobile ? { opacity: 1 } : { opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
               className="order-1"
             >
               <div className={cn('bento-card p-4 sm:p-6 md:p-8 glass')}>
@@ -367,44 +364,46 @@ export default function Contact() {
                     rows={5}
                   />
 
-                  {/* Submit */}
-                  <motion.button
-                    type="submit"
-                    disabled={loading}
-                    whileHover={!loading ? { scale: 1.02 } : {}}
-                    whileTap={!loading ? { scale: 0.98 } : {}}
-                    className={cn(
-                      'w-full flex items-center justify-center gap-2.5',
-                      'py-3.5 px-6 rounded-xl text-sm font-semibold text-white',
-                      'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)]',
-                      'shadow-lg hover:shadow-[var(--primary)]/30',
-                      'transition-all duration-250',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]',
-                      'disabled:opacity-60 disabled:cursor-not-allowed',
-                    )}
-                  >
-                    {loading ? (
-                      <>
-                        <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                        {t('Sending...', 'Versturen...')}
-                      </>
-                    ) : (
-                      <>
-                        <i className="ri-send-plane-line text-base" />
-                        {t('Send Message', 'Verstuur Bericht')}
-                      </>
-                    )}
-                  </motion.button>
+                  {/* Submit — extra bottom margin ensures it's never cut off */}
+                  <div className="pb-1">
+                    <motion.button
+                      type="submit"
+                      disabled={loading}
+                      whileHover={!loading ? { scale: 1.02 } : {}}
+                      whileTap={!loading ? { scale: 0.98 } : {}}
+                      className={cn(
+                        'w-full flex items-center justify-center gap-2.5',
+                        'py-3.5 px-6 rounded-xl text-sm font-semibold text-white',
+                        'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)]',
+                        'shadow-lg hover:shadow-[var(--primary)]/30',
+                        'transition-all duration-250',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]',
+                        'disabled:opacity-60 disabled:cursor-not-allowed',
+                      )}
+                    >
+                      {loading ? (
+                        <>
+                          <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                          {t('Sending...', 'Versturen...')}
+                        </>
+                      ) : (
+                        <>
+                          <i className="ri-send-plane-line text-base" />
+                          {t('Send Message', 'Verstuur Bericht')}
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
                 </form>
               </div>
             </motion.div>
 
             {/* ── Right: Info + Map ───────────────────────────────────────── */}
             <motion.div
-              initial={isMobile ? { opacity: 0 } : { opacity: 0, x: 32 }}
-              whileInView={isMobile ? { opacity: 1 } : { opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={isMobile ? { duration: 0.3 } : { duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
               className="order-2 flex flex-col gap-5"
             >
               {/* Status pills */}

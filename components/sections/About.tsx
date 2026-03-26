@@ -52,6 +52,21 @@ const highlights = [
   { icon: "ri-chat-voice-line", text: { en: "Voice AI", nl: "Voice AI" } },
 ];
 
+/* ─── Shared animation presets — NO isMobile conditionals ────────────── */
+const fadeLeft = {
+  initial: { opacity: 0, y: 16 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.05 as const },
+  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
+};
+
+const fadeRight = {
+  initial: { opacity: 0, y: 16 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.05 as const },
+  transition: { duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const },
+};
+
 /* ─── About Section ───────────────────────────────────────────────────── */
 export default function About() {
   const { language, t } = useLanguage();
@@ -71,25 +86,6 @@ export default function About() {
     isMobile ? [1, 1, 1] : [0.97, 1, 0.97],
   );
 
-  /* Entrance variants — fade only on mobile, slide on desktop */
-  const slideLeft = {
-    initial: isMobile ? { opacity: 0 } : { opacity: 0, x: -40 },
-    whileInView: isMobile ? { opacity: 1 } : { opacity: 1, x: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: isMobile
-      ? { duration: 0.3 }
-      : { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
-  };
-
-  const slideRight = {
-    initial: isMobile ? { opacity: 0 } : { opacity: 0, x: 40 },
-    whileInView: isMobile ? { opacity: 1 } : { opacity: 1, x: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: isMobile
-      ? { duration: 0.3 }
-      : { duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const },
-  };
-
   return (
     <section
       id="about-me"
@@ -108,14 +104,14 @@ export default function About() {
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* ── Left column: text ──────────────────────────────────────── */}
-          <motion.div {...slideLeft} className="flex flex-col gap-6">
+          <motion.div {...fadeLeft} className="flex flex-col gap-6 min-w-0">
             {/* Label */}
             <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
               {t("About", "Over Mij")}
             </p>
 
-            {/* Heading */}
-            <h2 className="text-3xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-4xl lg:text-5xl">
+            {/* Heading — capped at text-4xl on mobile to prevent overflow */}
+            <h2 className="text-2xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-3xl lg:text-5xl">
               {t("Building AI that ", "AI bouwen die ")}
               <span className="gradient-text-static">
                 {t("actually works.", "echt werkt.")}
@@ -179,7 +175,7 @@ export default function About() {
 
           {/* ── Right column: photo ────────────────────────────────────── */}
           <motion.div
-            {...slideRight}
+            {...fadeRight}
             ref={photoContainerRef}
             className="relative flex items-center justify-center lg:justify-end"
           >
@@ -218,14 +214,10 @@ export default function About() {
 
               {/* Floating badge: available */}
               <motion.div
-                initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.8, y: 10 }}
-                whileInView={isMobile ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={
-                  isMobile
-                    ? { duration: 0.3 }
-                    : { duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] as const }
-                }
+                initial={{ opacity: 0, scale: 0.9, y: 8 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
                 className={cn(
                   "absolute flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg",
                   "bg-emerald-600 border border-emerald-500/30",
@@ -243,14 +235,10 @@ export default function About() {
 
               {/* Floating badge: Amsterdam */}
               <motion.div
-                initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.8, y: -10 }}
-                whileInView={isMobile ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={
-                  isMobile
-                    ? { duration: 0.3 }
-                    : { duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] as const }
-                }
+                initial={{ opacity: 0, scale: 0.9, y: -8 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
                 className={cn(
                   "absolute flex items-center gap-2 rounded-2xl px-4 py-2.5",
                   "glass border border-[var(--border)] shadow-lg",

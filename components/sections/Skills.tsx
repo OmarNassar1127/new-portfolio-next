@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { skillsData, skillCategories } from '@/data/skills';
 
 /* ─── Skills Section — Compact grouped layout ─────────────────────────────── */
@@ -13,7 +12,6 @@ import { skillsData, skillCategories } from '@/data/skills';
 export default function Skills() {
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   // Group skills by category (skip "all")
   const groups = skillCategories
@@ -43,10 +41,10 @@ export default function Skills() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 28 }}
-          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
           className="text-center mb-12 md:mb-16"
         >
           <span
@@ -79,10 +77,10 @@ export default function Skills() {
           {groups.map((group, gi) => (
             <motion.div
               key={group.id}
-              initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
-              whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={isMobile ? { duration: 0.3 } : { duration: 0.5, delay: gi * 0.08, ease: [0.22, 1, 0.36, 1] as const }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.4, delay: gi * 0.05, ease: [0.22, 1, 0.36, 1] as const }}
               className={cn(
                 'rounded-2xl border p-4 md:p-6 transition-all duration-300',
                 isDarkMode
@@ -118,15 +116,11 @@ export default function Skills() {
                 </div>
               </div>
 
-              {/* Skill pills */}
+              {/* Skill pills — plain divs, no per-pill motion to avoid stagger issues */}
               <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill, si) => (
-                  <motion.div
+                {group.skills.map((skill) => (
+                  <div
                     key={skill.name}
-                    initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
-                    whileInView={isMobile ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={isMobile ? { duration: 0.3 } : { duration: 0.3, delay: gi * 0.05 + si * 0.02 }}
                     className={cn(
                       'group/pill flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium',
                       'border transition-all duration-200 cursor-default',
@@ -167,7 +161,7 @@ export default function Skills() {
                       )}
                       title={`${skill.proficiency}%`}
                     />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -178,8 +172,8 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={isMobile ? { duration: 0.3 } : { duration: 0.4, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-6 text-[10px] text-[var(--text-muted)]"
         >
           <span className="flex items-center gap-1.5">

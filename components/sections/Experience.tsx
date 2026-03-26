@@ -5,13 +5,11 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { experienceData } from '@/data/experience';
 
 export default function Experience() {
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const reversed = [...experienceData].reverse();
 
@@ -26,10 +24,10 @@ export default function Experience() {
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 30 }}
-          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={isMobile ? { duration: 0.3 } : { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
           className="text-center mb-14 md:mb-18"
         >
           <span
@@ -81,14 +79,10 @@ export default function Experience() {
               return (
                 <motion.div
                   key={entry.id}
-                  initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 32 }}
-                  whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={
-                    isMobile
-                      ? { duration: 0.3 }
-                      : { duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] as const }
-                  }
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.05 }}
+                  transition={{ duration: 0.4, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] as const }}
                   className="relative flex gap-5 md:gap-7"
                 >
                   {/* Node */}
@@ -208,10 +202,10 @@ export default function Experience() {
 
         {/* Stats strip */}
         <motion.div
-          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 32 }}
-          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={isMobile ? { duration: 0.3 } : { duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
           className="mt-14 md:mt-18"
         >
           <div
