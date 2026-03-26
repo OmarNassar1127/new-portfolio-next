@@ -6,6 +6,7 @@ import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import { personal } from '@/data/personal';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
 
 /* ─── AnimatedCounter ─────────────────────────────────────────────────── */
@@ -30,23 +31,27 @@ function AnimatedCounter({ value, suffix }: { value: string; suffix?: string }) 
 
 /* ─── Blob background ─────────────────────────────────────────────────── */
 function BackgroundBlobs() {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      {/* Primary purple blob */}
+      {/* Primary purple blob — static on mobile to avoid animation jank */}
       <div
         className="absolute -top-32 right-[5%] h-[480px] w-[480px] rounded-full bg-[var(--primary)] opacity-[0.13] blur-[120px]"
-        style={{ animation: 'blob 14s ease-in-out infinite' }}
+        style={isMobile ? undefined : { animation: 'blob 14s ease-in-out infinite' }}
       />
       {/* Cyan blob */}
       <div
         className="absolute top-[35%] -left-24 h-[380px] w-[380px] rounded-full bg-[var(--accent-cyan)] opacity-[0.09] blur-[110px]"
-        style={{ animation: 'blob 18s ease-in-out infinite', animationDelay: '3s' }}
+        style={isMobile ? undefined : { animation: 'blob 18s ease-in-out infinite', animationDelay: '3s' }}
       />
-      {/* Pink blob */}
-      <div
-        className="absolute bottom-16 right-[15%] h-[320px] w-[320px] rounded-full bg-[var(--accent-pink)] opacity-[0.08] blur-[100px]"
-        style={{ animation: 'blob 22s ease-in-out infinite', animationDelay: '6s' }}
-      />
+      {/* Pink blob — hidden on mobile to reduce paint cost */}
+      {!isMobile && (
+        <div
+          className="absolute bottom-16 right-[15%] h-[320px] w-[320px] rounded-full bg-[var(--accent-pink)] opacity-[0.08] blur-[100px]"
+          style={{ animation: 'blob 22s ease-in-out infinite', animationDelay: '6s' }}
+        />
+      )}
       {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 opacity-[0.025]"
@@ -63,23 +68,26 @@ function BackgroundBlobs() {
 /* ─── Role cycling text ───────────────────────────────────────────────── */
 function RoleCycler({ roles }: { roles: string[] }) {
   const [index, setIndex] = useState(0);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
+    // Slower cycle on mobile to reduce re-render pressure
+    const interval = isMobile ? 4000 : 3000;
     const id = setInterval(() => {
       setIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
+    }, interval);
     return () => clearInterval(id);
-  }, [roles.length]);
+  }, [roles.length, isMobile]);
 
   return (
     <div className="relative flex h-[38px] items-center justify-center overflow-hidden sm:h-[44px]">
       <AnimatePresence mode="wait">
         <motion.span
           key={roles[index]}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 16 }}
+          animate={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          exit={isMobile ? { opacity: 0 } : { opacity: 0, y: -16 }}
+          transition={isMobile ? { duration: 0.3 } : { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
           className="absolute bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl"
           style={{ backgroundSize: '200% 100%' }}
         >
@@ -112,10 +120,12 @@ function StatCard({ stat, lang }: { stat: (typeof personal.stats)[number]; lang:
 
 /* ─── Scroll chevron ──────────────────────────────────────────────────── */
 function ScrollChevron() {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <motion.div
       className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      animate={{ y: [0, 8, 0] }}
+      animate={isMobile ? {} : { y: [0, 8, 0] }}
       transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
       aria-hidden="true"
     >
@@ -129,6 +139,7 @@ export default function Hero() {
   const { language } = useLanguage();
   const lang = language === 'NL' ? 'nl' : 'en';
   const roles = personal.roles[lang];
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const socialLinks = [
     { href: personal.github, icon: 'ri-github-fill', label: 'GitHub' },
@@ -137,17 +148,19 @@ export default function Hero() {
     { href: `mailto:${personal.email}`, icon: 'ri-mail-line', label: 'Email' },
   ];
 
-  /* stagger helpers */
+  /* stagger helpers — on mobile, fade only with no y offset and no stagger delay */
   const fadeUp = (delay: number) => ({
-    initial: { opacity: 0, y: 28 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
+    initial: isMobile ? { opacity: 0 } : { opacity: 0, y: 28 },
+    animate: isMobile ? { opacity: 1 } : { opacity: 1, y: 0 },
+    transition: isMobile
+      ? { duration: 0.3 }
+      : { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
   });
 
   const fadeIn = (delay: number) => ({
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    transition: { duration: 0.6, delay },
+    transition: isMobile ? { duration: 0.3 } : { duration: 0.6, delay },
   });
 
   return (

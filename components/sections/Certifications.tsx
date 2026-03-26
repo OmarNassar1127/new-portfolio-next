@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { certificationsData, type Certification } from '@/data/certifications';
 
 /* ─── Deterministic shuffle (seeded by day so it changes daily) ───────────── */
@@ -169,6 +170,7 @@ function CertCarouselCard({ cert }: { cert: Certification }) {
 export default function Certifications() {
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -246,10 +248,10 @@ export default function Certifications() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header + Controls */}
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 28 }}
+          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
+          transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 md:mb-12"
         >
           <div>
@@ -312,10 +314,10 @@ export default function Certifications() {
 
         {/* Carousel */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 20 }}
+          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={isMobile ? { duration: 0.3 } : { duration: 0.5, delay: 0.1 }}
           className="relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}

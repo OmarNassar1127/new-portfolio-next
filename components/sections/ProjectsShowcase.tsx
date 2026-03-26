@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { projects } from '@/data/projects';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
 
 /* ─── Derived data ────────────────────────────────────────────────────── */
@@ -39,6 +40,7 @@ function ProjectCard({
   index: number;
 }) {
   const { language } = useLanguage();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const lang = language === 'NL' ? 'nl' : 'en';
   const description = project.description[lang];
   const firstSentence = description.split('. ')[0] + '.';
@@ -46,14 +48,14 @@ function ProjectCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 32 }}
+      whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.22, 1, 0.36, 1] as const,
-      }}
+      transition={
+        isMobile
+          ? { duration: 0.3 }
+          : { duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] as const }
+      }
     >
       <Link
         href={`/projects/${project.slug}/`}
@@ -131,6 +133,7 @@ function ProjectCard({
 /* ─── ProjectsShowcase ────────────────────────────────────────────────── */
 export default function ProjectsShowcase() {
   const { t } = useLanguage();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <section
@@ -150,10 +153,10 @@ export default function ProjectsShowcase() {
       <div className="relative z-10 mx-auto max-w-6xl">
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 24 }}
+          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
+          transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
           className="mb-14 text-center"
         >
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
@@ -179,10 +182,10 @@ export default function ProjectsShowcase() {
 
         {/* View all link */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 16 }}
+          whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={isMobile ? { duration: 0.3 } : { duration: 0.5, delay: 0.3 }}
           className="mt-12 flex justify-center"
         >
           <Link

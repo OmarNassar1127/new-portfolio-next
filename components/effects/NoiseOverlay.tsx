@@ -1,13 +1,19 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 /**
  * Full-viewport noise texture overlay.
  * Uses an inline SVG filter so no external assets are needed.
  * opacity 0.03 + mix-blend-mode overlay gives a subtle film-grain effect.
+ * Disabled on mobile — the SVG feTurbulence filter is GPU-heavy on phones.
  */
 export function NoiseOverlay({ className }: { className?: string }) {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  if (isMobile) return null;
+
   return (
     <>
       {/* SVG filter definition — not rendered visually */}

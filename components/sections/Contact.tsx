@@ -6,6 +6,7 @@ import { toast, Toaster } from 'sonner';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { personal } from '@/data/personal';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -110,6 +111,7 @@ function FormTextarea({ label, icon, isDarkMode, error, ...rest }: TextareaProps
 export default function Contact() {
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
@@ -246,10 +248,10 @@ export default function Contact() {
 
           {/* ── Header ───────────────────────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={isMobile ? { opacity: 0 } : { opacity: 0, y: 28 }}
+            whileInView={isMobile ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
+            transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
             className="text-center mb-12 md:mb-16"
           >
             <span
@@ -282,10 +284,10 @@ export default function Contact() {
 
             {/* ── Left: Contact form ──────────────────────────────────────── */}
             <motion.div
-              initial={{ opacity: 0, x: -32 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0 } : { opacity: 0, x: -32 }}
+              whileInView={isMobile ? { opacity: 1 } : { opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
+              transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
               className="order-1"
             >
               <div className={cn('bento-card p-6 md:p-8 glass')}>
@@ -399,10 +401,10 @@ export default function Contact() {
 
             {/* ── Right: Info + Map ───────────────────────────────────────── */}
             <motion.div
-              initial={{ opacity: 0, x: 32 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0 } : { opacity: 0, x: 32 }}
+              whileInView={isMobile ? { opacity: 1 } : { opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
+              transition={isMobile ? { duration: 0.3 } : { duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
               className="order-2 flex flex-col gap-5"
             >
               {/* Status pills */}

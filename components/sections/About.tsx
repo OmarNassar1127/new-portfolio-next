@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { personal } from "@/data/personal";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 /* ─── Content data ────────────────────────────────────────────────────── */
@@ -55,37 +56,38 @@ const highlights = [
 export default function About() {
   const { language, t } = useLanguage();
   const lang = language === "NL" ? "nl" : "en";
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
-  /* Subtle parallax on photo */
+  /* Subtle parallax on photo — disabled on mobile to avoid jank */
   const photoContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: photoContainerRef,
     offset: ["start end", "end start"],
   });
-  const photoY = useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]);
+  const photoY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["4%", "-4%"]);
   const photoScale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0.97, 1, 0.97],
+    isMobile ? [1, 1, 1] : [0.97, 1, 0.97],
   );
 
-  /* Entrance variants */
+  /* Entrance variants — fade only on mobile, slide on desktop */
   const slideLeft = {
-    initial: { opacity: 0, x: -40 },
-    whileInView: { opacity: 1, x: 0 },
+    initial: isMobile ? { opacity: 0 } : { opacity: 0, x: -40 },
+    whileInView: isMobile ? { opacity: 1 } : { opacity: 1, x: 0 },
     viewport: { once: true, margin: "-80px" },
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
+    transition: isMobile
+      ? { duration: 0.3 }
+      : { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
   };
 
   const slideRight = {
-    initial: { opacity: 0, x: 40 },
-    whileInView: { opacity: 1, x: 0 },
+    initial: isMobile ? { opacity: 0 } : { opacity: 0, x: 40 },
+    whileInView: isMobile ? { opacity: 1 } : { opacity: 1, x: 0 },
     viewport: { once: true, margin: "-80px" },
-    transition: {
-      duration: 0.75,
-      delay: 0.1,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
+    transition: isMobile
+      ? { duration: 0.3 }
+      : { duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const },
   };
 
   return (
@@ -215,14 +217,14 @@ export default function About() {
 
               {/* Floating badge: available */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.8, y: 10 }}
+                whileInView={isMobile ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.45,
-                  ease: [0.22, 1, 0.36, 1] as const,
-                }}
+                transition={
+                  isMobile
+                    ? { duration: 0.3 }
+                    : { duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] as const }
+                }
                 className={cn(
                   "absolute -bottom-4 -left-4 flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg",
                   "bg-emerald-600 border border-emerald-500/30",
@@ -239,14 +241,14 @@ export default function About() {
 
               {/* Floating badge: Amsterdam */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: -10 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.8, y: -10 }}
+                whileInView={isMobile ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.55,
-                  ease: [0.22, 1, 0.36, 1] as const,
-                }}
+                transition={
+                  isMobile
+                    ? { duration: 0.3 }
+                    : { duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] as const }
+                }
                 className={cn(
                   "absolute -right-5 top-6 flex items-center gap-2 rounded-2xl px-4 py-2.5",
                   "glass border border-[var(--border)] shadow-lg",

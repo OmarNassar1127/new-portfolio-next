@@ -294,6 +294,32 @@ div[id] {
   border-radius: 4px;
 }
 
+/* ============================================================
+   REDUCED MOTION — honour system accessibility preference
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Framer Motion respects this via its own built-in check,
+     but belt-and-suspenders: kill CSS keyframe animations too */
+  .blob,
+  .floating,
+  .glow-box,
+  .slide-up,
+  .pulse-dot,
+  .gradient-text {
+    animation: none !important;
+  }
+}
+
 /* Selection highlight */
 ::selection {
   background: rgba(136, 115, 239, 0.30);
