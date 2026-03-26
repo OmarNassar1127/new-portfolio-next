@@ -27,10 +27,25 @@ export default function ProjectCaseStudy({
   const topRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Force scroll to top on mount — bypasses Lenis
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    // Force scroll to top — multiple methods to bypass Lenis
+    // Immediate
+    window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+    // After Lenis initializes
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+    });
+    // After hydration completes
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+    }, 50);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+    }, 150);
   }, [project.slug]);
 
   const description =

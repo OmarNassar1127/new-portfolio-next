@@ -1,15 +1,27 @@
 'use client';
 
-import { ReactLenis } from 'lenis/react';
+import { useEffect } from 'react';
+import { ReactLenis, useLenis } from 'lenis/react';
+import { usePathname } from 'next/navigation';
 
 type SmoothScrollProps = {
   children: React.ReactNode;
 };
 
-/**
- * Wraps the application in Lenis smooth scroll.
- * lerp 0.1 + duration 1.2 gives a natural, non-over-damped feel.
- */
+function ScrollToTopOnRouteChange() {
+  const lenis = useLenis();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // When route changes, tell Lenis to scroll to top immediately
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+  }, [pathname, lenis]);
+
+  return null;
+}
+
 export function SmoothScroll({ children }: SmoothScrollProps) {
   return (
     <ReactLenis
@@ -18,8 +30,10 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
         lerp: 0.1,
         duration: 1.2,
         smoothWheel: true,
+        autoResize: true,
       }}
     >
+      <ScrollToTopOnRouteChange />
       {children}
     </ReactLenis>
   );
