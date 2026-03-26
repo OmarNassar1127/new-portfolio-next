@@ -189,6 +189,7 @@ export default function About() {
                   sizes="(max-width: 640px) 280px, 360px"
                   className="object-cover object-top"
                   priority
+                  loading="eager"
                 />
                 {/* Subtle gradient overlay at bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[rgba(10,15,28,0.6)] to-transparent" />

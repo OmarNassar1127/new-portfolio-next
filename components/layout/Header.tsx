@@ -313,6 +313,7 @@ export default function Header() {
                 fill
                 className="object-cover"
                 sizes="36px"
+                loading="eager"
               />
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[var(--bg)] rounded-full" />
             </div>
@@ -468,6 +469,7 @@ function NavLogo({
           className="object-cover"
           sizes="32px"
           priority
+          loading="eager"
         />
       </span>
       <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-[var(--card)] rounded-full" />
