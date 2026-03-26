@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -23,6 +24,15 @@ export default function ProjectCaseStudy({
   nextProject: Project | null;
 }) {
   const { language, t } = useLanguage();
+  const topRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Force scroll to top on mount — bypasses Lenis
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [project.slug]);
+
   const description =
     language === 'NL' ? project.description.nl : project.description.en;
   const { intro, highlights } = parseDescription(description);
