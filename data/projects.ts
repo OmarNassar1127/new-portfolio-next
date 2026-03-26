@@ -654,10 +654,10 @@ export const projects: Project[] = [
 const FEATURED_SLUGS = new Set([
   "enterprise-ai-platform",
   "whatsapp-ai-business-agent",
-  "slouch-ai-posture-coach",
-  "ai-customer-support",
-  "medical-technical-file-builder",
+  "invoice-fraud-prevention-platform",
+  "full-stack-multi-agent",
   "enterprise-rag-platform",
+  "medical-technical-file-builder",
 ]);
 
 // Apply featured flag (already set inline above, this ensures consistency)
