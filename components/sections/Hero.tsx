@@ -77,34 +77,11 @@ function RoleCycler({ roles }: { roles: string[] }) {
     return () => clearInterval(id);
   }, [roles.length]);
 
-  /* On mobile, skip AnimatePresence entirely — just show static text.
-     The AnimatePresence exit/enter cycle was causing elements to flash
-     because the motion props changed after hydration. */
-  if (isMobile) {
-    return (
-      <div className="flex h-[38px] items-center justify-center">
-        <span className="bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl">
-          {roles[index]}
-        </span>
-      </div>
-    );
-  }
-
   return (
     <div className="relative flex h-[38px] items-center justify-center overflow-hidden sm:h-[44px]">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={roles[index]}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
-          className="absolute bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl"
-          style={{ backgroundSize: '200% 100%' }}
-        >
-          {roles[index]}
-        </motion.span>
-      </AnimatePresence>
+      <span className="bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl">
+        {roles[index]}
+      </span>
     </div>
   );
 }

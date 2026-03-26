@@ -1,11 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { personal } from "@/data/personal";
 import { useLanguage } from "@/hooks/useLanguage";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 /* ─── Content data ────────────────────────────────────────────────────── */
@@ -71,20 +69,6 @@ const fadeRight = {
 export default function About() {
   const { language, t } = useLanguage();
   const lang = language === "NL" ? "nl" : "en";
-  const isMobile = useMediaQuery("(max-width: 768px)");
-
-  /* Subtle parallax on photo — disabled on mobile to avoid jank */
-  const photoContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: photoContainerRef,
-    offset: ["start end", "end start"],
-  });
-  const photoY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["4%", "-4%"]);
-  const photoScale = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    isMobile ? [1, 1, 1] : [0.97, 1, 0.97],
-  );
 
   return (
     <section
@@ -176,7 +160,6 @@ export default function About() {
           {/* ── Right column: photo ────────────────────────────────────── */}
           <motion.div
             {...fadeRight}
-            ref={photoContainerRef}
             className="relative flex items-center justify-center lg:justify-end"
           >
             <div className="relative w-[280px] sm:w-auto">
@@ -190,9 +173,8 @@ export default function About() {
                 aria-hidden="true"
               />
 
-              {/* Photo with parallax */}
-              <motion.div
-                style={{ y: photoY, scale: photoScale }}
+              {/* Photo */}
+              <div
                 className={cn(
                   "relative overflow-hidden rounded-3xl",
                   "h-[340px] w-full sm:h-[460px] sm:w-[360px]",
@@ -210,7 +192,7 @@ export default function About() {
                 />
                 {/* Subtle gradient overlay at bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[rgba(10,15,28,0.6)] to-transparent" />
-              </motion.div>
+              </div>
 
               {/* Floating badge: available */}
               <motion.div
@@ -221,7 +203,7 @@ export default function About() {
                 className={cn(
                   "absolute flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg",
                   "bg-emerald-600 border border-emerald-500/30",
-                  isMobile ? "bottom-3 left-3" : "-bottom-4 -left-4",
+                  "bottom-3 left-3 sm:-bottom-4 sm:-left-4",
                 )}
               >
                 <span className="relative flex h-2.5 w-2.5">
@@ -242,7 +224,7 @@ export default function About() {
                 className={cn(
                   "absolute flex items-center gap-2 rounded-2xl px-4 py-2.5",
                   "glass border border-[var(--border)] shadow-lg",
-                  isMobile ? "right-3 top-3" : "-right-5 top-6",
+                  "right-3 top-3 sm:-right-5 sm:top-6",
                 )}
               >
                 <i className="ri-map-pin-2-fill text-sm text-[var(--primary)]" />

@@ -48,6 +48,7 @@ function FormInput({ label, icon, isDarkMode, error, ...rest }: InputProps) {
         />
         <input
           {...rest}
+          suppressHydrationWarning
           placeholder={label}
           className={cn(
             'w-full pl-11 pr-4 py-3.5 rounded-xl text-sm',
@@ -89,6 +90,7 @@ function FormTextarea({ label, icon, isDarkMode, error, ...rest }: TextareaProps
         />
         <textarea
           {...rest}
+          suppressHydrationWarning
           placeholder={label}
           className={cn(
             'w-full pl-11 pr-4 py-3.5 rounded-xl text-sm resize-none',
