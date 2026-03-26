@@ -290,7 +290,7 @@ export default function Contact() {
               transition={isMobile ? { duration: 0.3 } : { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
               className="order-1"
             >
-              <div className={cn('bento-card p-6 md:p-8 glass')}>
+              <div className={cn('bento-card p-4 sm:p-6 md:p-8 glass')}>
                 <h3 className="text-base font-bold text-[var(--text)] mb-6 flex items-center gap-2">
                   <i className="ri-send-plane-2-line text-[var(--primary)]" />
                   {t('Send a Message', 'Stuur een Bericht')}
@@ -485,11 +485,11 @@ export default function Contact() {
                   <span className="text-xs font-semibold text-[var(--text)]">
                     {t('Based in Amsterdam', 'Gevestigd in Amsterdam')}
                   </span>
-                  <span className="text-[10px] text-[var(--text-muted)] ml-auto">
+                  <span className="text-[10px] text-[var(--text-muted)] ml-auto truncate hidden sm:block">
                     Amsterdam-Zuid, Netherlands
                   </span>
                 </div>
-                <div className="relative h-56 md:h-72">
+                <div className="relative h-48 sm:h-56 md:h-72 overflow-hidden">
                   <iframe
                     title={t('Amsterdam location map', 'Amsterdam locatiekaart')}
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19500.474268381622!2d4.848801944608884!3d52.342140875020675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c609fd919e5b05%3A0xfadb36a3b89991d8!2sAmsterdam-Zuid%2C%20Amsterdam!5e0!3m2!1sen!2snl!4v1680872096824!5m2!1sen!2snl"

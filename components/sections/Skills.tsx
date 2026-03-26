@@ -84,25 +84,25 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={isMobile ? { duration: 0.3 } : { duration: 0.5, delay: gi * 0.08, ease: [0.22, 1, 0.36, 1] as const }}
               className={cn(
-                'rounded-2xl border p-5 md:p-6 transition-all duration-300',
+                'rounded-2xl border p-4 md:p-6 transition-all duration-300',
                 isDarkMode
                   ? 'bg-[var(--card)] border-[var(--border)] hover:border-[var(--primary)]/20'
                   : 'bg-white border-gray-200 hover:border-[var(--primary)]/20'
               )}
             >
               {/* Category header */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="flex items-center gap-3 min-w-0">
                   <div
                     className={cn(
-                      'w-9 h-9 rounded-lg flex items-center justify-center bg-gradient-to-br shadow-sm',
+                      'w-9 h-9 shrink-0 rounded-lg flex items-center justify-center bg-gradient-to-br shadow-sm',
                       group.color
                     )}
                   >
                     <i className={cn(group.icon, 'text-sm text-white')} />
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[var(--text)]">
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-bold text-[var(--text)] truncate">
                       {t(group.label.en, group.label.nl)}
                     </h3>
                     <p className="text-[11px] text-[var(--text-muted)]">
@@ -112,7 +112,7 @@ export default function Skills() {
                 </div>
 
                 {/* Average proficiency */}
-                <div className="text-right">
+                <div className="text-right shrink-0">
                   <span className="text-lg font-bold text-[var(--primary)]">{group.avg}%</span>
                   <p className="text-[10px] text-[var(--text-muted)]">{t('avg', 'gem')}</p>
                 </div>
@@ -180,7 +180,7 @@ export default function Skills() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={isMobile ? { duration: 0.3 } : { duration: 0.4, delay: 0.3 }}
-          className="flex items-center justify-center gap-5 mt-6 text-[10px] text-[var(--text-muted)]"
+          className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-6 text-[10px] text-[var(--text-muted)]"
         >
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> {t('Expert', 'Expert')} 90%+

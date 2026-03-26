@@ -183,7 +183,7 @@ export default function About() {
             ref={photoContainerRef}
             className="relative flex items-center justify-center lg:justify-end"
           >
-            <div className="relative">
+            <div className="relative w-[280px] sm:w-auto">
               {/* Glow ring behind the photo */}
               <div
                 className="absolute -inset-3 rounded-3xl opacity-50 blur-2xl"
@@ -198,7 +198,8 @@ export default function About() {
               <motion.div
                 style={{ y: photoY, scale: photoScale }}
                 className={cn(
-                  "relative h-[380px] w-[300px] overflow-hidden rounded-3xl sm:h-[460px] sm:w-[360px]",
+                  "relative overflow-hidden rounded-3xl",
+                  "h-[340px] w-full sm:h-[460px] sm:w-[360px]",
                   "border border-[rgba(136,115,239,0.25)]",
                   "shadow-[0_32px_80px_-16px_rgba(0,0,0,0.4)]",
                 )}
@@ -207,7 +208,7 @@ export default function About() {
                   src="/images/me2.png"
                   alt="Omar Nassar — AI Engineer"
                   fill
-                  sizes="(max-width: 640px) 300px, 360px"
+                  sizes="(max-width: 640px) 280px, 360px"
                   className="object-cover object-top"
                   priority
                 />
@@ -226,8 +227,9 @@ export default function About() {
                     : { duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] as const }
                 }
                 className={cn(
-                  "absolute -bottom-4 -left-4 flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg",
+                  "absolute flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg",
                   "bg-emerald-600 border border-emerald-500/30",
+                  isMobile ? "bottom-3 left-3" : "-bottom-4 -left-4",
                 )}
               >
                 <span className="relative flex h-2.5 w-2.5">
@@ -250,8 +252,9 @@ export default function About() {
                     : { duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] as const }
                 }
                 className={cn(
-                  "absolute -right-5 top-6 flex items-center gap-2 rounded-2xl px-4 py-2.5",
+                  "absolute flex items-center gap-2 rounded-2xl px-4 py-2.5",
                   "glass border border-[var(--border)] shadow-lg",
+                  isMobile ? "right-3 top-3" : "-right-5 top-6",
                 )}
               >
                 <i className="ri-map-pin-2-fill text-sm text-[var(--primary)]" />
