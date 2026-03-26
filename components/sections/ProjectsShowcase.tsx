@@ -33,10 +33,8 @@ function CategoryBadge({ category }: { category: 'ai/ml' | 'professional' }) {
 /* ─── Project card ────────────────────────────────────────────────────── */
 function ProjectCard({
   project,
-  index,
 }: {
   project: (typeof featuredProjects)[number];
-  index: number;
 }) {
   const { language } = useLanguage();
   const lang = language === 'NL' ? 'nl' : 'en';
@@ -45,12 +43,7 @@ function ProjectCard({
   const visibleTechs = project.technologies.slice(0, 4);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] as const }}
-    >
+    <div>
       <Link
         href={`/projects/${project.slug}/`}
         className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-400 hover:border-[rgba(136,115,239,0.35)] hover:shadow-[0_8px_40px_-12px_rgba(136,115,239,0.25)] hover:-translate-y-1"
@@ -120,7 +113,7 @@ function ProjectCard({
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
@@ -148,8 +141,8 @@ export default function ProjectsShowcase() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="mb-14 text-center"
         >
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
@@ -168,8 +161,8 @@ export default function ProjectsShowcase() {
 
         {/* Project grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
 
@@ -177,8 +170,8 @@ export default function ProjectsShowcase() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.3 }}
           className="mt-12 flex justify-center"
         >
           <Link

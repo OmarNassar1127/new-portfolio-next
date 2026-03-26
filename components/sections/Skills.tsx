@@ -43,8 +43,8 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="text-center mb-12 md:mb-16"
         >
           <span
@@ -74,13 +74,9 @@ export default function Skills() {
 
         {/* Grouped skill rows */}
         <div className="space-y-6">
-          {groups.map((group, gi) => (
-            <motion.div
+          {groups.map((group) => (
+            <div
               key={group.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.4, delay: gi * 0.05, ease: [0.22, 1, 0.36, 1] as const }}
               className={cn(
                 'rounded-2xl border p-4 md:p-6 transition-all duration-300',
                 isDarkMode
@@ -164,18 +160,12 @@ export default function Skills() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Legend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-6 text-[10px] text-[var(--text-muted)]"
-        >
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-6 text-[10px] text-[var(--text-muted)]">
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> {t('Expert', 'Expert')} 90%+
           </span>
@@ -188,7 +178,7 @@ export default function Skills() {
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-orange-500" /> {t('Learning', 'Lerende')}
           </span>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

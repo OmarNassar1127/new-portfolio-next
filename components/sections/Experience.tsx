@@ -26,8 +26,8 @@ export default function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="text-center mb-14 md:mb-18"
         >
           <span
@@ -77,12 +77,8 @@ export default function Experience() {
               const description = t(entry.description.en, entry.description.nl);
 
               return (
-                <motion.div
+                <div
                   key={entry.id}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.05 }}
-                  transition={{ duration: 0.4, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] as const }}
                   className="relative flex gap-5 md:gap-7"
                 >
                   {/* Node */}
@@ -194,20 +190,14 @@ export default function Experience() {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </div>
 
         {/* Stats strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
-          className="mt-14 md:mt-18"
-        >
+        <div className="mt-14 md:mt-18">
           <div
             className={cn(
               'rounded-2xl border px-6 py-8 md:py-10',
@@ -232,7 +222,7 @@ export default function Experience() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

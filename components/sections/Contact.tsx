@@ -249,8 +249,8 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+            viewport={{ once: true, amount: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
             className="text-center mb-12 md:mb-16"
           >
             <span
@@ -282,13 +282,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
             {/* ── Left: Contact form ──────────────────────────────────────── */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
-              className="order-1"
-            >
+            <div className="order-1">
               <div className={cn('bento-card p-4 sm:p-6 md:p-8 glass')}>
                 <h3 className="text-base font-bold text-[var(--text)] mb-6 flex items-center gap-2">
                   <i className="ri-send-plane-2-line text-[var(--primary)]" />
@@ -398,16 +392,10 @@ export default function Contact() {
                   </div>
                 </form>
               </div>
-            </motion.div>
+            </div>
 
             {/* ── Right: Info + Map ───────────────────────────────────────── */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
-              className="order-2 flex flex-col gap-5"
-            >
+            <div className="order-2 flex flex-col gap-5">
               {/* Status pills */}
               <div className="flex flex-wrap gap-3">
                 {/* Location */}
@@ -502,7 +490,7 @@ export default function Contact() {
                   />
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

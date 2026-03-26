@@ -53,7 +53,6 @@ function IssuerLogo({ cert }: { cert: Certification }) {
         width={40}
         height={40}
         className={cn('object-contain', cert.logo === 'anthropic' && 'rounded-lg')}
-        style={{ width: 'auto', height: 'auto' }}
       />
     );
   }
@@ -257,8 +256,8 @@ export default function Certifications() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="mb-8 md:mb-12"
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -322,11 +321,7 @@ export default function Certifications() {
         </motion.div>
 
         {/* Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
+        <div
           className="relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -370,7 +365,7 @@ export default function Certifications() {
               <CertCarouselCard key={cert.id} cert={cert} />
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Dot indicators */}
         <div className="flex justify-center gap-2 mt-8">

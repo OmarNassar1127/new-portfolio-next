@@ -48,13 +48,6 @@ const techStack = [
   { name: "Tailwind", color: "rgba(56,189,248,0.15)", text: "#38bdf8" },
 ];
 
-/* ─── Shared fade-up preset — no isMobile branches ───────────────────── */
-const fadeUp = {
-  initial: { opacity: 0, y: 16 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.05 as const },
-  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
-};
 
 /* ─── BentoDashboard ──────────────────────────────────────────────────── */
 export default function BentoDashboard() {
@@ -78,7 +71,10 @@ export default function BentoDashboard() {
       <div className="relative z-10 mx-auto max-w-6xl">
         {/* Section heading */}
         <motion.div
-          {...fadeUp}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="mb-12 text-center"
         >
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
@@ -92,13 +88,10 @@ export default function BentoDashboard() {
           </h2>
         </motion.div>
 
-        {/* Bento grid — each card fades in individually without stagger */}
+        {/* Bento grid — plain divs, section-level motion handles the reveal */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {/* Card 1 — Current role (2 cols) */}
-          <motion.div
-            {...fadeUp}
-            className="sm:col-span-2"
-          >
+          <div className="sm:col-span-2">
             <SpotlightCard className="h-full min-h-[160px] p-6">
               <div className="flex h-full flex-col justify-between gap-4">
                 <div className="flex items-start gap-3">
@@ -136,10 +129,10 @@ export default function BentoDashboard() {
                 </p>
               </div>
             </SpotlightCard>
-          </motion.div>
+          </div>
 
           {/* Card 2 — Years counter (1 col) */}
-          <motion.div {...fadeUp}>
+          <div>
             <SpotlightCard className="h-full min-h-[160px] p-6">
               <div className="flex h-full flex-col justify-between">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(0,212,255,0.1)]">
@@ -155,10 +148,10 @@ export default function BentoDashboard() {
                 </div>
               </div>
             </SpotlightCard>
-          </motion.div>
+          </div>
 
           {/* Card 3 — Projects counter (1 col) */}
-          <motion.div {...fadeUp}>
+          <div>
             <SpotlightCard className="h-full min-h-[160px] p-6">
               <div className="flex h-full flex-col justify-between">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(255,0,110,0.1)]">
@@ -174,10 +167,10 @@ export default function BentoDashboard() {
                 </div>
               </div>
             </SpotlightCard>
-          </motion.div>
+          </div>
 
           {/* Card 4 — Tech stack (2 cols) */}
-          <motion.div {...fadeUp} className="sm:col-span-2">
+          <div className="sm:col-span-2">
             <SpotlightCard className="h-full p-6">
               <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
                 {t("Tech Stack", "Technologieën")}
@@ -198,10 +191,10 @@ export default function BentoDashboard() {
                 ))}
               </div>
             </SpotlightCard>
-          </motion.div>
+          </div>
 
           {/* Card 5 — Location (1 col) */}
-          <motion.div {...fadeUp}>
+          <div>
             <SpotlightCard className="h-full min-h-[140px] p-6">
               <div className="flex h-full flex-col justify-between">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(136,115,239,0.1)]">
@@ -225,10 +218,10 @@ export default function BentoDashboard() {
                 </div>
               </div>
             </SpotlightCard>
-          </motion.div>
+          </div>
 
           {/* Card 6 — Status (1 col) */}
-          <motion.div {...fadeUp}>
+          <div>
             <SpotlightCard
               className="h-full min-h-[140px] p-6"
               spotlightColor="rgba(0, 212, 255, 0.12)"
@@ -254,13 +247,10 @@ export default function BentoDashboard() {
                 </div>
               </div>
             </SpotlightCard>
-          </motion.div>
+          </div>
 
           {/* Card 7 — Monthly impact stat (full width) */}
-          <motion.div
-            {...fadeUp}
-            className="sm:col-span-2 md:col-span-4"
-          >
+          <div className="sm:col-span-2 md:col-span-4">
             <SpotlightCard
               className="p-6"
               spotlightColor="rgba(136,115,239,0.12)"
@@ -292,7 +282,7 @@ export default function BentoDashboard() {
                 </div>
               </div>
             </SpotlightCard>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
