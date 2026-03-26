@@ -14,8 +14,10 @@ export interface ExperienceEntry {
     en: string;
     nl: string;
   };
-  /** Path relative to /public/images/ */
+  /** Remix Icon class or image path */
   icon: string;
+  /** Whether icon is a Remix Icon class (true) or image path (false) */
+  iconType: 'remix' | 'image';
   /** Company website URL */
   companyUrl: string | null;
   color: string;
@@ -44,7 +46,8 @@ export const experienceData: ExperienceEntry[] = [
       en: "MBO Amstelland",
       nl: "MBO Amstelland",
     },
-    icon: "/images/front-end.png",
+    icon: "ri-graduation-cap-fill",
+    iconType: "remix",
     companyUrl: null,
     color: "from-blue-500 to-blue-600",
     technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL", "C#", "WordPress"],
@@ -70,7 +73,8 @@ export const experienceData: ExperienceEntry[] = [
       en: "CSDM",
       nl: "CSDM",
     },
-    icon: "/images/backend.png",
+    icon: "ri-code-box-fill",
+    iconType: "remix",
     companyUrl: "https://www.csdigitalmedia.nl/",
     color: "from-green-500 to-green-600",
     technologies: ["ReactJS", "GraphQL", "Frontend Architecture"],
@@ -96,7 +100,8 @@ export const experienceData: ExperienceEntry[] = [
       en: "Independent Study",
       nl: "Zelfstandige Studie",
     },
-    icon: "/images/apps.png",
+    icon: "ri-lightbulb-flash-fill",
+    iconType: "remix",
     companyUrl: null,
     color: "from-purple-500 to-purple-600",
     technologies: ["Blockchain", "Smart Contracts", "Cryptography", "Web3"],
@@ -122,7 +127,8 @@ export const experienceData: ExperienceEntry[] = [
       en: "Bitsliced",
       nl: "Bitsliced",
     },
-    icon: "/images/design.png",
+    icon: "ri-team-fill",
+    iconType: "remix",
     companyUrl: null,
     color: "from-orange-500 to-orange-600",
     technologies: ["NFT", "Product Strategy", "Team Leadership", "Teaching"],
@@ -148,7 +154,8 @@ export const experienceData: ExperienceEntry[] = [
       en: "Vloto B.V.",
       nl: "Vloto B.V.",
     },
-    icon: "/images/apps.png",
+    icon: "ri-car-fill",
+    iconType: "remix",
     companyUrl: "https://vloto.nl/",
     color: "from-teal-500 to-teal-600",
     technologies: [
@@ -181,7 +188,8 @@ export const experienceData: ExperienceEntry[] = [
       en: "Virelio Agency",
       nl: "Virelio Agency",
     },
-    icon: "/images/front-end.png",
+    icon: "ri-robot-2-fill",
+    iconType: "remix",
     companyUrl: "https://virelio.nl/",
     color: "from-purple-600 to-pink-600",
     technologies: [

@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -92,14 +91,7 @@ export default function Experience() {
                         entry.current && 'shadow-[0_0_20px_var(--primary-glow)]'
                       )}
                     >
-                      <Image
-                        src={entry.icon}
-                        alt={title}
-                        width={28}
-                        height={28}
-                        className="object-contain brightness-0 invert drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]"
-                        style={{ filter: 'brightness(0) invert(1) drop-shadow(0 0 1px white)', opacity: 1 }}
-                      />
+                      <i className={cn(entry.icon, 'text-xl text-white drop-shadow-[0_0_2px_rgba(255,255,255,0.5)]')} />
                     </div>
                   </div>
 

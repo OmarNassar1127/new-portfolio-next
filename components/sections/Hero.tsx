@@ -73,8 +73,8 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content — CSS animations only */}
-      <div className="relative z-10 mx-auto w-full max-w-5xl slide-up">
+      {/* Content — CSS staggered entrance */}
+      <div className="relative z-10 mx-auto w-full max-w-5xl hero-stagger">
         {/* Greeting */}
         <p className="mb-5 text-center font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
           {lang === 'en' ? "Hello, I'm" : 'Hallo, ik ben'}
