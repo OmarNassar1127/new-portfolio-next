@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useSectionInView } from "@/hooks/useSectionInView";
 import { cn } from "@/lib/utils";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
@@ -52,6 +53,7 @@ const techStack = [
 /* ─── BentoDashboard ──────────────────────────────────────────────────── */
 export default function BentoDashboard() {
   const { t } = useLanguage();
+  const gridRef = useSectionInView<HTMLDivElement>();
 
   return (
     <section
@@ -89,7 +91,7 @@ export default function BentoDashboard() {
         </motion.div>
 
         {/* Bento grid — plain divs, section-level motion handles the reveal */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
+        <div ref={gridRef} className="section-stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {/* Card 1 — Current role (2 cols) */}
           <div className="sm:col-span-2">
             <SpotlightCard className="h-full min-h-[160px] p-6">

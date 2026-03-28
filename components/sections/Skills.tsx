@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
+import { useSectionInView } from '@/hooks/useSectionInView';
 import { skillsData, skillCategories } from '@/data/skills';
 
 /* ─── Skills Section — Compact grouped layout ─────────────────────────────── */
@@ -14,6 +15,7 @@ export default function Skills() {
   const { isDarkMode } = useTheme();
 
   // Group skills by category (skip "all")
+  const rowsRef = useSectionInView<HTMLDivElement>();
   const groups = skillCategories
     .filter((c) => c.id !== 'all')
     .map((cat) => ({
@@ -73,7 +75,7 @@ export default function Skills() {
         </motion.div>
 
         {/* Grouped skill rows */}
-        <div className="space-y-6">
+        <div ref={rowsRef} className="section-stagger space-y-6">
           {groups.map((group) => (
             <div
               key={group.id}

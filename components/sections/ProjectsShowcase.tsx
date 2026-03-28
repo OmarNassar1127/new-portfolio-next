@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { projects } from '@/data/projects';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useSectionInView } from '@/hooks/useSectionInView';
 import { cn } from '@/lib/utils';
 
 /* ─── Derived data ────────────────────────────────────────────────────── */
@@ -120,6 +121,7 @@ function ProjectCard({
 /* ─── ProjectsShowcase ────────────────────────────────────────────────── */
 export default function ProjectsShowcase() {
   const { t } = useLanguage();
+  const gridRef = useSectionInView<HTMLDivElement>();
 
   return (
     <section
@@ -160,7 +162,7 @@ export default function ProjectsShowcase() {
         </motion.div>
 
         {/* Project grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="section-stagger grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

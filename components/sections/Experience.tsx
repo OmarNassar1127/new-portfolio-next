@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
+import { useSectionInView } from '@/hooks/useSectionInView';
 import { experienceData } from '@/data/experience';
 
 export default function Experience() {
@@ -11,6 +12,7 @@ export default function Experience() {
   const { isDarkMode } = useTheme();
 
   const reversed = [...experienceData].reverse();
+  const timelineRef = useSectionInView<HTMLDivElement>();
 
   return (
     <section id="journey" className="relative py-20 md:py-28 overflow-hidden bg-[var(--bg)]">
@@ -68,7 +70,7 @@ export default function Experience() {
             }}
           />
 
-          <div className="space-y-8 md:space-y-10">
+          <div ref={timelineRef} className="section-stagger space-y-8 md:space-y-10">
             {reversed.map((entry, index) => {
               const title = t(entry.title.en, entry.title.nl);
               const company = t(entry.company.en, entry.company.nl);
