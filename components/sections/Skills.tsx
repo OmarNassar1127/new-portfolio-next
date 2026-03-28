@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+// motion removed — CSS animations only
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
@@ -42,13 +42,7 @@ export default function Skills() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-          className="text-center mb-12 md:mb-16"
-        >
+        <div className="text-center mb-12 md:mb-16">
           <span
             className={cn(
               'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-5',
@@ -72,7 +66,7 @@ export default function Skills() {
               '34 technologieën in 5 domeinen, verfijnd door productie.'
             )}
           </p>
-        </motion.div>
+        </div>
 
         {/* Grouped skill rows */}
         <div ref={rowsRef} className="section-stagger space-y-6">

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+// motion removed — CSS animations only
 import Image from 'next/image';
 import Link from 'next/link';
 import { projects } from '@/data/projects';
@@ -140,13 +140,7 @@ export default function ProjectsShowcase() {
 
       <div className="relative z-10 mx-auto max-w-6xl">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-          className="mb-14 text-center"
-        >
+        <div className="mb-14 text-center">
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
             {t('Portfolio', 'Portfolio')}
           </p>
@@ -159,7 +153,7 @@ export default function ProjectsShowcase() {
           <p className="mt-4 text-base text-[var(--text-muted)] sm:text-lg">
             {t('Projects that define my craft', 'Projecten die mijn vakmanschap definiëren')}
           </p>
-        </motion.div>
+        </div>
 
         {/* Project grid */}
         <div ref={gridRef} className="section-stagger grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -169,13 +163,7 @@ export default function ProjectsShowcase() {
         </div>
 
         {/* View all link */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.3 }}
-          className="mt-12 flex justify-center"
-        >
+        <div className="mt-12 flex justify-center">
           <Link
             href="/projects"
             className={cn(
@@ -187,7 +175,7 @@ export default function ProjectsShowcase() {
             {t('View All Projects', 'Alle Projecten Bekijken')}
             <i className="ri-arrow-right-line text-base transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

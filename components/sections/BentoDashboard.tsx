@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+// motion removed — CSS animations only
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useSectionInView } from "@/hooks/useSectionInView";
@@ -72,13 +72,7 @@ export default function BentoDashboard() {
 
       <div className="relative z-10 mx-auto max-w-6xl">
         {/* Section heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-          className="mb-12 text-center"
-        >
+        <div className="mb-12 text-center">
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
             {t("Overview", "Overzicht")}
           </p>
@@ -88,7 +82,7 @@ export default function BentoDashboard() {
               {t("Glance", "Oogopslag")}
             </span>
           </h2>
-        </motion.div>
+        </div>
 
         {/* Bento grid — plain divs, section-level motion handles the reveal */}
         <div ref={gridRef} className="section-stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">

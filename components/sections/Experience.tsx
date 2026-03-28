@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+// motion removed — CSS animations only
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTheme } from '@/hooks/useTheme';
@@ -24,12 +24,7 @@ export default function Experience() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-          className="text-center mb-14 md:mb-18"
+        <div className="text-center mb-14 md:mb-18"
         >
           <span
             className={cn(
@@ -54,7 +49,7 @@ export default function Experience() {
               'Van code-student tot AI mede-oprichter — systemen bouwen die schalen.'
             )}
           </p>
-        </motion.div>
+        </div>
 
         {/* Timeline — single column, line on the left */}
         <div className="relative">
