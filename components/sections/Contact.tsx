@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+// motion removed — using CSS animations only
 import { toast, Toaster } from 'sonner';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -246,13 +246,7 @@ export default function Contact() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header ───────────────────────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-            className="text-center mb-12 md:mb-16"
-          >
+          <div className="text-center mb-12 md:mb-16">
             <span
               className={cn(
                 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-5',
@@ -276,7 +270,7 @@ export default function Contact() {
                 'Heb je een project in gedachten of wil je AI-oplossingen verkennen? Ik hoor graag van je.',
               )}
             </p>
-          </motion.div>
+          </div>
 
           {/* ── Two-column layout ─────────────────────────────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">

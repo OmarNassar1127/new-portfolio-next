@@ -26,15 +26,25 @@ function AnimatedCounter({ value }: { value: string }) {
 /* ─── Role cycling text ───────────────────────────────────────────────── */
 function RoleCycler({ roles }: { roles: string[] }) {
   const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((prev) => (prev + 1) % roles.length), 3000);
+    const id = setInterval(() => {
+      setVisible(false); // fade out
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % roles.length);
+        setVisible(true); // fade in with new text
+      }, 300);
+    }, 3000);
     return () => clearInterval(id);
   }, [roles.length]);
 
   return (
     <div className="flex h-[38px] items-center justify-center sm:h-[44px]">
-      <span className="bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl">
+      <span
+        className="bg-gradient-to-r from-[var(--primary)] via-[var(--accent-cyan)] to-[var(--primary)] bg-clip-text text-lg font-semibold text-transparent sm:text-xl transition-opacity duration-300"
+        style={{ opacity: visible ? 1 : 0 }}
+      >
         {roles[index]}
       </span>
     </div>
