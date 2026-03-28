@@ -17,7 +17,7 @@ function AnimatedCounter({ value }: { value: string }) {
   return (
     <span ref={ref}>
       {prefix}
-      {inView ? <CountUp end={numeric} duration={2} separator="," /> : '0'}
+      {inView ? <CountUp end={numeric} duration={2} separator="," /> : String(numeric)}
       {suffix}
     </span>
   );
