@@ -160,6 +160,7 @@ export default function Header() {
       {/* ── Desktop: floating pill ──────────────────────────────────────── */}
       <header
         aria-label="Site navigation"
+        suppressHydrationWarning
         className={cn(
           'hidden lg:block fixed top-0 left-0 w-full z-50 pointer-events-none',
           'transition-all duration-300 ease-out',
@@ -247,9 +248,10 @@ export default function Header() {
       {/* ── Mobile: top bar ─────────────────────────────────────────────── */}
       <header
         aria-label="Site navigation"
+        suppressHydrationWarning
         className={cn(
           'lg:hidden fixed top-0 left-0 right-0 z-50',
-          'bg-[var(--card)]/90 backdrop-blur-xl border-b border-[var(--border)]',
+          'bg-transparent backdrop-blur-xl',
           'transition-all duration-300 ease-out',
           isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none',
         )}
