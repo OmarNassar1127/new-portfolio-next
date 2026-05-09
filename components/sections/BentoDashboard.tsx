@@ -34,7 +34,7 @@ function AnimatedCounter({
 const techStack = [
   { name: "Anthropic", color: "rgba(204,115,68,0.15)", text: "#cc7344" },
   { name: "OpenAI", color: "rgba(16,163,127,0.15)", text: "#10a37f" },
-  { name: "LangChain", color: "rgba(136,115,239,0.15)", text: "var(--primary)" },
+  { name: "LangChain", color: "rgba(124, 92, 252,0.15)", text: "var(--primary)" },
   { name: "CrewAI", color: "rgba(255,100,100,0.15)", text: "#ff6464" },
   { name: "React", color: "rgba(97,218,251,0.15)", text: "#61dafb" },
   { name: "Python", color: "rgba(255,212,59,0.12)", text: "#ffd43b" },
@@ -66,22 +66,30 @@ export default function BentoDashboard() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(136,115,239,0.05) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(124, 92, 252,0.05) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">
-        {/* Section heading */}
-        <div className="mb-12 text-center">
-          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            {t("Overview", "Overzicht")}
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--text)] sm:text-4xl">
-            {t("At a ", "In één")}
-            <span className="gradient-text-static">
-              {t("Glance", "Oogopslag")}
+        {/* Section heading — editorial */}
+        <div className="mb-14">
+          <div className="mb-5 flex items-center justify-between gap-4">
+            <span className="eyebrow">
+              <span className="text-[var(--accent)]">02</span>
+              <span>{t("Overview", "Overzicht")}</span>
             </span>
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline">
+              {t("Live · Updated 2026", "Live · Bijgewerkt 2026")}
+            </span>
+          </div>
+          <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
+            {t("At a ", "In één ")}
+            <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
+              {t("glance", "oogopslag")}
+            </span>
+            {t(", the operator profile.", ", het operator-profiel.")}
           </h2>
+          <span className="mt-6 block h-px w-full bg-[var(--rule)]" aria-hidden="true" />
         </div>
 
         {/* Bento grid — plain divs, section-level motion handles the reveal */}
@@ -91,7 +99,7 @@ export default function BentoDashboard() {
             <SpotlightCard className="h-full min-h-[160px] p-6">
               <div className="flex h-full flex-col justify-between gap-4">
                 <div className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[rgba(136,115,239,0.12)]">
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[rgba(124, 92, 252,0.12)]">
                     <i className="ri-briefcase-4-line text-lg text-[var(--primary)]" />
                   </span>
                   <div>
@@ -105,12 +113,12 @@ export default function BentoDashboard() {
                       </span>
                     </h3>
                     <p className="mt-0.5 text-sm text-[var(--text-muted)]">
-                      {t("Co-founder", "Mede-oprichter")} —{" "}
+                      {t("Founder", "Oprichter")} ·{" "}
                       <a
                         href="https://virelio.nl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[var(--accent-cyan)] underline-offset-2 hover:underline"
+                        className="font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-4 hover:decoration-[var(--accent)]"
                       >
                         Virelio
                       </a>
@@ -119,8 +127,8 @@ export default function BentoDashboard() {
                 </div>
                 <p className="text-sm leading-relaxed text-[var(--text-muted)]">
                   {t(
-                    "Building production AI systems that power 80,000+ users. Deploying on-premise LLM platforms and custom AI agents.",
-                    "Productie AI-systemen bouwen voor 80.000+ gebruikers. On-premise LLM-platforms en custom AI-agents implementeren.",
+                    "Building the AI systems and the backend powering them. WhatsApp agents, voice AI, on-premise LLMs, fraud-prevention models, plus the booking algorithms and dashboards keeping it all running. 80,000+ users.",
+                    "De AI-systemen bouwen en de backend eronder. WhatsApp-agenten, voice AI, on-premise LLM's, fraudepreventie, plus de boekingsalgoritmes en dashboards eronder. 80.000+ gebruikers.",
                   )}
                 </p>
               </div>
@@ -131,14 +139,14 @@ export default function BentoDashboard() {
           <div>
             <SpotlightCard className="h-full min-h-[160px] p-6">
               <div className="flex h-full flex-col justify-between">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(0,212,255,0.1)]">
-                  <i className="ri-time-line text-lg text-[var(--accent-cyan)]" />
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(245,121,59,0.12)]">
+                  <i className="ri-time-line text-lg text-[var(--accent)]" />
                 </span>
                 <div>
-                  <p className="text-4xl font-bold text-[var(--text)]">
+                  <p className="display-serif text-5xl font-semibold leading-none text-[var(--text)]">
                     <AnimatedCounter end={7} suffix="+" />
                   </p>
-                  <p className="mt-1 font-mono text-xs uppercase tracking-widest text-[var(--text-muted)]">
+                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
                     {t("Years in Tech", "Jaar in Tech")}
                   </p>
                 </div>
@@ -150,11 +158,11 @@ export default function BentoDashboard() {
           <div>
             <SpotlightCard className="h-full min-h-[160px] p-6">
               <div className="flex h-full flex-col justify-between">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(255,0,110,0.1)]">
-                  <i className="ri-rocket-2-line text-lg text-[var(--accent-pink)]" />
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(232,184,110,0.18)]">
+                  <i className="ri-rocket-2-line text-lg text-[var(--signal-gold)]" />
                 </span>
                 <div>
-                  <p className="text-4xl font-bold text-[var(--text)]">
+                  <p className="display-serif text-5xl font-semibold leading-none text-[var(--text)]">
                     <AnimatedCounter end={30} suffix="+" />
                   </p>
                   <p className="mt-1 font-mono text-xs uppercase tracking-widest text-[var(--text-muted)]">
@@ -193,7 +201,7 @@ export default function BentoDashboard() {
           <div>
             <SpotlightCard className="h-full min-h-[140px] p-6">
               <div className="flex h-full flex-col justify-between">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(136,115,239,0.1)]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgba(124, 92, 252,0.1)]">
                   <i className="ri-map-pin-2-line text-lg text-[var(--primary)]" />
                 </span>
                 <div>
@@ -220,7 +228,7 @@ export default function BentoDashboard() {
           <div>
             <SpotlightCard
               className="h-full min-h-[140px] p-6"
-              spotlightColor="rgba(0, 212, 255, 0.12)"
+              spotlightColor="rgba(245, 121, 59, 0.12)"
             >
               <div className="flex h-full flex-col justify-between">
                 {/* Pulsing status dot */}
@@ -249,11 +257,11 @@ export default function BentoDashboard() {
           <div className="sm:col-span-2 md:col-span-4">
             <SpotlightCard
               className="p-6"
-              spotlightColor="rgba(136,115,239,0.12)"
+              spotlightColor="rgba(124, 92, 252,0.12)"
             >
               <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[rgba(136,115,239,0.12)]">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[rgba(124, 92, 252,0.12)]">
                     <i className="ri-line-chart-line text-xl text-[var(--primary)]" />
                   </span>
                   <div>
@@ -272,7 +280,7 @@ export default function BentoDashboard() {
                   </div>
                 </div>
                 <div className="shrink-0">
-                  <p className="text-3xl font-bold text-[var(--text)] sm:text-4xl">
+                  <p className="display-serif text-4xl font-semibold leading-none text-[var(--text)] sm:text-5xl">
                     €<AnimatedCounter end={50} suffix="K+" duration={2.5} />
                   </p>
                 </div>

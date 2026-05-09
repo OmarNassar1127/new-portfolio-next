@@ -96,7 +96,7 @@ function NeuralNodes() {
             />
           </bufferGeometry>
           <lineBasicMaterial
-            color="#8873ef"
+            color="#7C5CFC"
             transparent
             opacity={0.15}
             linewidth={1}
@@ -112,7 +112,7 @@ function NeuralNodes() {
             />
           </bufferGeometry>
           <pointsMaterial
-            color="#00d4ff"
+            color="#F5793B"
             size={0.12}
             transparent
             opacity={0.8}
@@ -127,7 +127,7 @@ function NeuralNodes() {
             <mesh key={i} position={[pos.x, pos.y, pos.z]}>
               <sphereGeometry args={[0.06, 8, 8]} />
               <meshBasicMaterial
-                color="#8873ef"
+                color="#7C5CFC"
                 transparent
                 opacity={0.6}
               />

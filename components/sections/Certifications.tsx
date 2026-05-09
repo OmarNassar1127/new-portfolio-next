@@ -57,7 +57,7 @@ function IssuerLogo({ cert }: { cert: Certification }) {
     );
   }
   return (
-    <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl text-sm font-bold text-white bg-gradient-to-br from-[var(--primary)] to-[var(--accent-cyan)]">
+    <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl text-sm font-bold text-[var(--bg)] bg-[var(--text)]">
       {cert.issuer.charAt(0)}
     </span>
   );
@@ -259,7 +259,7 @@ export default function Certifications() {
               <span
                 className={cn(
                   'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-5',
-                  'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)] text-white'
+                  'bg-[var(--text)] text-[var(--bg)]'
                 )}
               >
                 <i className="ri-award-line" />
@@ -267,7 +267,7 @@ export default function Certifications() {
               </span>
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-3">
-                <span className="gradient-text-static">{t('Certifications', 'Certificeringen')}</span>
+                <span className="display-serif-italic font-medium text-[var(--accent-deep)]">{t('Certifications', 'Certificeringen')}</span>
               </h2>
 
               <p className="text-[var(--text-muted)] max-w-xl text-sm md:text-base leading-relaxed">

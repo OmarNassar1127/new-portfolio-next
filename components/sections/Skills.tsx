@@ -57,7 +57,7 @@ export default function Skills() {
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-4">
             {t('Skills &', 'Vaardigheden &')}{' '}
-            <span className="gradient-text-static">{t('Expertise', 'Expertise')}</span>
+            <span className="display-serif-italic font-medium text-[var(--accent-deep)]">{t('Expertise', 'Expertise')}</span>
           </h2>
 
           <p className="text-[var(--text-muted)] max-w-lg mx-auto text-sm md:text-base leading-relaxed">

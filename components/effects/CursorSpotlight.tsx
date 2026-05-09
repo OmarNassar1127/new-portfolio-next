@@ -38,7 +38,7 @@ export function CursorSpotlight({ className }: { className?: string }) {
           '--x': '-9999px',
           '--y': '-9999px',
           background:
-            'radial-gradient(400px circle at var(--x) var(--y), rgba(139,92,246,0.07), transparent 80%)',
+            'radial-gradient(420px circle at var(--x) var(--y), rgba(124,92,252,0.08), rgba(245,121,59,0.04) 40%, transparent 80%)',
         } as React.CSSProperties
       }
     />

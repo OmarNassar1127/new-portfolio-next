@@ -261,7 +261,7 @@ export default function Contact() {
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-4">
               {t("Let's", "Laten We")}{' '}
-              <span className="gradient-text-static">{t('Connect', 'Verbinden')}</span>
+              <span className="display-serif-italic font-medium text-[var(--accent-deep)]">{t('Connect', 'Verbinden')}</span>
             </h2>
 
             <p className="text-[var(--text-muted)] max-w-lg mx-auto text-sm md:text-base leading-relaxed">
@@ -361,11 +361,14 @@ export default function Contact() {
                       disabled={loading}
                       className={cn(
                         'w-full flex items-center justify-center gap-2.5',
-                        'py-3.5 px-6 rounded-xl text-sm font-semibold text-white',
-                        'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)]',
-                        'shadow-lg hover:shadow-[var(--primary)]/30',
-                        'transition-all duration-250 hover:scale-[1.02] active:scale-[0.98]',
-                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]',
+                        'py-3.5 px-6 rounded-full text-sm font-semibold',
+                        'bg-[var(--text)] text-[var(--bg)]',
+                        'shadow-[0_8px_28px_-8px_rgba(10,11,17,0.45)]',
+                        'transition-all duration-300',
+                        'hover:bg-[var(--primary)] hover:text-white',
+                        'hover:shadow-[0_10px_32px_-6px_rgba(124,92,252,0.5)]',
+                        'active:scale-[0.98]',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
                         'disabled:opacity-60 disabled:cursor-not-allowed',
                       )}
                     >

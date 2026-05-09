@@ -22,8 +22,8 @@ function CategoryBadge({ category }: { category: 'ai/ml' | 'professional' }) {
       className={cn(
         'rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest',
         isAI
-          ? 'bg-[rgba(136,115,239,0.15)] text-[var(--primary)]'
-          : 'bg-[rgba(0,212,255,0.12)] text-[var(--accent-cyan)]',
+          ? 'bg-[rgba(124, 92, 252,0.15)] text-[var(--primary)]'
+          : 'bg-[rgba(245, 121, 59,0.12)] text-[var(--accent-cyan)]',
       )}
     >
       {isAI ? 'AI / ML' : 'Professional'}
@@ -47,7 +47,7 @@ function ProjectCard({
     <div>
       <Link
         href={`/projects/${project.slug}/`}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-400 hover:border-[rgba(136,115,239,0.35)] hover:shadow-[0_8px_40px_-12px_rgba(136,115,239,0.25)] hover:-translate-y-1"
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-400 hover:border-[rgba(124, 92, 252,0.35)] hover:shadow-[0_8px_40px_-12px_rgba(124, 92, 252,0.25)] hover:-translate-y-1"
         aria-label={`View case study: ${project.title}`}
       >
         {/* Image container */}
@@ -101,7 +101,7 @@ function ProjectCard({
             {visibleTechs.map((tech) => (
               <span
                 key={tech}
-                className="rounded-md border border-[var(--border)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-muted)] transition-colors duration-200 group-hover:border-[rgba(136,115,239,0.25)]"
+                className="rounded-md border border-[var(--border)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-muted)] transition-colors duration-200 group-hover:border-[rgba(124, 92, 252,0.25)]"
               >
                 {tech}
               </span>
@@ -134,25 +134,30 @@ export default function ProjectsShowcase() {
         aria-hidden="true"
         style={{
           background:
-            'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,212,255,0.04) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245, 121, 59,0.04) 0%, transparent 70%)',
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-6xl">
-        {/* Heading */}
-        <div className="mb-14 text-center">
-          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
-            {t('Portfolio', 'Portfolio')}
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--text)] sm:text-4xl lg:text-5xl">
-            {t('Selected ', 'Geselecteerd ')}
-            <span className="gradient-text">
-              {t('Work', 'Werk')}
+        {/* Heading — editorial */}
+        <div className="mb-14">
+          <div className="mb-5 flex items-center justify-between gap-4">
+            <span className="eyebrow">
+              <span className="text-[var(--accent)]">03</span>
+              <span>{t('Selected Work', 'Geselecteerd Werk')}</span>
             </span>
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline">
+              {t('Case Studies · 2018—2026', 'Casestudies · 2018—2026')}
+            </span>
+          </div>
+          <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
+            {t('Projects that define the ', 'Projecten die het ')}
+            <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
+              {t('craft', 'vakmanschap')}
+            </span>
+            {t('.', ' definiëren.')}
           </h2>
-          <p className="mt-4 text-base text-[var(--text-muted)] sm:text-lg">
-            {t('Projects that define my craft', 'Projecten die mijn vakmanschap definiëren')}
-          </p>
+          <span className="mt-6 block h-px w-full bg-[var(--rule)]" aria-hidden="true" />
         </div>
 
         {/* Project grid */}
@@ -169,7 +174,7 @@ export default function ProjectsShowcase() {
             className={cn(
               'group inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-7 py-3',
               'text-sm font-semibold text-[var(--text-muted)] transition-all duration-300',
-              'hover:border-[var(--primary)] hover:text-[var(--text)] hover:shadow-[0_0_24px_-6px_rgba(136,115,239,0.3)]',
+              'hover:border-[var(--primary)] hover:text-[var(--text)] hover:shadow-[0_0_24px_-6px_rgba(124, 92, 252,0.3)]',
             )}
           >
             {t('View All Projects', 'Alle Projecten Bekijken')}

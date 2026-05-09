@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
@@ -23,27 +23,49 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  axes: ["SOFT", "WONK", "opsz"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://omardev.xyz"),
   title: {
     default:
-      "Omar Nassar | AI Agent Engineer & Full Stack Developer — Amsterdam",
+      "Omar Nassar | Full-Stack Engineer & AI Systems Builder, Amsterdam",
     template: "%s | Omar Nassar",
   },
   description:
-    "Omar Nassar — AI Agent Engineer & Full Stack Developer in Amsterdam. Building custom AI agents, autonomous multi-agent systems, WhatsApp AI agents, sales agents, operations agents, and enterprise RAG platforms. Founder of Virelio.",
+    "Omar Nassar, full-stack engineer and AI systems builder in Amsterdam. Seven years across React, Next.js, Laravel, Node, and Python. Production AI agents, multi-agent systems, RAG platforms, on-premise LLM workflows, and the backend underneath. Founder of Virelio.",
   keywords: [
     "AI agent developer",
     "AI agents Amsterdam",
+    "AI systems engineer",
+    "AI workflows",
     "multi-agent systems",
     "WhatsApp AI agent",
+    "voice AI",
     "autonomous AI agents",
     "AI automation",
     "RAG architect",
     "enterprise AI",
     "CrewAI developer",
     "LangGraph developer",
+    "LangChain developer",
+    "on-premise LLM",
     "AI agent builder",
+    "full stack developer Amsterdam",
+    "full-stack engineer",
+    "React developer Amsterdam",
+    "Next.js developer",
+    "Laravel developer",
+    "Node.js engineer",
+    "TypeScript engineer",
+    "backend engineer Amsterdam",
+    "Python developer",
+    "FastAPI",
     "Omar Nassar",
   ],
   authors: [{ name: "Omar Nassar" }],
@@ -51,26 +73,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://omardev.xyz/",
-    title: "Omar Nassar | AI Agent Engineer — Building Autonomous AI Systems",
+    title: "Omar Nassar | Full-Stack Engineer & AI Systems Builder, Amsterdam",
     description:
-      "AI Agent Engineer building autonomous multi-agent systems, WhatsApp AI agents, sales agents, customer service agents, and enterprise RAG platforms. 30+ AI systems deployed, 200+ automations, serving 80,000+ users. Amsterdam.",
+      "Full-stack engineer and AI systems builder in Amsterdam. React, Next.js, Laravel, Node, Python, plus LangChain, CrewAI, and on-premise LLMs for production AI agents and multi-agent workflows. 30+ AI systems deployed, 200+ automations, 80,000+ users served. Founder of Virelio.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Omar Nassar — AI Engineer & Full Stack Developer | 30+ AI Systems, 200+ Automations, 80K+ Users Served",
+        alt: "Omar Nassar | Full-Stack Engineer & AI Systems Builder. 30+ AI systems, 200+ automations, 80K+ users served",
       },
     ],
     locale: "en_US",
     alternateLocale: "nl_NL",
-    siteName: "Omar Nassar - AI Agent Engineer Portfolio",
+    siteName: "Omar Nassar Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Omar Nassar | AI Agent Engineer — Autonomous AI Systems",
+    title: "Omar Nassar | Full-Stack + AI Systems, Amsterdam",
     description:
-      "Building autonomous AI agents: WhatsApp agents, sales agents, customer service agents, operations agents, multi-agent systems. 30+ AI systems deployed. Amsterdam.",
+      "Full-stack engineer building production AI agents and multi-agent workflows. React, Laravel, Node, Python, plus LangChain, CrewAI, on-premise LLMs. 30+ AI systems shipped, 80,000+ users served. Amsterdam.",
     images: ["/og-image.png"],
     site: "@GodelTrabuco69",
     creator: "@GodelTrabuco69",
@@ -90,9 +112,9 @@ const jsonLd = {
       name: "Omar Nassar",
       url: "https://omardev.xyz",
       image: "https://omardev.xyz/images/me2.png",
-      jobTitle: "AI Agent Engineer & Full Stack Developer",
+      jobTitle: "Full-Stack Engineer & AI Systems Builder",
       description:
-        "AI Agent Engineer and Full Stack Developer based in Amsterdam. Builds autonomous AI agents for businesses — WhatsApp AI agents, sales automation agents, customer service agents, operations agents, and enterprise multi-agent systems. Founder of Virelio, an AI agency delivering custom AI agent teams. Has deployed 30+ AI systems serving 80,000+ users, built 200+ automation workflows, and architected on-premise LLM platforms with multi-agent orchestration using CrewAI, LangGraph, and RAG architectures.",
+        "Full-stack engineer and AI systems builder based in Amsterdam. Seven years of full-stack engineering across React, Next.js, Laravel, Node, and Python, plus the infrastructure to run it in production. Builds autonomous AI agents and the systems they run on: WhatsApp AI agents, voice AI, sales automation agents, customer service agents, operations agents, and enterprise multi-agent systems. Founder of Virelio, an AI agency delivering custom AI agent teams. Has deployed 30+ AI systems serving 80,000+ users, built 200+ automation workflows, and architected on-premise LLM platforms with multi-agent orchestration using CrewAI, LangGraph, and RAG architectures.",
       email: "mailto:omarnassar1127@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -152,13 +174,13 @@ const jsonLd = {
     {
       "@type": "ProfilePage",
       "@id": "https://omardev.xyz/#profilepage",
-      name: "Omar Nassar | AI Agent Engineer & Full Stack Developer",
+      name: "Omar Nassar | Full-Stack Engineer & AI Systems Builder",
       url: "https://omardev.xyz",
       description:
-        "Portfolio of Omar Nassar — AI Agent Engineer building autonomous AI agents, multi-agent systems, and enterprise RAG platforms. Founder of Virelio.",
+        "Portfolio of Omar Nassar, full-stack engineer and AI systems builder in Amsterdam. Seven years across React, Next.js, Laravel, Node, and Python. Builds production AI agents, multi-agent workflows, RAG platforms, and on-premise LLM systems. Founder of Virelio.",
       mainEntity: { "@id": "https://omardev.xyz/#person" },
       dateCreated: "2023-01-01",
-      dateModified: "2026-03-25",
+      dateModified: "2026-05-09",
       inLanguage: ["en", "nl"],
       speakable: {
         "@type": "SpeakableSpecification",
@@ -168,10 +190,10 @@ const jsonLd = {
     {
       "@type": "WebSite",
       "@id": "https://omardev.xyz/#website",
-      name: "Omar Nassar - AI Agent Engineer Portfolio",
+      name: "Omar Nassar Portfolio",
       url: "https://omardev.xyz",
       description:
-        "Portfolio of Omar Nassar, AI Agent Engineer based in Amsterdam. Specializing in autonomous AI agents, multi-agent systems, WhatsApp AI agents, enterprise AI, and RAG platforms.",
+        "Portfolio of Omar Nassar, full-stack engineer and AI systems builder based in Amsterdam. Specializing in production AI agents, multi-agent workflows, RAG platforms, on-premise LLMs, plus the React, Next.js, Laravel, Node, and Python stack underneath.",
       author: { "@id": "https://omardev.xyz/#person" },
       inLanguage: ["en", "nl"],
     },
@@ -198,7 +220,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
       <head>

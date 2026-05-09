@@ -30,7 +30,7 @@ export function SkillBadge({ skill, className }: SkillBadgeProps) {
         'border border-[var(--border)] bg-[var(--card)]',
         'cursor-default overflow-hidden',
         'transition-[border-color,box-shadow,transform] duration-300',
-        'hover:-translate-y-0.5 hover:border-[rgba(136,115,239,0.30)]',
+        'hover:-translate-y-0.5 hover:border-[rgba(124, 92, 252,0.30)]',
         'hover:shadow-[0_4px_20px_-8px_var(--primary-glow)]',
         className
       )}

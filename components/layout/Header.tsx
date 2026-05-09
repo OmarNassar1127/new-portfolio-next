@@ -50,13 +50,17 @@ export default function Header() {
   // Build nav items from translations
   const navItems: NavItem[] = [
     { id: 'about',          href: '#about',          label: t('Home', 'Home'),             icon: 'ri-home-line' },
-    { id: 'portfolio',      href: '#portfolio',      label: t('Projects', 'Projecten'),    icon: 'ri-briefcase-line' },
-    { id: 'about-me',       href: '#about-me',       label: t('About', 'Over mij'),        icon: 'ri-user-line' },
-    { id: 'journey',        href: '#journey',        label: t('Experience', 'Ervaring'),   icon: 'ri-road-map-line' },
-    { id: 'skills',         href: '#skills',         label: t('Skills', 'Vaardigheden'),   icon: 'ri-code-line' },
+    { id: 'portfolio',      href: '#portfolio',      label: t('Work', 'Werk'),             icon: 'ri-briefcase-line' },
+    { id: 'about-me',       href: '#about-me',       label: t('About', 'Over'),            icon: 'ri-user-line' },
+    { id: 'journey',        href: '#journey',        label: t('Journey', 'Reis'),          icon: 'ri-road-map-line' },
+    { id: 'skills',         href: '#skills',         label: t('Stack', 'Stack'),           icon: 'ri-code-line' },
     { id: 'certifications', href: '#certifications', label: t('Certs', 'Certs'),           icon: 'ri-award-line' },
     { id: 'contact',        href: '#contact',        label: t('Contact', 'Contact'),       icon: 'ri-mail-line' },
   ];
+
+  // Active index for the editorial position indicator (01/07)
+  const activeIndex = navItems.findIndex((i) => i.id === activeSection);
+  const activeNumber = activeIndex >= 0 ? activeIndex + 1 : 1;
 
   // ── Scroll handler ─────────────────────────────────────────────────────────
 
@@ -145,10 +149,9 @@ export default function Header() {
   const progressDeg = (scrollProgress / 100) * 360;
   const conicGradient = hasMounted
     ? `conic-gradient(from 0deg,
-        #8873ef 0deg,
-        #00d4ff ${progressDeg * 0.4}deg,
-        #4ade80 ${progressDeg * 0.7}deg,
-        #ff006e ${progressDeg}deg,
+        #7C5CFC 0deg,
+        #A89BFB ${progressDeg * 0.5}deg,
+        #F5793B ${progressDeg}deg,
         transparent ${progressDeg}deg
       )`
     : 'none';
@@ -170,11 +173,11 @@ export default function Header() {
         <div className="flex justify-center px-4 pt-5">
           <div
             className={cn(
-              'pointer-events-auto relative flex items-center h-14 px-2 gap-2',
+              'pointer-events-auto relative flex items-center h-12 pl-1.5 pr-1.5 gap-1',
               'rounded-full transition-all duration-500',
-              'bg-[var(--card)]/80 backdrop-blur-xl',
+              'bg-[var(--bg-elevated)]/85 backdrop-blur-xl',
               'border border-[var(--border)]',
-              'shadow-[0_8px_32px_rgba(136,115,239,0.12),0_2px_8px_rgba(0,0,0,0.08)]',
+              'shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_8px_32px_-8px_rgba(10,11,17,0.18)]',
             )}
           >
             {/* Scroll progress conic ring */}
@@ -183,7 +186,7 @@ export default function Header() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 rounded-full"
                 style={{
-                  padding: '1.5px',
+                  padding: '1px',
                   background: conicGradient,
                   WebkitMask:
                     'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -193,48 +196,51 @@ export default function Header() {
               />
             )}
 
-            {/* Ambient glow on scroll */}
-            {hasMounted && (
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-full transition-opacity duration-500"
-                style={{
-                  opacity: Math.min(scrollProgress / 200, 0.35),
-                  boxShadow:
-                    '0 0 24px rgba(136,115,239,0.3), 0 0 48px rgba(0,212,255,0.15)',
-                }}
-              />
-            )}
-
             {/* Profile image / logo */}
             <NavLogo onClick={() => isHomePage && scrollToSection('about')} isHomePage={isHomePage} />
 
+            {/* Editorial position indicator — 0X/07 */}
+            {isHomePage && hasMounted && (
+              <span
+                aria-hidden="true"
+                className="hidden xl:inline-flex items-center gap-1 pl-2 pr-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--text-subtle)]"
+              >
+                <span className="text-[var(--accent)]">{String(activeNumber).padStart(2, '0')}</span>
+                <span className="opacity-50">/{String(navItems.length).padStart(2, '0')}</span>
+              </span>
+            )}
+
             {/* Divider */}
-            <span className="h-6 w-px bg-[var(--border)] mx-1" aria-hidden="true" />
+            <span className="h-5 w-px bg-[var(--border)] mx-1.5" aria-hidden="true" />
 
             {/* Nav links */}
-            <nav aria-label="Main navigation" className="flex items-center gap-0.5">
-              {navItems.map((item) => (
-                <Link
-                  key={item.id}
-                  href={navHref(item)}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                  className={cn(
-                    'relative px-3.5 py-1.5 rounded-full text-sm font-medium',
-                    'transition-all duration-200',
-                    isHomePage && activeSection === item.id
-                      ? 'text-white bg-[var(--primary)] shadow-[0_2px_12px_rgba(136,115,239,0.4)]'
-                      : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--card-hover)]',
-                  )}
-                  aria-current={isHomePage && activeSection === item.id ? 'location' : undefined}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <nav aria-label="Main navigation" className="flex items-center gap-px">
+              {navItems.map((item) => {
+                const isActive = isHomePage && activeSection === item.id;
+                return (
+                  <Link
+                    key={item.id}
+                    href={navHref(item)}
+                    onClick={(e) => handleNavClick(e, item.id)}
+                    className={cn(
+                      'relative inline-flex items-center justify-center',
+                      'px-3 py-1.5 rounded-full',
+                      'font-mono text-[10px] font-medium uppercase tracking-[0.18em]',
+                      'transition-all duration-200',
+                      isActive
+                        ? 'bg-[var(--text)] text-[var(--bg)]'
+                        : 'text-[var(--text-muted)] hover:text-[var(--text)]',
+                    )}
+                    aria-current={isActive ? 'location' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Divider */}
-            <span className="h-6 w-px bg-[var(--border)] mx-1" aria-hidden="true" />
+            <span className="h-5 w-px bg-[var(--border)] mx-1.5" aria-hidden="true" />
 
             {/* Controls */}
             <div className="flex items-center gap-1">
@@ -272,7 +278,7 @@ export default function Header() {
             className="absolute bottom-0 left-0 h-[2px] transition-all duration-150 ease-out"
             style={{
               width: `${scrollProgress}%`,
-              background: 'linear-gradient(to right, var(--primary), var(--accent-cyan), var(--accent-pink))',
+              background: 'linear-gradient(to right, var(--primary), var(--accent))',
             }}
           />
         )}
@@ -306,145 +312,150 @@ export default function Header() {
         )}
       >
         {/* Drawer header */}
-        <div className="flex items-center justify-between p-4 border-b border-[var(--border)]">
+        <div className="flex items-center justify-between p-5 border-b border-[var(--border)]">
           <div className="flex items-center gap-3">
-            <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-[var(--primary)]/40 flex-shrink-0">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden ring-1 ring-[var(--border-strong)] flex-shrink-0">
               <Image
                 src="/images/me2.png"
                 alt="Omar Nassar"
                 fill
                 className="object-cover"
-                sizes="36px"
+                sizes="40px"
                 loading="eager"
               />
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[var(--bg)] rounded-full" />
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[var(--signal-emerald)] border-2 border-[var(--bg)] rounded-full" />
             </div>
             <div>
               <p className="text-sm font-semibold text-[var(--text)]">Omar Nassar</p>
-              <p className="text-xs text-[var(--accent-cyan)]">
-                {t('Available for AI projects', 'Beschikbaar voor AI projecten')}
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--signal-emerald)]">
+                {t('Available', 'Beschikbaar')}
               </p>
             </div>
           </div>
           <button
             onClick={() => setIsMenuOpen(false)}
             aria-label={t('Close menu', 'Menu sluiten')}
-            className="p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--card)] transition-colors"
+            className="p-2 rounded-full text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--card)] transition-colors"
           >
             <i className="ri-close-line text-xl" />
           </button>
         </div>
 
-        {/* Drawer nav */}
+        {/* Drawer nav — editorial numbered */}
         <nav
           aria-label="Mobile navigation"
-          className="flex-1 overflow-y-auto px-3 py-4 pb-32"
+          className="flex-1 overflow-y-auto px-5 py-5 pb-32"
         >
-          <ul className="space-y-1" role="list">
-            {navItems.map((item, i) => (
-              <li key={item.id}>
-                <Link
-                  href={navHref(item)}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                  style={{ animationDelay: `${i * 40}ms` }}
-                  className={cn(
-                    'flex items-center gap-3 px-3 py-2.5 rounded-xl',
-                    'font-medium text-sm transition-all duration-200',
-                    isHomePage && activeSection === item.id
-                      ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)] text-white shadow-lg'
-                      : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--card)]',
-                  )}
-                  aria-current={isHomePage && activeSection === item.id ? 'location' : undefined}
-                >
-                  <span
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
+            {t('Sections · 07', 'Secties · 07')}
+          </p>
+          <ul role="list">
+            {navItems.map((item, i) => {
+              const isActive = isHomePage && activeSection === item.id;
+              return (
+                <li key={item.id}>
+                  <Link
+                    href={navHref(item)}
+                    onClick={(e) => handleNavClick(e, item.id)}
                     className={cn(
-                      'w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0',
-                      isHomePage && activeSection === item.id
-                        ? 'bg-white/20'
-                        : 'bg-[var(--card)]',
+                      'group flex items-baseline justify-between gap-4 border-b border-[var(--rule)] py-3.5',
+                      'transition-colors duration-200',
+                      isActive ? 'text-[var(--text)]' : 'text-[var(--text-muted)] hover:text-[var(--text)]',
                     )}
+                    aria-current={isActive ? 'location' : undefined}
                   >
-                    <i className={cn(item.icon, 'text-base',
-                      isHomePage && activeSection === item.id
-                        ? 'text-white'
-                        : 'text-[var(--primary)]',
-                    )} />
-                  </span>
-                  <span className="flex-1">{item.label}</span>
-                  {isHomePage && activeSection === item.id && (
-                    <i className="ri-arrow-right-s-line text-white" />
-                  )}
-                </Link>
-              </li>
-            ))}
+                    <span className="flex items-baseline gap-3">
+                      <span
+                        className={cn(
+                          'font-mono text-[10px] font-medium uppercase tracking-[0.22em]',
+                          isActive ? 'text-[var(--accent)]' : 'text-[var(--text-subtle)]',
+                        )}
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="display-serif text-2xl font-semibold leading-none">
+                        {item.label}
+                      </span>
+                    </span>
+                    <i
+                      className={cn(
+                        'ri-arrow-right-line text-base transition-transform duration-200',
+                        isActive ? 'translate-x-0 text-[var(--accent)]' : '-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100',
+                      )}
+                    />
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Settings */}
-          <div className="mt-6 pt-5 border-t border-[var(--border)]">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-[var(--text-muted)] px-3 mb-3">
-              {t('Settings', 'Instellingen')}
+          <div className="mt-8">
+            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
+              {t('Controls', 'Bediening')}
             </p>
 
-            {/* Theme */}
-            <button
-              onClick={toggleTheme}
-              className={cn(
-                'flex items-center gap-3 w-full px-3 py-2.5 rounded-xl',
-                'text-sm font-medium text-[var(--text-muted)]',
-                'hover:text-[var(--text)] hover:bg-[var(--card)] transition-colors',
-              )}
-            >
-              <span className="w-8 h-8 rounded-lg bg-[var(--card)] flex items-center justify-center flex-shrink-0">
-                <i className={cn(isDarkMode ? 'ri-sun-line' : 'ri-moon-line', 'text-base text-[var(--primary)]')} />
-              </span>
-              <span className="flex-1 text-left">
-                {isDarkMode
-                  ? t('Light Mode', 'Lichte Modus')
-                  : t('Dark Mode', 'Donkere Modus')}
-              </span>
-            </button>
+            <div className="flex flex-col gap-2">
+              {/* Theme */}
+              <button
+                onClick={toggleTheme}
+                className={cn(
+                  'group flex items-center justify-between gap-3 border border-[var(--rule)] rounded-full px-4 py-2.5',
+                  'font-mono text-[11px] uppercase tracking-[0.18em] font-medium text-[var(--text)]',
+                  'transition-colors duration-200 hover:border-[var(--border-strong)] hover:bg-[var(--card)]',
+                )}
+              >
+                <span className="flex items-center gap-2">
+                  <i className={cn(isDarkMode ? 'ri-sun-line' : 'ri-moon-line', 'text-base')} />
+                  {isDarkMode ? t('Light', 'Licht') : t('Dark', 'Donker')}
+                </span>
+                <i className="ri-arrow-left-right-line text-[var(--text-subtle)] text-sm" />
+              </button>
 
-            {/* Language */}
-            <div className="flex items-center gap-3 px-3 py-2.5">
-              <span className="w-8 h-8 rounded-lg bg-[var(--card)] flex items-center justify-center flex-shrink-0">
-                <i className="ri-global-line text-base text-[var(--primary)]" />
-              </span>
-              <span className="text-sm font-medium text-[var(--text-muted)] flex-1">
-                {t('Language', 'Taal')}
-              </span>
-              <div className="flex p-0.5 rounded-lg bg-[var(--card)] gap-0.5">
-                {(['EN', 'NL'] as const).map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => language !== lang && toggleLanguage()}
-                    className={cn(
-                      'px-3 py-1 text-xs font-semibold rounded-md transition-all',
-                      language === lang
-                        ? 'bg-[var(--primary)] text-white'
-                        : 'text-[var(--text-muted)] hover:text-[var(--text)]',
-                    )}
-                  >
-                    {lang}
-                  </button>
-                ))}
+              {/* Language */}
+              <div className="flex items-center justify-between gap-3 border border-[var(--rule)] rounded-full px-4 py-2">
+                <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] font-medium text-[var(--text)]">
+                  <i className="ri-global-line text-base" />
+                  {t('Language', 'Taal')}
+                </span>
+                <div className="flex p-0.5 rounded-full bg-[var(--card)] gap-0.5">
+                  {(['EN', 'NL'] as const).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => language !== lang && toggleLanguage()}
+                      className={cn(
+                        'px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] rounded-full transition-all',
+                        language === lang
+                          ? 'bg-[var(--text)] text-[var(--bg)]'
+                          : 'text-[var(--text-muted)] hover:text-[var(--text)]',
+                      )}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </nav>
 
         {/* Drawer footer CTA */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-[var(--bg)] border-t border-[var(--border)]">
+        <div className="absolute bottom-0 left-0 right-0 p-5 bg-[var(--bg)] border-t border-[var(--border)]">
           <a
             href="mailto:omarnassar1127@gmail.com"
             className={cn(
-              'flex items-center justify-center gap-2',
-              'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)]',
-              'text-white text-xs font-semibold px-3 py-2.5 rounded-xl',
-              'hover:shadow-lg hover:shadow-[var(--primary)]/25 transition-all duration-200',
+              'group flex items-center justify-between gap-2',
+              'bg-[var(--text)] text-[var(--bg)] rounded-full px-5 py-3',
+              'font-mono text-[11px] uppercase tracking-[0.18em] font-semibold',
+              'transition-all duration-300 hover:bg-[var(--primary)] hover:text-white',
+              'hover:shadow-[0_10px_24px_-6px_rgba(124,92,252,0.5)]',
             )}
           >
-            <i className="ri-mail-line" />
-            {t('Get in touch', 'Neem contact op')}
+            <span className="flex items-center gap-2">
+              <i className="ri-mail-line text-base" />
+              {t('Get in touch', 'Contact')}
+            </span>
+            <i className="ri-arrow-right-line text-base transition-transform duration-200 group-hover:translate-x-0.5" />
           </a>
         </div>
       </div>
@@ -509,12 +520,12 @@ function ThemeToggle({
       onClick={onToggle}
       aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
       className={cn(
-        'p-2 rounded-full text-[var(--text-muted)]',
+        'h-8 w-8 inline-flex items-center justify-center rounded-full text-[var(--text-muted)]',
         'hover:text-[var(--text)] hover:bg-[var(--card-hover)]',
         'transition-all duration-200',
       )}
     >
-      <i className={cn(isDarkMode ? 'ri-sun-line' : 'ri-moon-line', 'text-[18px]')} />
+      <i className={cn(isDarkMode ? 'ri-sun-line' : 'ri-moon-line', 'text-[16px]')} />
     </button>
   );
 }
@@ -528,7 +539,7 @@ function LangToggle({
 }) {
   return (
     <div
-      className="flex p-0.5 rounded-full bg-[var(--card-hover)] gap-0.5"
+      className="flex p-0.5 rounded-full bg-[var(--card)] gap-0.5"
       role="group"
       aria-label="Language selection"
     >
@@ -538,9 +549,9 @@ function LangToggle({
           onClick={() => language !== lang && onToggle()}
           aria-pressed={language === lang}
           className={cn(
-            'px-2.5 py-1 text-[11px] font-bold rounded-full transition-all duration-200',
+            'px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] rounded-full transition-all duration-200',
             language === lang
-              ? 'bg-[var(--primary)] text-white shadow-sm'
+              ? 'bg-[var(--text)] text-[var(--bg)]'
               : 'text-[var(--text-muted)] hover:text-[var(--text)]',
           )}
         >

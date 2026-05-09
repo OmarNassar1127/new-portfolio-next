@@ -62,7 +62,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
           </Link>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            <span className="gradient-text-static">
+            <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
               {t('All Projects', 'Alle Projecten')}
             </span>
           </h1>
@@ -92,7 +92,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                   className={cn(
                     'px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200',
                     active
-                      ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)] text-white shadow-lg shadow-[var(--primary)]/20'
+                      ? 'bg-[var(--text)] text-[var(--bg)] shadow-[0_8px_24px_-6px_rgba(10,11,17,0.4)]'
                       : isDarkMode
                         ? 'bg-[var(--card)] border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--primary)]/40'
                         : 'bg-white border border-gray-200 text-gray-600 hover:border-[var(--primary)]/40'
