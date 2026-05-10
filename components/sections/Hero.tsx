@@ -144,7 +144,7 @@ export default function Hero() {
                 </span>
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">
-                  <span className="text-[var(--text)]">30+</span> AI systems shipped
+                  <span className="text-[var(--text)]">50+</span> systems shipped
                 </span>
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">
@@ -158,7 +158,7 @@ export default function Hero() {
                 </span>
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">
-                  <span className="text-[var(--text)]">30+</span> AI-systemen
+                  <span className="text-[var(--text)]">50+</span> systemen
                 </span>
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">

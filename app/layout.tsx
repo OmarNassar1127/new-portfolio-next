@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: "%s | Omar Nassar",
   },
   description:
-    "Omar Nassar, full-stack engineer and AI systems builder in Amsterdam. Seven years across React, Next.js, Laravel, Node, and Python. Production AI agents, multi-agent systems, RAG platforms, on-premise LLM workflows, and the backend underneath. Founder of Virelio.",
+    "Omar Nassar, full-stack engineer and AI systems builder in Amsterdam. Seven years across React, Next.js, Laravel, Node, and Python. Production AI agents, multi-agent systems, RAG platforms, on-premise LLM workflows, and the backend underneath. 50+ systems shipped. Founder of Virelio.",
   keywords: [
     "AI agent developer",
     "AI agents Amsterdam",
@@ -75,13 +75,13 @@ export const metadata: Metadata = {
     url: "https://omardev.xyz/",
     title: "Omar Nassar | Full-Stack Engineer & AI Systems Builder, Amsterdam",
     description:
-      "Full-stack engineer and AI systems builder in Amsterdam. React, Next.js, Laravel, Node, Python, plus LangChain, CrewAI, and on-premise LLMs for production AI agents and multi-agent workflows. 30+ AI systems deployed, 200+ automations, 80,000+ users served. Founder of Virelio.",
+      "Full-stack engineer and AI systems builder in Amsterdam. React, Next.js, Laravel, Node, Python, plus LangChain, CrewAI, and on-premise LLMs for production AI agents and multi-agent workflows. 50+ systems shipped, 200+ automations, 80,000+ users served. Founder of Virelio.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Omar Nassar | Full-Stack Engineer & AI Systems Builder. 30+ AI systems, 200+ automations, 80K+ users served",
+        alt: "Omar Nassar | Full-Stack Engineer & AI Systems Builder. 50+ systems shipped, 200+ automations, 80K+ users served",
       },
     ],
     locale: "en_US",
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Omar Nassar | Full-Stack + AI Systems, Amsterdam",
     description:
-      "Full-stack engineer building production AI agents and multi-agent workflows. React, Laravel, Node, Python, plus LangChain, CrewAI, on-premise LLMs. 30+ AI systems shipped, 80,000+ users served. Amsterdam.",
+      "Full-stack engineer building production AI agents and multi-agent workflows. React, Laravel, Node, Python, plus LangChain, CrewAI, on-premise LLMs. 50+ systems shipped, 80,000+ users served. Amsterdam.",
     images: ["/og-image.png"],
     site: "@GodelTrabuco69",
     creator: "@GodelTrabuco69",
@@ -114,7 +114,7 @@ const jsonLd = {
       image: "https://omardev.xyz/images/me2.png",
       jobTitle: "Full-Stack Engineer & AI Systems Builder",
       description:
-        "Full-stack engineer and AI systems builder based in Amsterdam. Seven years of full-stack engineering across React, Next.js, Laravel, Node, and Python, plus the infrastructure to run it in production. Builds autonomous AI agents and the systems they run on: WhatsApp AI agents, voice AI, sales automation agents, customer service agents, operations agents, and enterprise multi-agent systems. Founder of Virelio, an AI agency delivering custom AI agent teams. Has deployed 30+ AI systems serving 80,000+ users, built 200+ automation workflows, and architected on-premise LLM platforms with multi-agent orchestration using CrewAI, LangGraph, and RAG architectures.",
+        "Full-stack engineer and AI systems builder based in Amsterdam. Seven years of full-stack engineering across React, Next.js, Laravel, Node, and Python, plus the infrastructure to run it in production. Builds autonomous AI agents and the systems they run on: WhatsApp AI agents, voice AI, sales automation agents, customer service agents, operations agents, and enterprise multi-agent systems. Founder of Virelio, an AI agency delivering custom AI agent teams. Has shipped 50+ production systems serving 80,000+ users, built 200+ automation workflows, and architected on-premise LLM platforms with multi-agent orchestration using CrewAI, LangGraph, and RAG architectures.",
       email: "mailto:omarnassar1127@gmail.com",
       address: {
         "@type": "PostalAddress",
