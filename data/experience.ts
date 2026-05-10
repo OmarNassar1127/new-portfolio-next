@@ -38,13 +38,13 @@ export const experienceData: ExperienceEntry[] = [
       nl: "2017-2019",
     },
     title: {
-      en: "Education Journey",
-      nl: "Opleidingsreis",
+      en: "Software Developer",
+      nl: "Software Developer",
     },
     subtitle: "Frontend & Backend Development",
     company: {
-      en: "MBO Amstelland",
-      nl: "MBO Amstelland",
+      en: "Amstelland College",
+      nl: "Amstelland College",
     },
     icon: "ri-graduation-cap-fill",
     iconType: "remix",
@@ -52,8 +52,8 @@ export const experienceData: ExperienceEntry[] = [
     color: "from-blue-500 to-blue-600",
     technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL", "C#", "WordPress"],
     description: {
-      en: "Started with frontend development during the first 18 months, mastering HTML/CSS and JavaScript. The last 18 months focused on backend technologies including PHP, MySQL, and C#, learning database design and CRUD functionalities.",
-      nl: "Begon met frontend-ontwikkeling in de eerste 18 maanden, beheersing van HTML/CSS en JavaScript. De laatste 18 maanden gericht op backend-technologieën waaronder PHP, MySQL en C#, leren van database-ontwerp en CRUD-functionaliteiten.",
+      en: "Three years going deep on the fundamentals. The first half was frontend craft: HTML, CSS, and JavaScript until the browser felt like a familiar room. The second half flipped to backend: PHP, MySQL, and C#. Database schemas, CRUD operations, the unglamorous plumbing every real system runs on. The foundation everything else got stacked on top of.",
+      nl: "Drie jaar diep duiken in de basis. De eerste helft was frontend-vakmanschap: HTML, CSS en JavaScript tot de browser voelde als een vertrouwde kamer. De tweede helft kantelde naar backend: PHP, MySQL en C#. Databaseschema's, CRUD-operaties, de onopvallende plumbing waar elk echt systeem op draait. Het fundament waar al het andere later bovenop kwam.",
     },
     current: false,
   },
