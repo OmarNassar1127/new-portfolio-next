@@ -10,7 +10,7 @@ export default function Experience() {
 
   // Newest first — career ledger reads top → down through time
   const reversed = [...experienceData].reverse();
-  const timelineRef = useSectionInView<HTMLDivElement>();
+  const timelineRef = useSectionInView<HTMLOListElement>();
 
   return (
     <section

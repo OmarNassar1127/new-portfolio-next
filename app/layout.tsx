@@ -191,11 +191,83 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://omardev.xyz/#website",
       name: "Omar Nassar Portfolio",
-      url: "https://omardev.xyz",
+      alternateName: ["Omar Nassar", "omardev"],
+      url: "https://omardev.xyz/",
       description:
         "Portfolio of Omar Nassar, full-stack engineer and AI systems builder based in Amsterdam. Specializing in production AI agents, multi-agent workflows, RAG platforms, on-premise LLMs, plus the React, Next.js, Laravel, Node, and Python stack underneath.",
       author: { "@id": "https://omardev.xyz/#person" },
+      publisher: { "@id": "https://omardev.xyz/#person" },
       inLanguage: ["en", "nl"],
+      // Sitebox / search action — Google uses this to render a search box
+      // directly in the search result for branded queries.
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: "https://omardev.xyz/projects/?q={search_term_string}",
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+    // Sitelink hints — explicit list of the main sections of the site.
+    // Google uses these to influence sitelinks generation.
+    {
+      "@type": "ItemList",
+      "@id": "https://omardev.xyz/#main-sections",
+      name: "Main sections",
+      url: "https://omardev.xyz/",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: 6,
+      itemListElement: [
+        {
+          "@type": "SiteNavigationElement",
+          position: 1,
+          name: "Selected Work",
+          description:
+            "Production AI projects and full-stack case studies including fraud prevention, WhatsApp AI agents, on-premise LLMs, and medical compliance automation.",
+          url: "https://omardev.xyz/#portfolio",
+        },
+        {
+          "@type": "SiteNavigationElement",
+          position: 2,
+          name: "About",
+          description:
+            "Full-stack engineer in Amsterdam shipping production AI agents on top of seven years of React, Next.js, Laravel, Node, and Python.",
+          url: "https://omardev.xyz/#about-me",
+        },
+        {
+          "@type": "SiteNavigationElement",
+          position: 3,
+          name: "Teaching · Lead AI",
+          description:
+            "Lead AI engineer at Vloto. AI lessons and webinars taught by building, not by slides.",
+          url: "https://omardev.xyz/#teaching",
+        },
+        {
+          "@type": "SiteNavigationElement",
+          position: 4,
+          name: "Journey",
+          description:
+            "Career ledger from student in 2017 to engineer at Vloto and founder of Virelio. By year.",
+          url: "https://omardev.xyz/#journey",
+        },
+        {
+          "@type": "SiteNavigationElement",
+          position: 5,
+          name: "Credentials",
+          description:
+            "Certifications verified through Anthropic, Google, and Oracle.",
+          url: "https://omardev.xyz/#certifications",
+        },
+        {
+          "@type": "SiteNavigationElement",
+          position: 6,
+          name: "Contact",
+          description:
+            "Available for full-time AI engineering and full-stack roles. Email omarnassar1127@gmail.com.",
+          url: "https://omardev.xyz/#contact",
+        },
+      ],
     },
     {
       "@type": "Organization",
@@ -207,7 +279,7 @@ const jsonLd = {
       founder: { "@id": "https://omardev.xyz/#person" },
       foundingDate: "2023",
       areaServed: "Europe",
-      sameAs: ["https://virelio.nl", "https://virelio.nl"],
+      sameAs: ["https://virelio.nl"],
     },
   ],
 };

@@ -24,12 +24,12 @@ export async function generateMetadata({
     title: project.title,
     description,
     alternates: {
-      canonical: `https://omardev.xyz/projects/${slug}`,
+      canonical: `https://omardev.xyz/projects/${slug}/`,
     },
     openGraph: {
       title: `${project.title} | Omar Nassar`,
       description,
-      url: `https://omardev.xyz/projects/${slug}`,
+      url: `https://omardev.xyz/projects/${slug}/`,
       images: [
         {
           url: project.image,
@@ -69,17 +69,49 @@ export default async function ProjectPage({
       ? sortedProjects[currentIndex + 1]
       : null;
 
+  const canonical = `https://omardev.xyz/projects/${slug}/`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: project.title,
-    description: project.description.en,
-    dateCreated: project.date,
-    author: { '@id': 'https://omardev.xyz/#person' },
-    keywords: project.technologies,
-    inLanguage: 'en',
-    mainEntityOfPage: `https://omardev.xyz/projects/${slug}`,
-    ...(project.siteUrl ? { url: project.siteUrl } : {}),
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        '@id': `${canonical}#case-study`,
+        name: project.title,
+        description: project.description.en,
+        dateCreated: project.date,
+        author: { '@id': 'https://omardev.xyz/#person' },
+        keywords: project.technologies,
+        inLanguage: 'en',
+        mainEntityOfPage: canonical,
+        ...(project.siteUrl ? { url: project.siteUrl } : {}),
+        image: `https://omardev.xyz${project.image}`,
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${canonical}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://omardev.xyz/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Selected Work',
+            item: 'https://omardev.xyz/#portfolio',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: project.title,
+            item: canonical,
+          },
+        ],
+      },
+    ],
   };
 
   return (
