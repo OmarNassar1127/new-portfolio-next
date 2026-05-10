@@ -1,6 +1,5 @@
 'use client';
 
-// motion removed — CSS animations only
 import Image from 'next/image';
 import Link from 'next/link';
 import { projects } from '@/data/projects';
@@ -12,142 +11,111 @@ import { cn } from '@/lib/utils';
 const featuredProjects = projects
   .filter((p) => p.featured)
   .sort((a, b) => a.priority - b.priority)
-  .slice(0, 6);
+  .slice(0, 4);
 
-/* ─── Category badge ──────────────────────────────────────────────────── */
-function CategoryBadge({ category }: { category: 'ai/ml' | 'professional' }) {
-  const isAI = category === 'ai/ml';
-  return (
-    <span
-      className={cn(
-        'rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest',
-        isAI
-          ? 'bg-[rgba(124, 92, 252,0.15)] text-[var(--primary)]'
-          : 'bg-[rgba(245, 121, 59,0.12)] text-[var(--accent-cyan)]',
-      )}
-    >
-      {isAI ? 'AI / ML' : 'Professional'}
-    </span>
-  );
-}
-
-/* ─── Project card ────────────────────────────────────────────────────── */
-function ProjectCard({
+/* ─── Editorial project row ───────────────────────────────────────────── */
+function ProjectRow({
   project,
+  index,
 }: {
   project: (typeof featuredProjects)[number];
+  index: number;
 }) {
   const { language } = useLanguage();
   const lang = language === 'NL' ? 'nl' : 'en';
   const description = project.description[lang];
   const firstSentence = description.split('. ')[0] + '.';
-  const visibleTechs = project.technologies.slice(0, 4);
+  const categoryLabel = project.category === 'ai/ml' ? 'AI / ML' : 'Professional';
+  const topTechs = project.technologies.slice(0, 3);
 
   return (
-    <div>
+    <li>
       <Link
         href={`/projects/${project.slug}/`}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-all duration-400 hover:border-[rgba(124, 92, 252,0.35)] hover:shadow-[0_8px_40px_-12px_rgba(124, 92, 252,0.25)] hover:-translate-y-1"
         aria-label={`View case study: ${project.title}`}
+        className="group grid grid-cols-1 items-center gap-x-6 gap-y-4 border-b border-[var(--rule)] py-6 transition-colors duration-200 sm:grid-cols-12 sm:py-8"
       >
-        {/* Image container */}
-        <div className="relative aspect-video w-full overflow-hidden bg-[var(--card-hover)]">
+        {/* Number — col 1 (desktop) */}
+        <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--accent)] sm:col-span-1">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+
+        {/* Thumbnail — col 2-3 */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-[var(--rule)] bg-[var(--card)] sm:col-span-2 sm:aspect-square">
           <Image
             src={project.image}
-            alt={project.title}
+            alt=""
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+            sizes="(max-width: 640px) 100vw, 200px"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           />
-          {/* Hover overlay */}
-          <div
-            className={cn(
-              'absolute inset-0 flex items-end justify-end p-4',
-              'bg-gradient-to-t from-black/70 via-black/20 to-transparent',
-              'opacity-0 transition-opacity duration-300 group-hover:opacity-100',
-            )}
-          >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--primary)] px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
-              View Case Study
-              <i className="ri-arrow-right-line text-sm" />
-            </span>
-          </div>
         </div>
 
-        {/* Content */}
-        <div className="flex flex-1 flex-col gap-3 p-5">
-          <div className="flex items-start justify-between gap-2">
-            <CategoryBadge category={project.category} />
-            {project.siteUrl && (
-              <span
-                className="flex h-6 w-6 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors duration-200 group-hover:border-[var(--primary)] group-hover:text-[var(--primary)]"
-                aria-hidden="true"
-              >
-                <i className="ri-external-link-line text-[11px]" />
-              </span>
-            )}
-          </div>
-
-          <h3 className="text-base font-bold leading-snug text-[var(--text)] transition-colors duration-200 group-hover:text-[var(--primary)]">
+        {/* Title + description + meta — col 4-11 */}
+        <div className="flex flex-col gap-2 sm:col-span-8">
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
+            {categoryLabel} · {project.year}
+          </span>
+          <h3 className="text-2xl font-semibold leading-tight tracking-tight text-[var(--text)] transition-colors duration-200 group-hover:text-[var(--accent-deep)] sm:text-[28px] lg:text-[32px]">
             {project.title}
           </h3>
-
-          <p className="line-clamp-2 text-sm leading-relaxed text-[var(--text-muted)]">
+          <p className="hidden text-sm leading-relaxed text-[var(--text-muted)] sm:block sm:text-[15px]">
             {firstSentence}
           </p>
-
-          {/* Tech tags */}
-          <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
-            {visibleTechs.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-md border border-[var(--border)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-muted)] transition-colors duration-200 group-hover:border-[rgba(124, 92, 252,0.25)]"
-              >
-                {tech}
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pt-1">
+            {topTechs.map((tech, i) => (
+              <span key={tech} className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                <span>{tech}</span>
+                {i < topTechs.length - 1 && <span className="opacity-50">·</span>}
               </span>
             ))}
-            {project.technologies.length > 4 && (
-              <span className="rounded-md border border-[var(--border)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-muted)]">
-                +{project.technologies.length - 4}
-              </span>
-            )}
           </div>
         </div>
+
+        {/* Arrow — col 12 */}
+        <span className="hidden sm:col-span-1 sm:flex sm:justify-end">
+          <i
+            className={cn(
+              'ri-arrow-right-up-line text-2xl text-[var(--text-subtle)]',
+              'transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--accent-deep)]',
+            )}
+          />
+        </span>
       </Link>
-    </div>
+    </li>
   );
 }
 
 /* ─── ProjectsShowcase ────────────────────────────────────────────────── */
 export default function ProjectsShowcase() {
   const { t } = useLanguage();
-  const gridRef = useSectionInView<HTMLDivElement>();
+  const listRef = useSectionInView<HTMLOListElement>();
 
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden bg-[var(--bg)] px-4 py-20 sm:px-6 sm:py-28"
+      className="relative overflow-hidden bg-[var(--bg)] px-4 py-20 sm:px-6 sm:py-28 lg:px-10"
     >
-      {/* Subtle background gradient */}
+      {/* Subtle background wash */}
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden="true"
         style={{
           background:
-            'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245, 121, 59,0.04) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245,121,59,0.04) 0%, transparent 70%)',
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-[1100px]">
         {/* Heading — editorial */}
-        <div className="mb-14">
+        <div className="mb-12">
           <div className="mb-5 flex items-center justify-between gap-4">
             <span className="eyebrow">
               <span className="text-[var(--accent)]">03</span>
               <span>{t('Selected Work', 'Geselecteerd Werk')}</span>
             </span>
             <span className="hidden font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline">
-              {t('Case Studies · 2018—2026', 'Casestudies · 2018—2026')}
+              {t('Case Studies · 04 of many', 'Casestudies · 04 van meer')}
             </span>
           </div>
           <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
@@ -160,25 +128,29 @@ export default function ProjectsShowcase() {
           <span className="mt-6 block h-px w-full bg-[var(--rule)]" aria-hidden="true" />
         </div>
 
-        {/* Project grid */}
-        <div ref={gridRef} className="section-stagger grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+        {/* Project list — editorial index */}
+        <ol ref={listRef} className="section-stagger" role="list">
+          {featuredProjects.map((project, i) => (
+            <ProjectRow key={project.id} project={project} index={i} />
           ))}
-        </div>
+        </ol>
 
         {/* View all link */}
-        <div className="mt-12 flex justify-center">
+        <div className="mt-10 flex items-center justify-between gap-4">
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
+            {t('Want more?', 'Meer zien?')}
+          </span>
           <Link
             href="/projects"
             className={cn(
-              'group inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-7 py-3',
-              'text-sm font-semibold text-[var(--text-muted)] transition-all duration-300',
-              'hover:border-[var(--primary)] hover:text-[var(--text)] hover:shadow-[0_0_24px_-6px_rgba(124, 92, 252,0.3)]',
+              'group inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] px-6 py-2.5',
+              'font-mono text-[11px] uppercase tracking-[0.18em] font-medium text-[var(--text)]',
+              'transition-all duration-300',
+              'hover:border-[var(--accent)] hover:text-[var(--accent-deep)]',
             )}
           >
-            {t('View All Projects', 'Alle Projecten Bekijken')}
-            <i className="ri-arrow-right-line text-base transition-transform duration-300 group-hover:translate-x-1" />
+            {t('View all projects', 'Alle projecten')}
+            <i className="ri-arrow-right-line text-base transition-transform duration-300 group-hover:translate-x-0.5" />
           </Link>
         </div>
       </div>

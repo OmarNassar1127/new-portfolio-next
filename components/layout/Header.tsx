@@ -24,7 +24,6 @@ const SECTION_IDS = [
   'portfolio',
   'about-me',
   'journey',
-  'skills',
   'certifications',
   'contact',
 ] as const;
@@ -47,15 +46,14 @@ export default function Header() {
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
 
-  // Build nav items from translations
+  // Build nav items — six-section main page
   const navItems: NavItem[] = [
-    { id: 'about',          href: '#about',          label: t('Home', 'Home'),             icon: 'ri-home-line' },
-    { id: 'portfolio',      href: '#portfolio',      label: t('Work', 'Werk'),             icon: 'ri-briefcase-line' },
-    { id: 'about-me',       href: '#about-me',       label: t('About', 'Over'),            icon: 'ri-user-line' },
-    { id: 'journey',        href: '#journey',        label: t('Journey', 'Reis'),          icon: 'ri-road-map-line' },
-    { id: 'skills',         href: '#skills',         label: t('Stack', 'Stack'),           icon: 'ri-code-line' },
-    { id: 'certifications', href: '#certifications', label: t('Certs', 'Certs'),           icon: 'ri-award-line' },
-    { id: 'contact',        href: '#contact',        label: t('Contact', 'Contact'),       icon: 'ri-mail-line' },
+    { id: 'about',          href: '#about',          label: t('Home',    'Home'),    icon: 'ri-home-line' },
+    { id: 'portfolio',      href: '#portfolio',      label: t('Work',    'Werk'),    icon: 'ri-briefcase-line' },
+    { id: 'about-me',       href: '#about-me',       label: t('About',   'Over'),    icon: 'ri-user-line' },
+    { id: 'journey',        href: '#journey',        label: t('Journey', 'Reis'),    icon: 'ri-road-map-line' },
+    { id: 'certifications', href: '#certifications', label: t('Certs',   'Certs'),   icon: 'ri-award-line' },
+    { id: 'contact',        href: '#contact',        label: t('Contact', 'Contact'), icon: 'ri-mail-line' },
   ];
 
   // Active index for the editorial position indicator (01/07)
@@ -474,7 +472,7 @@ function NavLogo({
 }) {
   const inner = (
     <span className="group relative flex-shrink-0 block">
-      <span className="relative block w-8 h-8 rounded-full overflow-hidden ring-2 ring-[var(--primary)]/40 group-hover:ring-[var(--primary)] transition-all duration-300">
+      <span className="relative block w-8 h-8 rounded-full overflow-hidden border border-[var(--rule)] transition-colors duration-300 group-hover:border-[var(--text-muted)]">
         <Image
           src="/images/me2.png"
           alt="Omar Nassar"
@@ -485,7 +483,7 @@ function NavLogo({
           loading="eager"
         />
       </span>
-      <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-[var(--card)] rounded-full" />
+      <span className="absolute -bottom-px -right-px h-2 w-2 rounded-full bg-[var(--signal-emerald)] outline outline-2 outline-[var(--bg-elevated)]" />
     </span>
   );
 

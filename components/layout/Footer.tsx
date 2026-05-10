@@ -32,12 +32,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const navLinks: NavLink[] = [
-    { href: '#about',          label: t('About',          'Over mij')      },
-    { href: '#experience',     label: t('Experience',     'Ervaring')      },
-    { href: '#portfolio',      label: t('Projects',       'Projecten')     },
-    { href: '#skills',         label: t('Skills',         'Vaardigheden')  },
-    { href: '#certifications', label: t('Certifications', 'Certificeringen') },
-    { href: '#contact',        label: t('Contact',        'Contact')       },
+    { href: '#about',          label: t('Home',    'Home')    },
+    { href: '#portfolio',      label: t('Work',    'Werk')    },
+    { href: '#about-me',       label: t('About',   'Over')    },
+    { href: '#journey',        label: t('Journey', 'Reis')    },
+    { href: '#certifications', label: t('Certs',   'Certs')   },
+    { href: '#contact',        label: t('Contact', 'Contact') },
   ];
 
   const socialCards: SocialCard[] = [

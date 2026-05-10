@@ -1,59 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
 import { personal } from '@/data/personal';
 import { useLanguage } from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
 
-/* ─── AnimatedCounter ─────────────────────────────────────────────────── */
-function AnimatedCounter({ value }: { value: string }) {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
-  const numeric = parseFloat(value.replace(/[^0-9.]/g, ''));
-  const prefix = value.match(/^[^0-9]*/)?.[0] ?? '';
-  const suffix = value.replace(/[0-9.]/g, '').replace(prefix, '');
-
-  return (
-    <span ref={ref}>
-      {prefix}
-      {inView ? <CountUp end={numeric} duration={2} separator="," /> : String(numeric)}
-      {suffix}
-    </span>
-  );
-}
-
-/* ─── Role cycling text ───────────────────────────────────────────────── */
-function RoleCycler({ roles }: { roles: string[] }) {
-  const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % roles.length);
-        setVisible(true);
-      }, 280);
-    }, 3200);
-    return () => clearInterval(id);
-  }, [roles.length]);
-
-  return (
-    <span
-      className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)] transition-opacity duration-300"
-      style={{ opacity: visible ? 1 : 0 }}
-    >
-      {roles[index]}
-    </span>
-  );
-}
-
-/* ─── Hero — Split-pane editorial, viewport-fitted ────────────────────── */
+/* ─── Hero — slim, hiring-manager-first ───────────────────────────────── */
 export default function Hero() {
   const { language } = useLanguage();
   const lang = language === 'NL' ? 'nl' : 'en';
-  const roles = personal.roles[lang];
 
   const socialLinks = [
     { href: personal.github, icon: 'ri-github-fill', label: 'GitHub' },
@@ -67,7 +21,7 @@ export default function Hero() {
       id="about"
       className="relative flex min-h-dvh-screen flex-col overflow-hidden bg-[var(--bg)] pt-20 lg:pt-24"
     >
-      {/* Background — single soft orb + masked grid */}
+      {/* Background — single soft orb + grid */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute inset-0 grid-backdrop" />
         <div
@@ -77,7 +31,6 @@ export default function Hero() {
               'radial-gradient(circle at 30% 30%, var(--primary) 0%, transparent 45%), radial-gradient(circle at 70% 70%, var(--accent) 0%, transparent 50%)',
           }}
         />
-        <div className="hidden md:block absolute bottom-10 right-[8%] h-[280px] w-[280px] rounded-full bg-[var(--accent)] opacity-[0.07] blur-[110px]" />
       </div>
 
       {/* Editorial filing strip — top */}
@@ -101,167 +54,173 @@ export default function Hero() {
 
       <span className="relative z-10 mx-auto mt-3 block h-px w-[calc(100%-2rem)] max-w-[1400px] bg-[var(--rule)] sm:w-[calc(100%-3rem)]" aria-hidden="true" />
 
-      {/* Main content area — fills remaining viewport */}
-      <div className="relative z-10 flex flex-1 items-center px-4 py-6 sm:px-6 lg:py-8">
-        <div className="hero-stagger relative mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-0">
-          {/* Viewfinder marks — desktop only, frames the whole content area */}
+      {/* Content area — sits right under the divider */}
+      <div className="relative z-10 flex flex-1 items-start justify-center px-4 pb-12 pt-6 sm:px-6 sm:pt-4 lg:pt-6">
+        <div className="hero-stagger relative mx-auto flex w-full max-w-[900px] flex-col items-center gap-8 text-center sm:gap-6">
+          {/* Viewfinder marks */}
           <span className="viewfinder tl hidden lg:block" />
           <span className="viewfinder tr hidden lg:block" />
           <span className="viewfinder bl hidden lg:block" />
           <span className="viewfinder br hidden lg:block" />
 
-          {/* ═══ LEFT: Massive editorial nameplate (cols 1-7) ════════════ */}
-          <div className="flex flex-col justify-center text-center lg:col-span-7 lg:text-left">
-            {/* Eyebrow */}
-            <div className="mb-5 flex justify-center lg:justify-start">
-              <span className="eyebrow">
-                <span className="text-[var(--accent)]">01</span>
-                <span>{lang === 'en' ? 'Engineer · Founder' : 'Ingenieur · Oprichter'}</span>
-              </span>
-            </div>
+          {/* Eyebrow */}
+          <span className="eyebrow eyebrow-centered">
+            <span className="text-[var(--accent)]">01</span>
+            <span>{lang === 'en' ? 'Engineer · Founder' : 'Ingenieur · Oprichter'}</span>
+          </span>
 
-            {/* Nameplate */}
-            <h1
-              className="font-bold leading-[0.88] tracking-tight text-[var(--text)]"
-              style={{
-                fontSize: 'clamp(2.75rem, 11vw, 7.5rem)',
-                letterSpacing: '-0.04em',
-              }}
+          {/* Nameplate */}
+          <h1
+            className="font-bold leading-[0.88] tracking-tight text-[var(--text)]"
+            style={{
+              fontSize: 'clamp(3rem, 11vw, 8rem)',
+              letterSpacing: '-0.04em',
+            }}
+          >
+            <span className="block">Omar</span>
+            <span
+              className="display-serif-italic block font-medium ink-flush"
+              style={{ fontWeight: 500, marginTop: '-0.05em' }}
             >
-              <span className="block">Omar</span>
-              <span
-                className="display-serif-italic block font-medium ink-flush"
-                style={{ fontWeight: 500, marginTop: '-0.05em' }}
-              >
-                Nassar.
-              </span>
-            </h1>
+              Nassar.
+            </span>
+          </h1>
 
-            {/* Role cycler — sits right under the nameplate */}
-            <div className="mt-6 flex justify-center lg:justify-start">
-              <RoleCycler roles={roles} />
-            </div>
+          {/* Tagline — single line, says everything */}
+          <p className="max-w-2xl text-balance text-lg leading-snug text-[var(--text-muted)] sm:text-xl">
+            {lang === 'en' ? (
+              <>
+                Full-stack developer and <span className="font-medium text-[var(--text)]">AI engineer</span> at{' '}
+                <a
+                  href="https://vloto.nl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-[var(--text)] underline decoration-[var(--rule)] underline-offset-4 transition-colors hover:decoration-[var(--accent)]"
+                >
+                  Vloto
+                </a>{' '}
+                and{' '}
+                <a
+                  href={personal.virelio.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="display-serif-italic font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-4 transition-colors hover:decoration-[var(--accent)]"
+                >
+                  Virelio
+                </a>
+                .
+              </>
+            ) : (
+              <>
+                Full-stack developer en <span className="font-medium text-[var(--text)]">AI engineer</span> bij{' '}
+                <a
+                  href="https://vloto.nl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-[var(--text)] underline decoration-[var(--rule)] underline-offset-4 transition-colors hover:decoration-[var(--accent)]"
+                >
+                  Vloto
+                </a>{' '}
+                en{' '}
+                <a
+                  href={personal.virelio.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="display-serif-italic font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-4 transition-colors hover:decoration-[var(--accent)]"
+                >
+                  Virelio
+                </a>
+                .
+              </>
+            )}
+          </p>
+
+          {/* Quick proof — stacks on mobile, inline on sm+ */}
+          <div className="flex flex-col items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-subtle)] sm:flex-row sm:gap-0">
+            {lang === 'en' ? (
+              <>
+                <span className="whitespace-nowrap">
+                  <span className="text-[var(--text)]">7+</span> years engineering
+                </span>
+                <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
+                <span className="whitespace-nowrap">
+                  <span className="text-[var(--text)]">30+</span> AI systems shipped
+                </span>
+                <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
+                <span className="whitespace-nowrap">
+                  <span className="text-[var(--text)]">80K+</span> users served
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="whitespace-nowrap">
+                  <span className="text-[var(--text)]">7+</span> jaar engineering
+                </span>
+                <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
+                <span className="whitespace-nowrap">
+                  <span className="text-[var(--text)]">30+</span> AI-systemen
+                </span>
+                <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
+                <span className="whitespace-nowrap">
+                  <span className="text-[var(--text)]">80K+</span> gebruikers
+                </span>
+              </>
+            )}
           </div>
 
-          {/* ═══ RIGHT: Editorial aside column (cols 8-12) ═══════════════ */}
-          <aside className="flex flex-col justify-center gap-6 lg:col-span-5">
-            {/* Tagline — lead sentence */}
-            <p className="text-balance text-center text-base leading-snug text-[var(--text-muted)] sm:text-lg lg:text-left lg:text-xl">
-              {lang === 'en' ? (
-                <>
-                  I build <span className="font-medium text-[var(--text)]">autonomous AI agents</span> and the systems they run on.{' '}
-                  <span className="display-serif-italic font-medium text-[var(--text)]">Production grade. Not demos.</span>
-                </>
-              ) : (
-                <>
-                  Ik bouw <span className="font-medium text-[var(--text)]">autonome AI-agenten</span> en de systemen waarop ze draaien.{' '}
-                  <span className="display-serif-italic font-medium text-[var(--text)]">Productie-niveau. Geen demo&apos;s.</span>
-                </>
+          {/* CTAs */}
+          <div className="mt-2 flex flex-col gap-2.5 sm:flex-row sm:gap-3">
+            <a
+              href="#portfolio"
+              className={cn(
+                'group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3',
+                'bg-[var(--text)] font-semibold text-[var(--bg)] text-sm',
+                'shadow-[0_8px_24px_-8px_rgba(10,11,17,0.45)]',
+                'transition-all duration-300',
+                'hover:bg-[var(--primary)] hover:text-white',
+                'hover:shadow-[0_10px_28px_-6px_rgba(124,92,252,0.5)]',
+                'active:scale-[0.98]',
               )}
-            </p>
+            >
+              <i className="ri-arrow-right-line text-base transition-transform duration-300 group-hover:translate-x-0.5" />
+              {lang === 'en' ? 'See the work' : 'Bekijk het werk'}
+            </a>
 
-            {/* Credibility line — full-stack foundation */}
-            <div className="flex flex-col gap-2 border-l-2 border-[var(--accent)] pl-4 text-center lg:text-left">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
-                {lang === 'en' ? 'Foundation' : 'Fundament'}
-              </span>
-              <p className="text-sm leading-relaxed text-[var(--text-muted)]">
-                {lang === 'en' ? (
-                  <>
-                    Production AI built on{' '}
-                    <span className="font-semibold text-[var(--text)]">seven years</span> of full-stack engineering. React,
-                    Node, Laravel, Python, then LangChain, CrewAI, and on-premise LLMs.{' '}
-                    <span className="display-serif-italic font-medium text-[var(--accent-deep)]">Foundation first. Agents on top.</span>
-                  </>
-                ) : (
-                  <>
-                    Productie-AI gebouwd op{' '}
-                    <span className="font-semibold text-[var(--text)]">zeven jaar</span> full-stack engineering. React,
-                    Node, Laravel, Python, en daarna LangChain, CrewAI en on-premise LLM&apos;s.{' '}
-                    <span className="display-serif-italic font-medium text-[var(--accent-deep)]">Fundament eerst. Agenten erbovenop.</span>
-                  </>
-                )}
-              </p>
-            </div>
+            <a
+              href={`mailto:${personal.email}`}
+              className={cn(
+                'group inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3',
+                'border-[var(--border-strong)] bg-transparent font-semibold text-[var(--text)] text-sm',
+                'transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent-deep)]',
+                'active:scale-[0.98]',
+              )}
+            >
+              <i className="ri-mail-line text-base" />
+              {lang === 'en' ? 'Get in touch' : 'Contact'}
+            </a>
+          </div>
 
-            {/* Stats — vertical list, editorial */}
-            <ul className="flex flex-col divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
-              {personal.stats.map((stat) => (
-                <li key={stat.value} className="flex items-baseline justify-between gap-4 py-3">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                    {stat.label[lang]}
-                  </span>
-                  <span className="display-serif text-2xl font-semibold leading-none text-[var(--text)] sm:text-[28px]">
-                    <AnimatedCounter value={stat.value} />
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            {/* CTAs */}
-            <div className="flex flex-col gap-2.5 sm:flex-row">
+          {/* Social row */}
+          <div className="mt-2 flex items-center justify-center gap-2.5">
+            {socialLinks.map((social) => (
               <a
-                href="#portfolio"
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
                 className={cn(
-                  'group inline-flex flex-1 items-center justify-center gap-2 rounded-full px-6 py-3',
-                  'bg-[var(--text)] font-semibold text-[var(--bg)] text-sm',
-                  'transition-all duration-300 hover:bg-[var(--primary)] hover:text-white',
-                  'hover:shadow-[0_8px_28px_-6px_rgba(124,92,252,0.5)]',
-                  'active:scale-[0.98]',
+                  'flex h-9 w-9 items-center justify-center rounded-full',
+                  'border border-[var(--border)] text-[var(--text-muted)]',
+                  'transition-all duration-300',
+                  'hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]',
                 )}
               >
-                <i className="ri-arrow-right-line text-base transition-transform duration-300 group-hover:translate-x-0.5" />
-                {lang === 'en' ? 'Selected Work' : 'Geselecteerd Werk'}
+                <i className={cn(social.icon, 'text-[15px]')} />
               </a>
-
-              <a
-                href="#contact"
-                className={cn(
-                  'group inline-flex flex-1 items-center justify-center gap-2 rounded-full border px-6 py-3',
-                  'border-[var(--border-strong)] bg-transparent font-semibold text-[var(--text)] text-sm',
-                  'transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent-deep)]',
-                  'active:scale-[0.98]',
-                )}
-              >
-                <i className="ri-send-plane-line text-base" />
-                {lang === 'en' ? 'Get In Touch' : 'Contact'}
-              </a>
-            </div>
-
-            {/* Social row */}
-            <div className="flex items-center justify-between gap-4 pt-1">
-              <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)]">
-                {lang === 'en' ? 'Find me' : 'Vind me'}
-              </span>
-              <div className="flex items-center gap-2.5">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className={cn(
-                      'flex h-8 w-8 items-center justify-center rounded-full',
-                      'border border-[var(--border)] text-[var(--text-muted)]',
-                      'transition-all duration-300',
-                      'hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]',
-                    )}
-                  >
-                    <i className={cn(social.icon, 'text-sm')} />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </aside>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Bottom plate — kinetic ticker handoff */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] items-center justify-between gap-3 px-4 pb-3 font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--text-subtle)] sm:px-6">
-        <span>{lang === 'en' ? 'Scroll' : 'Scroll'}</span>
-        <i className="ri-arrow-down-line text-sm floating text-[var(--text-muted)]" />
-        <span className="hidden sm:inline">{lang === 'en' ? 'Stack ↓' : 'Stack ↓'}</span>
       </div>
     </section>
   );

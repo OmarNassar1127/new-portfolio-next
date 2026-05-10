@@ -35,24 +35,53 @@ export default function Experience() {
               <span className="text-[var(--accent)]">04</span>
               <span>{t('Career Ledger', 'Carrière Logboek')}</span>
             </span>
-            <span className="hidden font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline">
-              {t(
-                `${experienceData.length} entries · 2017—Present`,
-                `${experienceData.length} regels · 2017—Heden`,
-              )}
+            <span className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline-flex">
+              <span>
+                {t(
+                  `${experienceData.length} entries · 2017—Present`,
+                  `${experienceData.length} regels · 2017—Heden`,
+                )}
+              </span>
+              <span className="opacity-50">·</span>
+              <span className="flex items-center gap-1.5 text-[var(--signal-emerald)]">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--signal-emerald)] opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--signal-emerald)]" />
+                </span>
+                {t('Open to full-time', 'Open voor full-time')}
+              </span>
             </span>
           </div>
-          <h2 className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-5xl text-4xl font-semibold leading-[1.08] tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
             {t('From ', 'Van ')}
             <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
               {t('student', 'student')}
             </span>
-            {t(' to ', ' tot ')}
-            <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
-              {t('co-founder', 'mede-oprichter')}
-            </span>
+            {t('. To engineer at ', '. Tot engineer bij ')}
+            <a
+              href="https://vloto.nl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="display-serif-italic font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-[6px] transition-colors hover:decoration-[var(--accent)]"
+            >
+              Vloto
+            </a>
+            {t('. To founder of ', '. Tot oprichter van ')}
+            <a
+              href="https://virelio.nl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="display-serif-italic font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-[6px] transition-colors hover:decoration-[var(--accent)]"
+            >
+              Virelio
+            </a>
             {t('. The journey, by year.', '. De reis, per jaar.')}
           </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
+            <span className="display-serif-italic text-[var(--text)]">
+              {t('Open to the right full-time role.', 'Open voor de juiste full-time rol.')}
+            </span>
+          </p>
           <span className="mt-6 block h-px w-full bg-[var(--rule)]" aria-hidden="true" />
         </header>
 
@@ -159,8 +188,8 @@ export default function Experience() {
           })}
         </ol>
 
-        {/* ════ Editorial footer summary ════════════════════════════════ */}
-        <footer className="mt-16 grid grid-cols-3 gap-6 border-t border-[var(--rule)] pt-10 lg:gap-10">
+        {/* ════ Editorial footer summary — centered ════════════════════ */}
+        <footer className="mt-16 grid grid-cols-3 border-t border-[var(--rule)] pt-10">
           {[
             { value: '7+', label: t('Years in tech', 'Jaar in tech') },
             { value: '3', label: t('Companies built at', 'Bedrijven') },
@@ -169,8 +198,8 @@ export default function Experience() {
             <div
               key={stat.label}
               className={cn(
-                'flex flex-col gap-1.5',
-                i > 0 && 'sm:border-l sm:border-[var(--rule)] sm:pl-6 lg:pl-10',
+                'flex flex-col items-center gap-1.5 text-center',
+                i > 0 && 'border-l border-[var(--rule)]',
               )}
             >
               <span className="display-serif text-4xl font-semibold leading-none text-[var(--text)] sm:text-5xl lg:text-6xl">

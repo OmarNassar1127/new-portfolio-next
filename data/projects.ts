@@ -25,7 +25,7 @@ export const projects: Project[] = [
     category: "ai/ml",
     date: "2026-01",
     year: 2026,
-    priority: 3,
+    priority: 10,
     description: {
       en: "I kept catching myself slouching during long coding sessions and realized most posture apps either need expensive hardware or send your webcam feed to some server. Neither felt right, so I built Slouch: a posture coach that runs 100% in the browser using MediaPipe Pose. No backend, no data leaving your device, ever. The app analyzes your posture in real-time through torso metrics like shoulder width, hip alignment, and tilt. I added a smart calibration system so it adapts to your body and chair setup, time-delayed alerts to avoid false triggers from quick movements, and sensitivity presets (Easy/Medium/Hard) so you can ease into it. When you slouch too long, you get a gentle audio nudge. Built with React, TypeScript, and a glassmorphism UI. Currently live at slouch.pro with a waitlist powered by Supabase.",
       nl: "Tijdens lange codeersessies betrapte ik mezelf er steeds op dat ik onderuitgezakt zat. De meeste houdingsapps vereisen duur hardware of sturen je webcamfeed naar een server — geen van beide leek me acceptabel. Dus bouwde ik Slouch: een houdingscoach die 100% in de browser draait via MediaPipe Pose. Geen backend, geen data die je apparaat verlaat, nooit. De app analyseert je houding real-time via romp-metrieken zoals schouderbreedte, heupuitlijning en kanteling. Ik heb een slim kalibratiesysteem toegevoegd zodat de app zich aanpast aan jouw lichaam en stoelopstelling, vertraagde meldingen om valse triggers bij snelle bewegingen te vermijden, en gevoeligheidsprofielen (Makkelijk/Gemiddeld/Moeilijk). Zit je te lang krom, dan krijg je een subtiel geluidsignaal. Gebouwd met React, TypeScript en een glassmorphism-interface. Live op slouch.pro met een wachtlijst via Supabase.",
@@ -100,7 +100,7 @@ export const projects: Project[] = [
     category: "ai/ml",
     date: "2025-01",
     year: 2025,
-    priority: 2,
+    priority: 8,
     description: {
       en: "The company had millions of internal documents spread across 10+ data sources. Employees were wasting hours searching for information that existed somewhere but was impossible to find. I built a RAG platform that indexes all of it with a scalable ingestion pipeline handling 10k+ PDFs, using Qdrant for vector storage and LangChain for retrieval orchestration. The key decision was keeping everything on-premise with Llama 3 to maintain data sovereignty. It delivers context-aware answers in under 1 second with 95% retrieval accuracy. Started as a prototype for one team, now runs organization-wide.",
       nl: "Het bedrijf had miljoenen interne documenten verspreid over 10+ databronnen — medewerkers verspilden uren aan zoeken naar informatie die ergens bestond maar onvindbaar was. Ik bouwde een RAG-platform dat alles indexeert via een schaalbare ingestie-pipeline die 10k+ PDF's verwerkt, met Qdrant voor vectoropslag en LangChain voor retrieval-orkestratie. De cruciale beslissing was alles on-premise te houden met Llama 3 om datasouvereiniteit te waarborgen. Het levert contextbewuste antwoorden in onder één seconde met 95% retrieval-nauwkeurigheid. Begon als prototype voor één team, draait nu organisatiebreed.",
@@ -291,7 +291,7 @@ export const projects: Project[] = [
     category: "ai/ml",
     date: "2023-04",
     year: 2023,
-    priority: 1,
+    priority: 9,
     description: {
       en: "The company needed AI capabilities but couldn't send data to external providers. Strict compliance requirements meant everything had to stay on-premise. I designed a fully private LLM platform running local 70B Llama models via Ollama, with Qdrant for vector storage and a multi-agent architecture that routes queries to specialized agents. The key challenge was getting acceptable inference speeds on standard enterprise hardware — after optimizing the pipeline, we hit <2s response times. The platform now serves around 400 employees across the organization with zero data leaving the premises.",
       nl: "Het bedrijf had AI-capaciteiten nodig maar mocht geen data naar externe providers sturen — strikte compliance-eisen betekenden dat alles on-premise moest blijven. Ik ontwierp een volledig privaat LLM-platform dat lokale 70B Llama-modellen draait via Ollama, met Qdrant voor vectoropslag en een multi-agent architectuur die queries doorstuurt naar gespecialiseerde agents. De grootste uitdaging was acceptabele inferentiesnelheden halen op standaard bedrijfshardware — na optimalisatie van de pipeline kwamen we op minder dan 2 seconden responstijd. Het platform bedient nu zo'n 400 medewerkers in de organisatie zonder dat er ook maar één byte het pand verlaat.",
@@ -347,7 +347,7 @@ export const projects: Project[] = [
     category: "professional",
     date: "2024-08",
     year: 2024,
-    priority: 12,
+    priority: 1,
     description: {
       en: "At Vloto, payment defaults were a serious problem. I built a fraud prevention system that uses behavioral pattern recognition to identify high-risk customers before invoicing. It implements dynamic risk profiles based on transaction history and payment behavior, and pioneered a micro-invoicing approach that splits monthly invoices into smaller periodic payments based on risk scores. The results: 73% reduction in payment defaults, 45% improvement in cash flow, and €2M+ recovered in outstanding payments across 50k+ monthly transactions.",
       nl: "Bij Vloto waren betalingsachterstanden een serieus probleem. Ik bouwde een fraudepreventiesysteem dat gedragspatroonherkenning gebruikt om hoog-risico klanten te identificeren vóór facturering. Het implementeert dynamische risicoprofielen op basis van transactiegeschiedenis en betalingsgedrag, en introduceerde een micro-factureringaanpak die maandelijkse facturen opsplitst in kleinere periodieke betalingen op basis van risicoscores. De resultaten: 73% minder betalingsverzuim, 45% verbetering in cashflow en €2M+ teruggehaald aan openstaande betalingen over 50k+ maandelijkse transacties.",
@@ -365,7 +365,7 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/fraud-prevention.jpeg",
-    featured: false,
+    featured: true,
   },
   {
     id: "02",
@@ -453,7 +453,7 @@ export const projects: Project[] = [
     category: "ai/ml",
     date: "2025-01",
     year: 2025,
-    priority: 6,
+    priority: 3,
     description: {
       en: "Medical device companies spend months compiling technical dossiers for regulatory approval — FDA, CE marking, ISO standards. A client asked if AI could speed this up. I built a platform using NLP models trained on medical regulations that automatically extracts documentation requirements, generates compliance templates, and cross-references regulatory changes. What used to take 3 months now takes about a week. The system handles the tedious research and formatting while the compliance team focuses on review and sign-off. 5x faster than the traditional process.",
       nl: "Fabrikanten van medische hulpmiddelen besteden maanden aan het samenstellen van technische dossiers voor regelgevingsgoedkeuring — FDA, CE-markering, ISO-normen. Een klant vroeg of AI dit kon versnellen. Ik bouwde een platform met NLP-modellen getraind op medische regelgeving dat automatisch documentatievereisten extraheert, compliance-sjablonen genereert en regelgevingswijzigingen kruisverwijst. Wat vroeger 3 maanden kostte, duurt nu ongeveer een week. Het systeem neemt het saaie onderzoek en de opmaak voor zijn rekening terwijl het compliance-team zich richt op review en aftekening. 5x sneller dan het traditionele proces.",
@@ -481,7 +481,7 @@ export const projects: Project[] = [
     category: "ai/ml",
     date: "2025-07",
     year: 2025,
-    priority: 5,
+    priority: 4,
     description: {
       en: "For Virelio's own website, I needed a support system that could handle client inquiries without me being online 24/7. I built an AI assistant using OpenAI for conversation processing, ElevenLabs for natural voice synthesis, and n8n for workflow automation. It handles incoming meeting requests, answers questions about our services, and provides instant responses at any hour. It's essentially my digital front desk — professional, always available, and it lets me focus on actual project work instead of answering the same intro questions repeatedly.",
       nl: "Voor de eigen website van Virelio had ik een supportsysteem nodig dat klantvragen kon afhandelen zonder dat ik 24/7 online hoef te zijn. Ik bouwde een AI-assistent met OpenAI voor gespreksverwerking, ElevenLabs voor natuurlijke spraaksynthese en n8n voor workflow-automatisering. Het handelt inkomende vergaderverzoeken af, beantwoordt vragen over onze diensten en geeft directe antwoorden op elk uur van de dag. Het is in wezen mijn digitale receptie — professioneel, altijd beschikbaar, en het stelt me in staat om te focussen op echt projectwerk in plaats van steeds dezelfde introducerende vragen te beantwoorden.",
@@ -650,14 +650,12 @@ export const projects: Project[] = [
   },
 ];
 
-// Slug-based IDs for the 6 featured projects
+// Slug-based IDs for the featured projects shown on the homepage
 const FEATURED_SLUGS = new Set([
-  "enterprise-ai-platform",
-  "whatsapp-ai-business-agent",
   "invoice-fraud-prevention-platform",
-  "full-stack-multi-agent",
-  "enterprise-rag-platform",
+  "whatsapp-ai-business-agent",
   "medical-technical-file-builder",
+  "ai-customer-support",
 ]);
 
 // Apply featured flag (already set inline above, this ensures consistency)
