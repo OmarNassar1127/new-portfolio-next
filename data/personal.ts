@@ -64,10 +64,10 @@ export const personal: Personal = {
       },
     },
     {
-      value: "30+",
+      value: "50+",
       label: {
-        en: "AI Systems Built",
-        nl: "AI Systemen Gebouwd",
+        en: "Systems Shipped",
+        nl: "Systemen Opgeleverd",
       },
     },
     {

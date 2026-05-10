@@ -32,12 +32,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const navLinks: NavLink[] = [
-    { href: '#about',          label: t('About',          'Over mij')      },
-    { href: '#experience',     label: t('Experience',     'Ervaring')      },
-    { href: '#portfolio',      label: t('Projects',       'Projecten')     },
-    { href: '#skills',         label: t('Skills',         'Vaardigheden')  },
-    { href: '#certifications', label: t('Certifications', 'Certificeringen') },
-    { href: '#contact',        label: t('Contact',        'Contact')       },
+    { href: '#about',          label: t('Home',    'Home')    },
+    { href: '#portfolio',      label: t('Work',    'Werk')    },
+    { href: '#about-me',       label: t('About',   'Over')    },
+    { href: '#journey',        label: t('Journey', 'Reis')    },
+    { href: '#certifications', label: t('Certs',   'Certs')   },
+    { href: '#contact',        label: t('Contact', 'Contact') },
   ];
 
   const socialCards: SocialCard[] = [
@@ -47,7 +47,7 @@ export default function Footer() {
       label: 'Email',
       handle: personal.email,
       colorClass: 'group-hover:text-[var(--primary)]',
-      glowColor: 'rgba(136,115,239,0.25)',
+      glowColor: 'rgba(124, 92, 252,0.25)',
     },
     {
       href: personal.linkedin,
@@ -108,44 +108,47 @@ export default function Footer() {
 
           {/* ── Left column: CTA + badges ────────────────────────────── */}
           <div className="lg:col-span-5 flex flex-col gap-8">
-            {/* Eyebrow */}
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--primary)]">
-              {t("Let's work together", 'Laten we samenwerken')}
-            </p>
+            {/* Eyebrow — editorial */}
+            <span className="eyebrow">
+              <span className="text-[var(--accent)]">·</span>
+              <span>{t("Let's work together", 'Laten we samenwerken')}</span>
+            </span>
 
             {/* Headline */}
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold leading-tight text-[var(--text)]">
-                {t("Let's build something", 'Laten we iets')}{' '}
-                <span className="gradient-text">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.05] tracking-tight text-[var(--text)]">
+                {t("Let's build something ", 'Laten we iets ')}
+                <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
                   {t('extraordinary', 'buitengewoons')}
                 </span>
+                {t('.', '.')}
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)]">
+              <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--text-muted)]">
                 {t(
-                  'Multi-agent systems, RAG platforms, and custom AI solutions — from concept to production.',
-                  'Multi-agent systemen, RAG-platformen en maatwerk AI-oplossingen — van concept tot productie.',
+                  'Multi-agent systems, RAG platforms, and the full-stack code underneath. From concept to production.',
+                  'Multi-agent systemen, RAG-platformen en de full-stack code eronder. Van concept tot productie.',
                 )}
               </p>
             </div>
 
-            {/* CTA button */}
+            {/* CTA button — editorial ink */}
             <div>
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }}
                 className={cn(
                   'group inline-flex items-center gap-3',
-                  'bg-gradient-to-r from-[var(--primary)] to-[var(--accent-cyan)]',
-                  'text-white font-semibold px-7 py-3.5 rounded-2xl',
-                  'hover:shadow-[0_8px_32px_rgba(136,115,239,0.4)]',
-                  'hover:-translate-y-0.5 active:translate-y-0',
+                  'bg-[var(--text)] text-[var(--bg)] font-semibold px-7 py-3.5 rounded-full',
+                  'shadow-[0_8px_24px_-6px_rgba(10,11,17,0.4)]',
                   'transition-all duration-300',
+                  'hover:bg-[var(--primary)] hover:text-white',
+                  'hover:shadow-[0_10px_28px_-6px_rgba(124,92,252,0.5)]',
+                  'hover:-translate-y-0.5 active:translate-y-0',
                 )}
               >
-                <i className="ri-chat-3-line text-lg group-hover:scale-110 transition-transform" />
-                {t('Start a conversation', 'Start een gesprek')}
-                <i className="ri-arrow-right-line group-hover:translate-x-1 transition-transform" />
+                <i className="ri-chat-3-line text-lg" />
+                <span className="text-sm">{t('Start a conversation', 'Start een gesprek')}</span>
+                <i className="ri-arrow-right-line text-base group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>
 
@@ -196,8 +199,8 @@ export default function Footer() {
               </span>
               <span>
                 {t(
-                  'Co-founded Virelio — AI agents on demand',
-                  'Mede-opgericht: Virelio — AI agents op aanvraag',
+                  'Founder of Virelio · AI agents on demand',
+                  'Oprichter van Virelio · AI agents op aanvraag',
                 )}
               </span>
               <i className="ri-external-link-line text-xs opacity-0 group-hover:opacity-100 transition-opacity" />

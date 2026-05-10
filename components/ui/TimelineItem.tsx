@@ -73,7 +73,7 @@ export function TimelineItem({ entry, index, isLast }: TimelineItemProps) {
         className={cn(
           'mb-10 flex-1 rounded-xl border border-[var(--border)] bg-[var(--card)]',
           'p-5 transition-[border-color,box-shadow] duration-300',
-          'hover:border-[rgba(136,115,239,0.30)] hover:shadow-[0_4px_24px_-8px_var(--primary-glow)]'
+          'hover:border-[rgba(124, 92, 252,0.30)] hover:shadow-[0_4px_24px_-8px_var(--primary-glow)]'
         )}
       >
         {/* Header row */}

@@ -63,7 +63,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         'group relative flex flex-col overflow-hidden rounded-xl',
         'border border-[var(--border)] bg-[var(--card)]',
         'transition-[border-color,box-shadow,transform] duration-300',
-        'hover:-translate-y-1 hover:border-[rgba(136,115,239,0.40)]',
+        'hover:-translate-y-1 hover:border-[rgba(124, 92, 252,0.40)]',
         'hover:shadow-[0_8px_32px_-8px_var(--primary-glow),0_24px_48px_-16px_rgba(0,0,0,0.25)]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]',
         className
@@ -75,7 +75,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         className="pointer-events-none absolute inset-0 z-0 rounded-xl transition-opacity duration-300"
         style={{
           opacity: spotlight.opacity,
-          background: `radial-gradient(300px circle at ${spotlight.x}px ${spotlight.y}px, rgba(136,115,239,0.14), transparent 70%)`,
+          background: `radial-gradient(300px circle at ${spotlight.x}px ${spotlight.y}px, rgba(124, 92, 252,0.14), transparent 70%)`,
         }}
       />
 

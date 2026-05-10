@@ -22,7 +22,7 @@ export function SpotlightCard<T extends AllowedTag = 'div'>({
   const cardRef = useRef<HTMLElement>(null);
   const [spotlight, setSpotlight] = useState({ x: 0, y: 0, opacity: 0 });
 
-  const defaultColor = 'rgba(136, 115, 239, 0.18)';
+  const defaultColor = 'rgba(124, 92, 252, 0.18)';
   const resolvedColor = spotlightColor ?? defaultColor;
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -51,7 +51,7 @@ export function SpotlightCard<T extends AllowedTag = 'div'>({
       className={cn(
         'relative overflow-hidden rounded-xl border border-[var(--border)]',
         'bg-[var(--card)] transition-[border-color,box-shadow] duration-300',
-        'hover:border-[rgba(136,115,239,0.35)]',
+        'hover:border-[rgba(124, 92, 252,0.35)]',
         className
       )}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

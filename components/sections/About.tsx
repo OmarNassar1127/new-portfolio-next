@@ -9,12 +9,12 @@ import { cn } from "@/lib/utils";
 /* ─── Content data ────────────────────────────────────────────────────── */
 const paragraphs = {
   en: [
-    "I'm an AI Engineer in Amsterdam who believes most AI demos are vaporware — I build the ones that aren't. At Vloto B.V., I've shipped on-premise AI solutions and automations that serve both the company and our users — our WhatsApp agent alone resolves over 55% of all customer conversations autonomously. On the side, I co-founded Virelio to bring that same production-grade AI to other companies.",
-    "Multi-agent orchestration, RAG architectures, WhatsApp agents, voice AI — if it involves LLMs and needs to work in production, that's my playground.",
+    "I started as a frontend developer in 2017 and moved into backend a few years later. The stack runs wide: React, Next.js, Laravel, Node, Python, plus the infrastructure to actually run it in production. The AI work came after that. Multi-agent systems, RAG platforms, on-premise LLMs. It's the latest chapter, built on top of the foundation, not stacked next to it.",
+    "At Vloto B.V., I build the AI systems and the backend they run on. The customer-facing WhatsApp agent resolves over 55% of conversations autonomously. There's voice AI for inbound calls, fraud-prevention models, on-premise LLM workflows running quietly inside the company, plus the booking algorithms, internal dashboards, and APIs underneath. With Virelio, I bring the same full-stack-to-AI approach to other companies.",
   ],
   nl: [
-    "Ik ben een AI Engineer in Amsterdam die gelooft dat de meeste AI-demo's lucht zijn — ik bouw de exemplaren die dat niet zijn. Bij Vloto B.V. heb ik on-premise AI-oplossingen en automatiseringen opgeleverd die zowel het bedrijf als onze gebruikers dienen — onze WhatsApp-agent lost inmiddels meer dan 55% van alle klantgesprekken zelfstandig op. Daarnaast heb ik Virelio mede-opgericht om diezelfde productie-AI naar andere bedrijven te brengen.",
-    "Multi-agent orchestratie, RAG-architecturen, WhatsApp-agents, voice AI — als het LLM's omvat en in productie moet werken, is dat mijn speeltuin.",
+    "Ik ben in 2017 begonnen als frontend developer en ging een paar jaar later over op backend. De stack is breed: React, Next.js, Laravel, Node, Python, plus de infrastructuur om het ook echt in productie te draaien. Het AI-werk kwam daarna. Multi-agent systemen, RAG-platformen, on-premise LLM's. Het is het nieuwste hoofdstuk, gebouwd op het fundament, niet ernaast geplakt.",
+    "Bij Vloto B.V. bouw ik de AI-systemen en de backend waarop ze draaien. De klantgerichte WhatsApp-agent lost meer dan 55% van de gesprekken autonoom op. Er is voice AI voor inkomende telefoontjes, fraudepreventie-modellen, on-premise LLM-workflows die intern stil hun werk doen, plus de boekingsalgoritmes, interne dashboards en API's eronder. Met Virelio breng ik diezelfde full-stack-tot-AI aanpak naar andere bedrijven.",
   ],
 };
 
@@ -36,18 +36,29 @@ const socialProof = [
   },
 ];
 
-/* ─── Skill chips ─────────────────────────────────────────────────────── */
+/* ─── Skill chips — balanced full-stack + AI ────────────────────────── */
 const highlights = [
-  { icon: "ri-cpu-line", text: { en: "On-premise AI", nl: "On-premise AI" } },
+  {
+    icon: "ri-stack-line",
+    text: { en: "Full-Stack Development", nl: "Full-Stack Ontwikkeling" },
+  },
+  {
+    icon: "ri-reactjs-line",
+    text: { en: "React / Next.js", nl: "React / Next.js" },
+  },
+  {
+    icon: "ri-server-line",
+    text: { en: "Laravel · Node · FastAPI", nl: "Laravel · Node · FastAPI" },
+  },
   {
     icon: "ri-team-line",
-    text: { en: "Multi-agent Systems", nl: "Multi-agent Systemen" },
+    text: { en: "Multi-Agent Systems", nl: "Multi-agent Systemen" },
   },
   {
     icon: "ri-database-2-line",
     text: { en: "RAG Architectures", nl: "RAG Architecturen" },
   },
-  { icon: "ri-chat-voice-line", text: { en: "Voice AI", nl: "Voice AI" } },
+  { icon: "ri-cpu-line", text: { en: "On-Premise LLMs", nl: "On-premise LLM's" } },
 ];
 
 /* ─── Shared animation presets — NO isMobile conditionals ────────────── */
@@ -81,7 +92,7 @@ export default function About() {
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 55% 60% at 0% 50%, rgba(136,115,239,0.06) 0%, transparent 60%)",
+            "radial-gradient(ellipse 55% 60% at 0% 50%, rgba(124, 92, 252,0.06) 0%, transparent 60%)",
         }}
       />
 
@@ -89,16 +100,17 @@ export default function About() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* ── Left column: text ──────────────────────────────────────── */}
           <motion.div {...fadeLeft} className="flex flex-col gap-6 min-w-0">
-            {/* Label */}
-            <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">
-              {t("About", "Over Mij")}
-            </p>
+            {/* Editorial eyebrow */}
+            <span className="eyebrow">
+              <span className="text-[var(--accent)]">·</span>
+              <span>{t("About / Profile", "Over / Profiel")}</span>
+            </span>
 
-            {/* Heading — capped at text-4xl on mobile to prevent overflow */}
-            <h2 className="text-2xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-3xl lg:text-5xl">
-              {t("Building AI that ", "AI bouwen die ")}
-              <span className="gradient-text-static">
-                {t("actually works.", "echt werkt.")}
+            {/* Heading — full-stack + AI balance */}
+            <h2 className="text-3xl font-semibold leading-[1.05] tracking-tight text-[var(--text)] sm:text-4xl lg:text-5xl">
+              {t("Builds the full stack. ", "Bouwt de hele stack. ")}
+              <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
+                {t("Ships the AI.", "Levert de AI.")}
               </span>
             </h2>
 
@@ -122,7 +134,7 @@ export default function About() {
                   className={cn(
                     "inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5",
                     "text-xs font-medium text-[var(--text-muted)] transition-all duration-200",
-                    "hover:border-[rgba(136,115,239,0.35)] hover:text-[var(--primary)]",
+                    "hover:border-[rgba(124, 92, 252,0.35)] hover:text-[var(--primary)]",
                   )}
                 >
                   <i className={cn(h.icon, "text-sm text-[var(--primary)]")} />
@@ -168,7 +180,7 @@ export default function About() {
                 className="absolute -inset-3 rounded-3xl opacity-50 blur-2xl"
                 style={{
                   background:
-                    "radial-gradient(ellipse at center, rgba(136,115,239,0.25) 0%, rgba(0,212,255,0.1) 60%, transparent 100%)",
+                    "radial-gradient(ellipse at center, rgba(124, 92, 252,0.25) 0%, rgba(245, 121, 59,0.1) 60%, transparent 100%)",
                 }}
                 aria-hidden="true"
               />
@@ -178,7 +190,7 @@ export default function About() {
                 className={cn(
                   "relative overflow-hidden rounded-3xl",
                   "h-[340px] w-full sm:h-[460px] sm:w-[360px]",
-                  "border border-[rgba(136,115,239,0.25)]",
+                  "border border-[rgba(124, 92, 252,0.25)]",
                   "shadow-[0_32px_80px_-16px_rgba(0,0,0,0.4)]",
                 )}
               >

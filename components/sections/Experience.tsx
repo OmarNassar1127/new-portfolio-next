@@ -1,217 +1,216 @@
 'use client';
 
-// motion removed — CSS animations only
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/useLanguage';
-import { useTheme } from '@/hooks/useTheme';
 import { useSectionInView } from '@/hooks/useSectionInView';
 import { experienceData } from '@/data/experience';
 
 export default function Experience() {
   const { t } = useLanguage();
-  const { isDarkMode } = useTheme();
 
+  // Newest first — career ledger reads top → down through time
   const reversed = [...experienceData].reverse();
-  const timelineRef = useSectionInView<HTMLDivElement>();
+  const timelineRef = useSectionInView<HTMLOListElement>();
 
   return (
-    <section id="journey" className="relative py-20 md:py-28 overflow-hidden bg-[var(--bg)]">
-      {/* Background blobs */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-72 h-72 bg-[var(--primary)]/8 rounded-full blur-3xl blob" />
-        <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-[var(--accent-cyan)]/6 rounded-full blur-3xl blob" style={{ animationDelay: '3s' }} />
-      </div>
+    <section
+      id="journey"
+      className="relative overflow-hidden bg-[var(--bg)] px-4 py-20 sm:px-6 sm:py-28 lg:px-10"
+    >
+      {/* Subtle warm wash (no rainbow blobs) */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background:
+            'radial-gradient(ellipse 50% 40% at 50% 100%, rgba(245,121,59,0.05) 0%, transparent 70%)',
+        }}
+      />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-14 md:mb-18"
-        >
-          <span
-            className={cn(
-              'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-5',
-              isDarkMode
-                ? 'bg-[var(--primary)]/15 text-[var(--primary)]'
-                : 'bg-[var(--primary)]/8 text-[var(--primary)]'
-            )}
-          >
-            <i className="ri-map-pin-time-line" />
-            {t('Career Timeline', 'Carrière Tijdlijn')}
-          </span>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-4">
-            {t('The', 'De')}{' '}
-            <span className="gradient-text-static">{t('Journey', 'Reis')}</span>
+      <div className="relative z-10 mx-auto max-w-[1400px]">
+        {/* ════ Editorial header ════════════════════════════════════════ */}
+        <header className="mb-14 lg:mb-20">
+          <div className="mb-5 flex items-center justify-between gap-4">
+            <span className="eyebrow">
+              <span className="text-[var(--accent)]">04</span>
+              <span>{t('Career Ledger', 'Carrière Logboek')}</span>
+            </span>
+            <span className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline-flex">
+              <span>
+                {t(
+                  `${experienceData.length} entries · 2017—Present`,
+                  `${experienceData.length} regels · 2017—Heden`,
+                )}
+              </span>
+              <span className="opacity-50">·</span>
+              <span className="flex items-center gap-1.5 text-[var(--signal-emerald)]">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--signal-emerald)] opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--signal-emerald)]" />
+                </span>
+                {t('Open to full-time', 'Open voor full-time')}
+              </span>
+            </span>
+          </div>
+          <h2 className="max-w-5xl text-4xl font-semibold leading-[1.08] tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
+            {t('From ', 'Van ')}
+            <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
+              {t('student', 'student')}
+            </span>
+            {t('. To engineer at ', '. Tot engineer bij ')}
+            <a
+              href="https://vloto.nl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="display-serif-italic font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-[6px] transition-colors hover:decoration-[var(--accent)]"
+            >
+              Vloto
+            </a>
+            {t('. To founder of ', '. Tot oprichter van ')}
+            <a
+              href="https://virelio.nl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="display-serif-italic font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-[6px] transition-colors hover:decoration-[var(--accent)]"
+            >
+              Virelio
+            </a>
+            {t('. The journey, by year.', '. De reis, per jaar.')}
           </h2>
-
-          <p className="text-[var(--text-muted)] max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-            {t(
-              'From code student to AI co-founder — building systems that scale.',
-              'Van code-student tot AI mede-oprichter — systemen bouwen die schalen.'
-            )}
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
+            <span className="display-serif-italic text-[var(--text)]">
+              {t('Open to the right full-time role.', 'Open voor de juiste full-time rol.')}
+            </span>
           </p>
-        </div>
+          <span className="mt-6 block h-px w-full bg-[var(--rule)]" aria-hidden="true" />
+        </header>
 
-        {/* Timeline — single column, line on the left */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div
-            aria-hidden="true"
-            className="absolute left-6 md:left-8 top-0 bottom-0 w-px"
-            style={{
-              background: isDarkMode
-                ? 'linear-gradient(to bottom, var(--primary), var(--accent-cyan), transparent)'
-                : 'linear-gradient(to bottom, var(--primary), var(--accent-cyan), transparent)',
-              opacity: 0.3,
-            }}
-          />
+        {/* ════ Career ledger — 12-col rows ═════════════════════════════ */}
+        <ol ref={timelineRef} className="section-stagger" role="list">
+          {reversed.map((entry, idx) => {
+            const title = t(entry.title.en, entry.title.nl);
+            const company = t(entry.company.en, entry.company.nl);
+            const period = t(entry.period.en, entry.period.nl);
+            const description = t(entry.description.en, entry.description.nl);
+            const isLast = idx === reversed.length - 1;
 
-          <div ref={timelineRef} className="section-stagger space-y-8 md:space-y-10">
-            {reversed.map((entry, index) => {
-              const title = t(entry.title.en, entry.title.nl);
-              const company = t(entry.company.en, entry.company.nl);
-              const period = t(entry.period.en, entry.period.nl);
-              const description = t(entry.description.en, entry.description.nl);
-
-              return (
-                <div
-                  key={entry.id}
-                  className="relative flex gap-5 md:gap-7"
-                >
-                  {/* Node */}
-                  <div className="relative z-10 flex-shrink-0 flex flex-col items-center">
-                    <div
-                      className={cn(
-                        'w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center',
-                        'shadow-md transition-all duration-300',
-                        'bg-gradient-to-br',
-                        entry.color,
-                        entry.current && 'shadow-[0_0_20px_var(--primary-glow)]'
-                      )}
+            return (
+              <li
+                key={entry.id}
+                className={cn(
+                  'group relative grid grid-cols-1 gap-x-8 gap-y-3 py-8 transition-colors duration-300 lg:grid-cols-12 lg:gap-x-10 lg:py-12',
+                  !isLast && 'border-b border-[var(--rule)]',
+                  entry.current &&
+                    'before:absolute before:left-[-1rem] before:top-8 before:h-12 before:w-0.5 before:bg-[var(--accent)] lg:before:left-[-1.25rem] lg:before:top-12',
+                )}
+              >
+                {/* ═══ COL 1-3: Year stamp ════════════════════════════ */}
+                <div className="lg:col-span-3">
+                  <div className="flex items-baseline gap-3 lg:flex-col lg:items-start lg:gap-1">
+                    <span
+                      className="display-serif font-semibold leading-none text-[var(--text)]"
+                      style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', letterSpacing: '-0.03em' }}
                     >
-                      <i className={cn(entry.icon, 'text-xl text-white drop-shadow-[0_0_2px_rgba(255,255,255,0.5)]')} />
-                    </div>
+                      {period.split('-')[0].replace('Present', 'Now').replace('Nu', 'Nu').trim()}
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                      —{' '}
+                      {period.includes('-')
+                        ? period.split('-')[1].trim()
+                        : t('single year', 'jaar')}
+                    </span>
                   </div>
 
-                  {/* Card */}
-                  <div
-                    className={cn(
-                      'flex-1 rounded-2xl border p-5 md:p-6 transition-all duration-300',
-                      isDarkMode
-                        ? 'bg-[var(--card)] border-[var(--border)] hover:border-[var(--primary)]/30'
-                        : 'bg-white border-gray-200 hover:border-[var(--primary)]/30 hover:shadow-lg',
-                      entry.current && 'ring-1 ring-[var(--primary)]/20'
-                    )}
-                  >
-                    {/* Top accent */}
-                    <div className={cn('h-0.5 w-16 rounded-full bg-gradient-to-r mb-4', entry.color)} />
+                  {entry.current && (
+                    <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--signal-emerald)]">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--signal-emerald)] opacity-60" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--signal-emerald)]" />
+                      </span>
+                      {t('On duty', 'Actief')}
+                    </span>
+                  )}
+                </div>
 
-                    {/* Header */}
-                    <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-                      <div>
-                        <h3 className="text-base md:text-lg font-bold text-[var(--text)]">
-                          {title}
-                        </h3>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-xs text-[var(--text-muted)]">{entry.subtitle}</span>
-                          <span className="text-[var(--text-muted)] opacity-40">·</span>
-                          {entry.companyUrl ? (
-                            <a
-                              href={entry.companyUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-xs font-semibold text-[var(--primary)] hover:text-[var(--accent-cyan)] transition-colors inline-flex items-center gap-1"
-                            >
-                              {company}
-                              <i className="ri-external-link-line text-[10px] opacity-60" />
-                            </a>
-                          ) : (
-                            <span className="text-xs font-semibold text-[var(--primary)]">{company}</span>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 shrink-0">
-                        <span
-                          className={cn(
-                            'px-2.5 py-1 rounded-full text-[10px] font-semibold',
-                            isDarkMode
-                              ? 'bg-[var(--card-hover)] text-[var(--text-muted)]'
-                              : 'bg-gray-100 text-gray-500'
-                          )}
-                        >
-                          {period}
-                        </span>
-                        {entry.current && (
-                          <span
-                            className={cn(
-                              'flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold',
-                              isDarkMode
-                                ? 'bg-green-500/15 text-green-400'
-                                : 'bg-green-100 text-green-700'
-                            )}
+                {/* ═══ COL 4-12: Entry body ═══════════════════════════ */}
+                <div className="flex flex-col gap-4 lg:col-span-9">
+                  {/* Title row */}
+                  <div className="flex flex-col gap-1.5">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
+                      {entry.subtitle}
+                    </span>
+                    <h3 className="text-2xl font-semibold leading-tight tracking-tight text-[var(--text)] sm:text-3xl lg:text-[34px]">
+                      {title}
+                      <span className="text-[var(--text-muted)]">
+                        {' '}·{' '}
+                        {entry.companyUrl ? (
+                          <a
+                            href={entry.companyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="display-serif-italic font-medium text-[var(--accent-deep)] underline decoration-[var(--accent)]/30 underline-offset-4 transition-colors duration-200 hover:decoration-[var(--accent)]"
                           >
-                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full pulse-dot" />
-                            {t('Current', 'Huidig')}
+                            {company}
+                          </a>
+                        ) : (
+                          <span className="display-serif-italic font-medium text-[var(--text)]">
+                            {company}
                           </span>
                         )}
-                      </div>
-                    </div>
+                      </span>
+                    </h3>
+                  </div>
 
-                    {/* Description */}
-                    <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4 line-clamp-3">
-                      {description}
-                    </p>
+                  {/* Description */}
+                  <p className="max-w-2xl text-[15px] leading-relaxed text-[var(--text-muted)] sm:text-base">
+                    {description}
+                  </p>
 
-                    {/* Tech tags */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {entry.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className={cn(
-                            'px-2 py-0.5 rounded-md text-[10px] font-semibold',
-                            isDarkMode
-                              ? 'bg-[var(--primary)]/15 text-[var(--primary)]'
-                              : 'bg-[var(--primary)]/8 text-[var(--primary)]'
-                          )}
-                        >
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 pt-1">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
+                      {t('Stack', 'Stack')} ·
+                    </span>
+                    {entry.technologies.map((tech, i) => (
+                      <span key={tech} className="flex items-center gap-2">
+                        <span className="font-mono text-[11px] font-medium text-[var(--text)]">
                           {tech}
                         </span>
-                      ))}
-                    </div>
+                        {i < entry.technologies.length - 1 && (
+                          <span className="font-mono text-[10px] text-[var(--text-subtle)]">·</span>
+                        )}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
+              </li>
+            );
+          })}
+        </ol>
 
-        {/* Stats strip */}
-        <div className="mt-14 md:mt-18">
-          <div
-            className={cn(
-              'rounded-2xl border px-6 py-8 md:py-10',
-              isDarkMode
-                ? 'bg-gradient-to-br from-[var(--primary)]/8 to-[var(--accent-cyan)]/5 border-[var(--border)]'
-                : 'bg-gradient-to-br from-[var(--primary)]/4 to-[var(--accent-cyan)]/3 border-gray-200'
-            )}
-          >
-            <div className="grid grid-cols-3 gap-4 md:gap-8 text-center">
-              {[
-                { icon: 'ri-time-line', gradient: 'from-[var(--primary)] to-purple-600', value: '7+', label: t('Years in Tech', 'Jaar in Tech') },
-                { icon: 'ri-building-2-line', gradient: 'from-blue-500 to-[var(--accent-cyan)]', value: '3', label: t('Companies', 'Bedrijven') },
-                { icon: 'ri-rocket-line', gradient: 'from-green-500 to-emerald-500', value: '50+', label: t('Projects Shipped', 'Projecten Opgeleverd') },
-              ].map((stat) => (
-                <div key={stat.label} className="space-y-2">
-                  <div className={cn('w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl flex items-center justify-center bg-gradient-to-br', stat.gradient)}>
-                    <i className={cn(stat.icon, 'text-base md:text-lg text-white')} />
-                  </div>
-                  <p className="text-xl md:text-3xl font-bold text-[var(--text)]">{stat.value}</p>
-                  <p className="text-xs md:text-sm text-[var(--text-muted)]">{stat.label}</p>
-                </div>
-              ))}
+        {/* ════ Editorial footer summary — centered ════════════════════ */}
+        <footer className="mt-16 grid grid-cols-3 border-t border-[var(--rule)] pt-10">
+          {[
+            { value: '7+', label: t('Years in tech', 'Jaar in tech') },
+            { value: '3', label: t('Companies built at', 'Bedrijven') },
+            { value: '50+', label: t('Projects shipped', 'Projecten opgeleverd') },
+          ].map((stat, i) => (
+            <div
+              key={stat.label}
+              className={cn(
+                'flex flex-col items-center gap-1.5 text-center',
+                i > 0 && 'border-l border-[var(--rule)]',
+              )}
+            >
+              <span className="display-serif text-4xl font-semibold leading-none text-[var(--text)] sm:text-5xl lg:text-6xl">
+                {stat.value}
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                {stat.label}
+              </span>
             </div>
-          </div>
-        </div>
+          ))}
+        </footer>
       </div>
     </section>
   );
