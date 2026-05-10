@@ -136,7 +136,7 @@ export default function Hero() {
           </p>
 
           {/* Quick proof — stacks on mobile, inline on sm+ */}
-          <div className="flex flex-col items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-subtle)] sm:flex-row sm:gap-0">
+          <div className="flex flex-col items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-subtle)] sm:flex-row sm:flex-wrap sm:justify-center sm:gap-0">
             {lang === 'en' ? (
               <>
                 <span className="whitespace-nowrap">
@@ -145,6 +145,10 @@ export default function Hero() {
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">
                   <span className="text-[var(--text)]">50+</span> systems shipped
+                </span>
+                <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
+                <span className="whitespace-nowrap">
+                  AI <span className="opacity-50">+</span> full-stack
                 </span>
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">
@@ -159,6 +163,10 @@ export default function Hero() {
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">
                   <span className="text-[var(--text)]">50+</span> systemen
+                </span>
+                <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
+                <span className="whitespace-nowrap">
+                  AI <span className="opacity-50">+</span> full-stack
                 </span>
                 <span className="hidden opacity-50 sm:mx-2 sm:inline">·</span>
                 <span className="whitespace-nowrap">
