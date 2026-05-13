@@ -25,6 +25,7 @@ const SECTION_IDS = [
   'about-me',
   'journey',
   'certifications',
+  'tools',
   'contact',
 ] as const;
 
@@ -53,6 +54,7 @@ export default function Header() {
     { id: 'about-me',       href: '#about-me',       label: t('About',   'Over'),    icon: 'ri-user-line' },
     { id: 'journey',        href: '#journey',        label: t('Journey', 'Reis'),    icon: 'ri-road-map-line' },
     { id: 'certifications', href: '#certifications', label: t('Certs',   'Certs'),   icon: 'ri-award-line' },
+    { id: 'tools',          href: '#tools',          label: t('Tools',   'Tools'),   icon: 'ri-terminal-box-line' },
     { id: 'contact',        href: '#contact',        label: t('Contact', 'Contact'), icon: 'ri-mail-line' },
   ];
 
@@ -345,7 +347,10 @@ export default function Header() {
           className="flex-1 overflow-y-auto px-5 py-5 pb-32"
         >
           <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
-            {t('Sections · 07', 'Secties · 07')}
+            {t(
+              `Sections · ${String(navItems.length).padStart(2, '0')}`,
+              `Secties · ${String(navItems.length).padStart(2, '0')}`,
+            )}
           </p>
           <ul role="list">
             {navItems.map((item, i) => {

@@ -4,6 +4,7 @@ import About from '@/components/sections/About';
 import Teaching from '@/components/sections/Teaching';
 import Experience from '@/components/sections/Experience';
 import Certifications from '@/components/sections/Certifications';
+import OpenSource from '@/components/sections/OpenSource';
 import Contact from '@/components/sections/Contact';
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Teaching />
       <Experience />
       <Certifications />
+      <OpenSource />
       <Contact />
     </>
   );
