@@ -26,7 +26,7 @@ export function ScrollProgress({ className }: { className?: string }) {
       )}
       style={{
         scaleX,
-        background: 'linear-gradient(to right, #a855f7, #06b6d4, #ec4899)',
+        background: 'var(--accent-deep)',
       }}
     />
   );

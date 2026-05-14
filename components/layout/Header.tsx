@@ -149,9 +149,8 @@ export default function Header() {
   const progressDeg = (scrollProgress / 100) * 360;
   const conicGradient = hasMounted
     ? `conic-gradient(from 0deg,
-        #7C5CFC 0deg,
-        #A89BFB ${progressDeg * 0.5}deg,
-        #F5793B ${progressDeg}deg,
+        var(--accent-deep) 0deg,
+        var(--accent-deep) ${progressDeg}deg,
         transparent ${progressDeg}deg
       )`
     : 'none';
@@ -278,7 +277,7 @@ export default function Header() {
             className="absolute bottom-0 left-0 h-[2px] transition-all duration-150 ease-out"
             style={{
               width: `${scrollProgress}%`,
-              background: 'linear-gradient(to right, var(--primary), var(--accent))',
+              background: 'var(--accent-deep)',
             }}
           />
         )}
