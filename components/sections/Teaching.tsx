@@ -3,7 +3,7 @@
 import { useLanguage } from '@/hooks/useLanguage';
 import { useSectionInView } from '@/hooks/useSectionInView';
 
-/* ─── Teaching — lead AI engineer + lessons / webinars ────────────────── */
+/* ─── Teaching — AI ownership + lessons / webinars ────────────────────── */
 export default function Teaching() {
   const { t } = useLanguage();
   const ref = useSectionInView<HTMLDivElement>();
@@ -28,7 +28,7 @@ export default function Teaching() {
         <div className="mb-10 flex items-center justify-between gap-4">
           <span className="eyebrow">
             <span className="text-[var(--accent)]">·</span>
-            <span>{t('Teaching · Lead AI · Workshops', 'Teaching · Lead AI · Workshops')}</span>
+            <span>{t('Teaching · AI · Workshops', 'Teaching · AI · Workshops')}</span>
           </span>
           <span className="hidden font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline">
             {t('Practice over slides', 'Praktijk boven slides')}
@@ -47,15 +47,12 @@ export default function Teaching() {
 
         {/* Body — two-column on lg, stacked on mobile */}
         <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 lg:grid-cols-12">
-          {/* Lead AI role */}
+          {/* AI ownership at Vloto */}
           <div className="lg:col-span-7">
             <p className="text-balance text-lg leading-relaxed text-[var(--text)] sm:text-xl">
-              {t(
-                "I'm the ",
-                'Ik ben de ',
-              )}
+              {t("I'm the ", 'Ik ben de ')}
               <span className="font-semibold">
-                {t('lead AI engineer', 'lead AI engineer')}
+                {t('AI go-to engineer', 'AI go-to engineer')}
               </span>
               {t(
                 ' at Vloto. The work is half engineering, half teaching: showing the team how to automate their workflows with the techniques and internal tools I build to compress dev time.',
@@ -74,7 +71,7 @@ export default function Teaching() {
           <ul className="flex flex-col divide-y divide-[var(--rule)] border-t border-[var(--rule)] lg:col-span-5 lg:border-l lg:border-t-0 lg:divide-y lg:pl-8">
             {[
               {
-                value: t('Lead AI', 'Lead AI'),
+                value: t('AI go-to', 'AI go-to'),
                 label: t('Engineer at Vloto', 'Engineer bij Vloto'),
               },
               {

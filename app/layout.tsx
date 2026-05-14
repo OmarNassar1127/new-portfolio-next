@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: "%s | Omar Nassar",
   },
   description:
-    "Omar Nassar, full-stack developer and AI engineer in Amsterdam. Seven years building production systems across React, Next.js, Laravel, Node, and Python, plus LangChain, CrewAI, RAG and on-premise LLMs. Built fraud-prevention systems recovering €2M+, WhatsApp AI agents resolving 55% of customer conversations, voice AI assistants, AI customer support platforms, medical compliance automation, and enterprise multi-agent workflows. 50+ systems shipped, 200+ automations, 80,000+ users served. Lead AI engineer at Vloto, founder of Virelio. Available for full-time engineering and AI roles.",
+    "Omar Nassar, full-stack developer and AI engineer in Amsterdam. Seven years building production systems across React, Next.js, Laravel, Node, and Python, plus LangChain, CrewAI, RAG and on-premise LLMs. Built fraud-prevention systems recovering €2M+, WhatsApp AI agents resolving 55% of customer conversations, voice AI assistants, AI customer support platforms, medical compliance automation, and enterprise multi-agent workflows. 50+ systems shipped, 200+ automations, 80,000+ users served. AI & Backend Engineer at Vloto, founder of Virelio. Available for full-time engineering and AI roles.",
   keywords: [
     // Identity
     "Omar Nassar",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     "AI engineer Amsterdam",
     "AI engineer Netherlands",
     "AI engineer Europe",
-    "lead AI engineer",
+    "AI & Backend Engineer",
     "AI agent developer",
     "AI agent engineer",
     "AI systems builder",
@@ -177,7 +177,7 @@ export const metadata: Metadata = {
     url: "https://omardev.xyz/",
     title: "Omar Nassar | Full-Stack Engineer & AI Systems Builder, Amsterdam",
     description:
-      "Full-stack developer and AI engineer in Amsterdam. Builds production AI agents, multi-agent workflows, RAG platforms, on-premise LLMs, fraud-prevention systems (€2M+ recovered), WhatsApp AI agents, voice AI, and the React, Next.js, Laravel, Node, Python stack underneath. 50+ systems shipped, 200+ automations, 80,000+ users served. Lead AI engineer at Vloto, founder of Virelio. Available for full-time roles.",
+      "Full-stack developer and AI engineer in Amsterdam. Builds production AI agents, multi-agent workflows, RAG platforms, on-premise LLMs, fraud-prevention systems (€2M+ recovered), WhatsApp AI agents, voice AI, and the React, Next.js, Laravel, Node, Python stack underneath. 50+ systems shipped, 200+ automations, 80,000+ users served. AI & Backend Engineer at Vloto, founder of Virelio. Available for full-time roles.",
     images: [
       {
         url: "/og-image.png",
@@ -194,7 +194,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Omar Nassar | Full-Stack + AI Systems, Amsterdam",
     description:
-      "Full-stack developer + AI engineer in Amsterdam. Production AI agents, fraud prevention, WhatsApp AI, voice AI, on-premise LLMs, RAG. Stack: React, Laravel, Node, Python, LangChain, CrewAI. 50+ shipped, 80K+ users. Lead AI @ Vloto, founder of Virelio.",
+      "Full-stack developer + AI engineer in Amsterdam. Production AI agents, fraud prevention, WhatsApp AI, voice AI, on-premise LLMs, RAG. Stack: React, Laravel, Node, Python, LangChain, CrewAI. 50+ shipped, 80K+ users. AI & Backend @ Vloto, founder of Virelio.",
     images: ["/og-image.png"],
     site: "@GodelTrabuco69",
     creator: "@GodelTrabuco69",
@@ -216,7 +216,7 @@ const jsonLd = {
       image: "https://omardev.xyz/images/me2.png",
       jobTitle: "Full-Stack Engineer & AI Systems Builder",
       description:
-        "Full-stack developer and AI engineer based in Amsterdam. Seven years of production engineering across React, Next.js, TypeScript, Laravel, Node, FastAPI, and Python, plus the infrastructure to run it in production. Specializes in building autonomous AI agents and the systems they run on. Lead AI engineer at Vloto B.V., where he ships WhatsApp AI agents resolving 55%+ of customer conversations autonomously, voice AI assistants, on-premise LLM workflows, fraud-prevention systems that have recovered €2M+, and the booking algorithms, internal dashboards, and APIs underneath. Founder of Virelio, an Amsterdam AI agency delivering custom AI agent teams, RAG platforms, AI customer support systems, and medical compliance automation to other companies. Has shipped 50+ production systems serving 80,000+ users, built 200+ automation workflows, architected on-premise LLM platforms with multi-agent orchestration using CrewAI, LangGraph, Anthropic Claude, OpenAI, and Google Gemini, and runs AI lessons and webinars teaching practical agent engineering. Available for full-time engineering and AI roles.",
+        "Full-stack developer and AI engineer based in Amsterdam. Seven years of production engineering across React, Next.js, TypeScript, Laravel, Node, FastAPI, and Python, plus the infrastructure to run it in production. Specializes in building autonomous AI agents and the systems they run on. AI & Backend Engineer at Vloto B.V., where he owns the AI surface and ships WhatsApp AI agents resolving 55%+ of customer conversations autonomously, voice AI assistants, on-premise LLM workflows, fraud-prevention systems that have recovered €2M+, and the booking algorithms, internal dashboards, and APIs underneath. Founder of Virelio, an Amsterdam AI agency delivering custom AI agent teams, RAG platforms, AI customer support systems, and medical compliance automation to other companies. Has shipped 50+ production systems serving 80,000+ users, built 200+ automation workflows, architected on-premise LLM platforms with multi-agent orchestration using CrewAI, LangGraph, Anthropic Claude, OpenAI, and Google Gemini, and runs AI lessons and webinars teaching practical agent engineering. Available for full-time engineering and AI roles.",
       email: "mailto:omarnassar1127@gmail.com",
       address: {
         "@type": "PostalAddress",
@@ -395,9 +395,9 @@ const jsonLd = {
         {
           "@type": "SiteNavigationElement",
           position: 3,
-          name: "Teaching · Lead AI",
+          name: "Teaching · AI",
           description:
-            "Lead AI engineer at Vloto. AI lessons and webinars taught by building, not by slides.",
+            "The AI go-to engineer at Vloto. AI lessons and webinars taught by building, not by slides.",
           url: "https://omardev.xyz/#teaching",
         },
         {

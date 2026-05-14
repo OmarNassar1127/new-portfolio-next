@@ -223,7 +223,7 @@ export default function ProjectCaseStudy({
                   <span>{t('Role', 'Rol')}</span>
                 </span>
                 <p className="text-sm font-medium text-[var(--text)]">
-                  {t('Lead AI Engineer', 'Lead AI Engineer')}
+                  {t('AI & Backend Engineer', 'AI & Backend Engineer')}
                 </p>
                 <p className="mt-1 text-sm text-[var(--text-muted)]">
                   {t('End-to-end design + delivery', 'End-to-end ontwerp + levering')}
