@@ -68,8 +68,27 @@ const packages: PackageMeta[] = [
     ghUrl: 'https://github.com/OmarNassar1127/skillsync-team',
   },
   {
-    status: 'soon',
+    status: 'live',
     index: '02',
+    name: 'claude-pin',
+    version: 'v0.1.0',
+    downloads: null,
+    tagline: {
+      en: 'Bookmarks for the sessions worth keeping.',
+      nl: 'Bookmarks voor de sessies die je wilt bewaren.',
+    },
+    description: {
+      en: "Claude Code's --resume window is short. claude-pin keeps the sessions you care about reachable past it — pinned, noted, retrievable. Ships /pin, /unpin, /pins, /note slash commands plus the cpin CLI with an interactive picker.",
+      nl: "Het --resume venster van Claude Code is kort. claude-pin houdt de sessies waar je om geeft bereikbaar voorbij dat venster — gepind, voorzien van notities, terugvindbaar. Levert /pin, /unpin, /pins, /note slash commands plus de cpin CLI met een interactieve picker.",
+    },
+    meta: ['MIT', 'CLI', 'Plugin'],
+    install: 'npm i -g claude-pin',
+    npmUrl: 'https://www.npmjs.com/package/claude-pin',
+    ghUrl: 'https://github.com/OmarNassar1127/claude-pin',
+  },
+  {
+    status: 'soon',
+    index: '03',
     name: 'featuresync',
     version: null,
     downloads: null,
@@ -147,7 +166,7 @@ export default function OpenSource() {
         <ol
           ref={ref}
           role="list"
-          className="section-stagger grid grid-cols-1 gap-5 lg:grid-cols-2"
+          className="section-stagger grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
         >
           {packages.map((pkg) => {
             const isLive = pkg.status === 'live';
@@ -329,10 +348,10 @@ export default function OpenSource() {
             <span className="inline-flex items-center gap-2">
               <NpmIcon className="h-3.5 w-3.5 rounded-[3px]" />
               <span className="text-[var(--text)]">
-                {t('2 packages', '2 packages')}
+                {t('3 packages', '3 packages')}
               </span>
               <span className="text-[var(--text-subtle)]">
-                · {t('1 live · 1 in dev', '1 live · 1 in dev')}
+                · {t('2 live · 1 in dev', '2 live · 1 in dev')}
               </span>
             </span>
             <span aria-hidden="true" className="opacity-50">·</span>
