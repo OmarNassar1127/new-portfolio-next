@@ -71,8 +71,8 @@ const packages: PackageMeta[] = [
     status: 'live',
     index: '02',
     name: 'claude-pin',
-    version: 'v0.6.1',
-    downloads: '1k+',
+    version: 'v0.7.1',
+    downloads: '2k+',
     tagline: {
       en: 'Bookmarks for the sessions worth keeping.',
       nl: 'Bookmarks voor de sessies die je wilt bewaren.',
@@ -357,7 +357,7 @@ export default function OpenSource() {
             <span aria-hidden="true" className="opacity-50">·</span>
             <span className="inline-flex items-center gap-2">
               <i className="ri-download-2-line text-[12px] text-[var(--accent)]" />
-              <span className="text-[var(--text)]">3k+</span>
+              <span className="text-[var(--text)]">4k+</span>
               <span>{t('installs', 'installs')}</span>
             </span>
             <span aria-hidden="true" className="opacity-50">·</span>
