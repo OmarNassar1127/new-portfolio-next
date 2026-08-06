@@ -52,7 +52,7 @@ const packages: PackageMeta[] = [
     status: 'live',
     index: '01',
     name: 'skillsync-team',
-    version: 'v3.1.1',
+    version: 'v3.1.3',
     downloads: '2k+',
     tagline: {
       en: 'Git-native skill sharing for AI coding agents.',
@@ -71,7 +71,7 @@ const packages: PackageMeta[] = [
     status: 'live',
     index: '02',
     name: 'claude-pin',
-    version: 'v0.7.1',
+    version: 'v0.7.7',
     downloads: '2k+',
     tagline: {
       en: 'Bookmarks for the sessions worth keeping.',
@@ -87,8 +87,46 @@ const packages: PackageMeta[] = [
     ghUrl: 'https://github.com/OmarNassar1127/claude-pin',
   },
   {
-    status: 'soon',
+    status: 'live',
     index: '03',
+    name: 'huurradar',
+    version: 'v1.0.4',
+    downloads: '1k+',
+    tagline: {
+      en: 'The Dutch rental market, minus the refreshing.',
+      nl: 'De Nederlandse huurmarkt, zonder het eindeloze refreshen.',
+    },
+    description: {
+      en: 'Good listings are gone within hours and sit on platforms that share nothing with each other. HuurRadar watches six of them on a schedule, filters to your criteria, has AI read the income requirements buried three paragraphs down, and emails you whatever survives — while it is still available.',
+      nl: 'Goede woningen zijn binnen een paar uur weg en staan verspreid over platforms die niets met elkaar delen. HuurRadar checkt er zes volgens een schema, filtert op jouw criteria, laat AI de inkomenseisen lezen die drie alinea’s verderop staan, en mailt je wat overblijft — zolang het nog beschikbaar is.',
+    },
+    meta: ['MIT', 'Node 20+', 'CLI', 'Dashboard'],
+    install: 'npx huurradar',
+    npmUrl: 'https://www.npmjs.com/package/huurradar',
+    ghUrl: 'https://github.com/OmarNassar1127/huurradar',
+  },
+  {
+    status: 'live',
+    index: '04',
+    name: 'huischeck',
+    version: 'v1.0.3',
+    downloads: '500+',
+    tagline: {
+      en: 'Paste a listing. Get the verdict the ad won’t give you.',
+      nl: 'Plak een advertentie. Krijg het oordeel dat de makelaar niet geeft.',
+    },
+    description: {
+      en: 'Every listing looks good: wide-angle photos, copy written by an agent. HuisCheck takes one link and works out what actually decides it — the commute at 08:30 in real traffic, whether the erfpacht runs out, what the neighbourhood is like after dark, what you can borrow. Every euro figure is computed in code, never guessed by a model.',
+      nl: 'Elke woning ziet er goed uit: groothoekfoto’s, tekst geschreven door de makelaar. HuisCheck neemt één link en zoekt uit wat het echt bepaalt — de reistijd om 08:30 in de spits, of de erfpacht afloopt, hoe de buurt is na zonsondergang, wat je kunt lenen. Elk bedrag wordt in code berekend, nooit gegokt door een model.',
+    },
+    meta: ['MIT', 'Next.js', 'Node 20+', 'Dashboard'],
+    install: 'npx huischeck',
+    npmUrl: 'https://www.npmjs.com/package/huischeck',
+    ghUrl: 'https://github.com/OmarNassar1127/huischeck-nl',
+  },
+  {
+    status: 'soon',
+    index: '05',
     name: 'featuresync',
     version: null,
     downloads: null,
@@ -154,9 +192,13 @@ export default function OpenSource() {
           </h2>
 
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
+            {t('Five packages, ', 'Vijf packages, ')}
+            <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
+              {t('over 5,000 installs.', 'ruim 5.000 installs.')}
+            </span>{' '}
             {t(
-              "Built these because shared knowledge kept leaking. Engineers on the same team rebuilding the same skills, hooks, and prompts because nobody had a way to share them. So I made one. Open source on npm.",
-              "Gebouwd omdat gedeelde kennis bleef weglekken. Engineers in hetzelfde team bouwden dezelfde skills, hooks en prompts opnieuw omdat niemand een manier had om ze te delen. Dus heb ik er een gemaakt. Open source op npm.",
+              'Some came out of work, two came out of trying to find somewhere to live in the Netherlands. All open source on npm.',
+              'Sommige komen voort uit werk, twee uit het zoeken naar een woning in Nederland. Allemaal open source op npm.',
             )}
           </p>
           <span className="mt-8 block h-px w-full bg-[var(--rule)]" aria-hidden="true" />
@@ -348,16 +390,16 @@ export default function OpenSource() {
             <span className="inline-flex items-center gap-2">
               <NpmIcon className="h-3.5 w-3.5 rounded-[3px]" />
               <span className="text-[var(--text)]">
-                {t('3 packages', '3 packages')}
+                {t('5 packages', '5 packages')}
               </span>
               <span className="text-[var(--text-subtle)]">
-                · {t('2 live · 1 in dev', '2 live · 1 in dev')}
+                · {t('4 live · 1 in dev', '4 live · 1 in dev')}
               </span>
             </span>
             <span aria-hidden="true" className="opacity-50">·</span>
             <span className="inline-flex items-center gap-2">
               <i className="ri-download-2-line text-[12px] text-[var(--accent)]" />
-              <span className="text-[var(--text)]">4k+</span>
+              <span className="text-[var(--text)]">5k+</span>
               <span>{t('installs', 'installs')}</span>
             </span>
             <span aria-hidden="true" className="opacity-50">·</span>
