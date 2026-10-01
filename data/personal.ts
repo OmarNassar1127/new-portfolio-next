@@ -46,7 +46,7 @@ export const personal: Personal = {
   email: "omarnassar1127@gmail.com",
   location: "Amsterdam, Netherlands",
   github: "https://github.com/OmarNassar1127",
-  linkedin: "https://www.linkedin.com/in/omar-nassar-93a176155/",
+  linkedin: "https://www.linkedin.com/in/omar-nassar-ai/",
   twitter: "https://twitter.com/GodelTrabuco69",
   virelio: {
     site: "https://virelio.nl",

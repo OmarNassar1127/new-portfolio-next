@@ -17,7 +17,7 @@ Omar is the founder of Virelio, an Amsterdam-based AI agency that builds custom 
 - [Portfolio](https://omardev.xyz): Omar Nassar's AI agent architecture portfolio
 - [Virelio Agency](https://virelio.nl): AI agency — custom AI agent teams on demand
 - [GitHub](https://github.com/OmarNassar1127): Open source projects and AI agent code
-- [LinkedIn](https://www.linkedin.com/in/omar-nassar-93a176155/): Professional profile
+- [LinkedIn](https://www.linkedin.com/in/omar-nassar-ai/): Professional profile
 - [Slouch](https://slouch.pro): AI Posture Coach — client-side AI agent
 - Contact: omarnassar1127@gmail.com
 

@@ -316,7 +316,7 @@ const jsonLd = {
       ],
       sameAs: [
         "https://github.com/OmarNassar1127",
-        "https://www.linkedin.com/in/omar-nassar-93a176155/",
+        "https://www.linkedin.com/in/omar-nassar-ai/",
         "https://twitter.com/GodelTrabuco69",
         "https://virelio.nl",
       ],
