@@ -1,3 +1,22 @@
+export type CoverTone = "ink" | "signal" | "paper";
+
+export type CoverIcon =
+  | "ShieldCheck" | "WhatsappLogo" | "MagicWand" | "FileText" | "UsersThree" | "Headset"
+  | "Lightning" | "Database" | "Microphone" | "Browser" | "LockKey" | "PersonSimple"
+  | "House" | "Car" | "Scan" | "CalendarCheck" | "Robot" | "LinkedinLogo" | "Books"
+  | "Cube" | "SelectionAll" | "BookOpen" | "Article" | "ForkKnife" | "GameController"
+  | "GridNine" | "Ticket";
+
+export interface ProjectCover {
+  tone: CoverTone;
+  icon: CoverIcon;
+  /** Big number with a label, or a short subject when there is no number to show. */
+  stat?: { value: string; label: { en: string; nl: string } };
+  subject?: string;
+  /** Three system steps, left to right. */
+  flow: string[];
+}
+
 export interface Project {
   id: string;
   slug: string;
@@ -14,6 +33,14 @@ export interface Project {
   siteUrl: string | null;
   image: string;
   featured: boolean;
+  /** Editorial cover (components/ui/ProjectCover). Stat numbers come from the description. */
+  cover: ProjectCover;
+  /** Homepage work-stack content. Only the featured projects carry it. */
+  showcase?: {
+    client: string;
+    summary: { en: string; nl: string };
+    metrics: { value: string; label: { en: string; nl: string } }[];
+  };
 }
 
 export const projects: Project[] = [
@@ -28,7 +55,7 @@ export const projects: Project[] = [
     priority: 10,
     description: {
       en: "I kept catching myself slouching during long coding sessions and realized most posture apps either need expensive hardware or send your webcam feed to some server. Neither felt right, so I built Slouch: a posture coach that runs 100% in the browser using MediaPipe Pose. No backend, no data leaving your device, ever. The app analyzes your posture in real-time through torso metrics like shoulder width, hip alignment, and tilt. I added a smart calibration system so it adapts to your body and chair setup, time-delayed alerts to avoid false triggers from quick movements, and sensitivity presets (Easy/Medium/Hard) so you can ease into it. When you slouch too long, you get a gentle audio nudge. Built with React, TypeScript, and a glassmorphism UI. Currently live at slouch.pro with a waitlist powered by Supabase.",
-      nl: "Tijdens lange codeersessies betrapte ik mezelf er steeds op dat ik onderuitgezakt zat. De meeste houdingsapps vereisen duur hardware of sturen je webcamfeed naar een server — geen van beide leek me acceptabel. Dus bouwde ik Slouch: een houdingscoach die 100% in de browser draait via MediaPipe Pose. Geen backend, geen data die je apparaat verlaat, nooit. De app analyseert je houding real-time via romp-metrieken zoals schouderbreedte, heupuitlijning en kanteling. Ik heb een slim kalibratiesysteem toegevoegd zodat de app zich aanpast aan jouw lichaam en stoelopstelling, vertraagde meldingen om valse triggers bij snelle bewegingen te vermijden, en gevoeligheidsprofielen (Makkelijk/Gemiddeld/Moeilijk). Zit je te lang krom, dan krijg je een subtiel geluidsignaal. Gebouwd met React, TypeScript en een glassmorphism-interface. Live op slouch.pro met een wachtlijst via Supabase.",
+      nl: "Tijdens lange codeersessies betrapte ik mezelf er steeds op dat ik onderuitgezakt zat. De meeste houdingsapps vereisen duur hardware of sturen je webcamfeed naar een server. Geen van beide leek me acceptabel. Dus bouwde ik Slouch: een houdingscoach die 100% in de browser draait via MediaPipe Pose. Geen backend, geen data die je apparaat verlaat, nooit. De app analyseert je houding real-time via romp-metrieken zoals schouderbreedte, heupuitlijning en kanteling. Ik heb een slim kalibratiesysteem toegevoegd zodat de app zich aanpast aan jouw lichaam en stoelopstelling, vertraagde meldingen om valse triggers bij snelle bewegingen te vermijden, en gevoeligheidsprofielen (Makkelijk/Gemiddeld/Moeilijk). Zit je te lang krom, dan krijg je een subtiel geluidsignaal. Gebouwd met React, TypeScript en een glassmorphism-interface. Live op slouch.pro met een wachtlijst via Supabase.",
     },
     technologies: [
       "MediaPipe",
@@ -42,6 +69,18 @@ export const projects: Project[] = [
     ],
     siteUrl: "https://slouch.pro",
     image: "/images/slouch_glass.png",
+    cover: {
+      tone: "paper",
+      icon: "PersonSimple",
+      stat: {
+        value: "100%",
+        label: {
+          en: "in the browser, no server",
+          nl: "in de browser, geen server",
+        },
+      },
+      flow: ["Webcam", "MediaPipe", "Nudge"],
+    },
     featured: true,
   },
   {
@@ -53,8 +92,8 @@ export const projects: Project[] = [
     year: 2026,
     priority: 2,
     description: {
-      en: "At Vloto, our customer support line was getting flooded with repetitive phone calls. The same questions about pricing, car availability, and booking details over and over. I built an AI agent on the WhatsApp Business API that gives customers a faster channel to get answers, in both Dutch and English, matching Vloto's tone. Beyond answering FAQs from a trained knowledge base, the agent uses tool calling to perform actual actions on bookings — extending rentals, checking availability, updating details — all with backend validation layers to ensure security and data integrity. The result: phone calls dropped significantly, and the agent now autonomously resolves 55% of all WhatsApp conversations without any human involvement. The solving rate keeps climbing as the knowledge base and available tools grow.",
-      nl: "Bij Vloto stroomde onze klantenservicelijn vol met dezelfde telefoontjes — steeds weer dezelfde vragen over prijzen, beschikbaarheid en boekingsdetails. Ik bouwde een AI-agent op de WhatsApp Business API die klanten een sneller kanaal geeft voor antwoorden, in zowel Nederlands als Engels, in de toon van Vloto. Naast het beantwoorden van veelgestelde vragen via een getrainde kennisbank, gebruikt de agent tool calling om daadwerkelijk acties uit te voeren op boekingen — verlengingen regelen, beschikbaarheid checken, details bijwerken — allemaal met backend-validatie voor veiligheid en data-integriteit. Het resultaat: het aantal telefoontjes daalde aanzienlijk, en de agent lost nu 55% van alle WhatsApp-gesprekken autonoom op zonder menselijke tussenkomst. Het oplossingspercentage blijft stijgen naarmate de kennisbank en beschikbare tools groeien.",
+      en: "At Vloto, our customer support line was getting flooded with repetitive phone calls. The same questions about pricing, car availability, and booking details over and over. I built an AI agent on the WhatsApp Business API that gives customers a faster channel to get answers, in both Dutch and English, matching Vloto's tone. Beyond answering FAQs from a trained knowledge base, the agent uses tool calling to perform actual actions on bookings (extending rentals, checking availability, updating details), all with backend validation layers to ensure security and data integrity. The result: phone calls dropped significantly, and the agent now autonomously resolves 55% of all WhatsApp conversations without any human involvement. The solving rate keeps climbing as the knowledge base and available tools grow.",
+      nl: "Bij Vloto stroomde onze klantenservicelijn vol met dezelfde telefoontjes: steeds weer dezelfde vragen over prijzen, beschikbaarheid en boekingsdetails. Ik bouwde een AI-agent op de WhatsApp Business API die klanten een sneller kanaal geeft voor antwoorden, in zowel Nederlands als Engels, in de toon van Vloto. Naast het beantwoorden van veelgestelde vragen via een getrainde kennisbank, gebruikt de agent tool calling om daadwerkelijk acties uit te voeren op boekingen (verlengingen regelen, beschikbaarheid checken, details bijwerken), allemaal met backend-validatie voor veiligheid en data-integriteit. Het resultaat: het aantal telefoontjes daalde aanzienlijk, en de agent lost nu 55% van alle WhatsApp-gesprekken autonoom op zonder menselijke tussenkomst. Het oplossingspercentage blijft stijgen naarmate de kennisbank en beschikbare tools groeien.",
     },
     technologies: [
       "WhatsApp Business API",
@@ -68,7 +107,24 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/whatsapp_agent.png",
+    cover: {
+      tone: "signal",
+      icon: "WhatsappLogo",
+      subject: "Agent",
+      flow: ["WhatsApp", "GPT-4 agent", "Booking API"],
+    },
     featured: true,
+    showcase: {
+      client: "Vloto",
+      summary: {
+        en: "A WhatsApp agent that answers in Dutch and English and changes real bookings through validated tool calls.",
+        nl: "Een WhatsApp-agent die in het Nederlands en Engels antwoordt en echte boekingen aanpast via gevalideerde tool calls.",
+      },
+      metrics: [
+        { value: "55%", label: { en: "Conversations resolved without a human", nl: "Gesprekken opgelost zonder mens" } },
+        { value: "80K+", label: { en: "Customers on the channel", nl: "Klanten op het kanaal" } },
+      ],
+    },
   },
   {
     id: "ai-01",
@@ -91,6 +147,12 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/ai_creative.png",
+    cover: {
+      tone: "paper",
+      icon: "MagicWand",
+      subject: "Diffusion",
+      flow: ["Prompt", "Stable Diffusion", "Upscale"],
+    },
     featured: false,
   },
   {
@@ -103,7 +165,7 @@ export const projects: Project[] = [
     priority: 8,
     description: {
       en: "The company had millions of internal documents spread across 10+ data sources. Employees were wasting hours searching for information that existed somewhere but was impossible to find. I built a RAG platform that indexes all of it with a scalable ingestion pipeline handling 10k+ PDFs, using Qdrant for vector storage and LangChain for retrieval orchestration. The key decision was keeping everything on-premise with Llama 3 to maintain data sovereignty. It delivers context-aware answers in under 1 second with 95% retrieval accuracy. Started as a prototype for one team, now runs organization-wide.",
-      nl: "Het bedrijf had miljoenen interne documenten verspreid over 10+ databronnen — medewerkers verspilden uren aan zoeken naar informatie die ergens bestond maar onvindbaar was. Ik bouwde een RAG-platform dat alles indexeert via een schaalbare ingestie-pipeline die 10k+ PDF's verwerkt, met Qdrant voor vectoropslag en LangChain voor retrieval-orkestratie. De cruciale beslissing was alles on-premise te houden met Llama 3 om datasouvereiniteit te waarborgen. Het levert contextbewuste antwoorden in onder één seconde met 95% retrieval-nauwkeurigheid. Begon als prototype voor één team, draait nu organisatiebreed.",
+      nl: "Het bedrijf had miljoenen interne documenten verspreid over 10+ databronnen. Medewerkers verspilden uren aan zoeken naar informatie die ergens bestond maar onvindbaar was. Ik bouwde een RAG-platform dat alles indexeert via een schaalbare ingestie-pipeline die 10k+ PDF's verwerkt, met Qdrant voor vectoropslag en LangChain voor retrieval-orkestratie. De cruciale beslissing was alles on-premise te houden met Llama 3 om datasouvereiniteit te waarborgen. Het levert contextbewuste antwoorden in onder één seconde met 95% retrieval-nauwkeurigheid. Begon als prototype voor één team, draait nu organisatiebreed.",
     },
     technologies: [
       "Llama 3",
@@ -119,6 +181,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/ai_server.png",
+    cover: {
+      tone: "paper",
+      icon: "Database",
+      stat: {
+        value: "95%",
+        label: {
+          en: "retrieval accuracy",
+          nl: "retrieval-nauwkeurigheid",
+        },
+      },
+      flow: ["10k+ PDFs", "Qdrant", "Llama 3"],
+    },
     featured: true,
   },
   {
@@ -131,11 +205,23 @@ export const projects: Project[] = [
     priority: 4,
     description: {
       en: "I wanted to see how far I could push autonomous AI. Could a crew of agents handle a full project without me touching it? I built a system with 6 specialized agents (research, code, review) orchestrated through CrewAI and LangGraph. Each agent has its own role, tools, and memory. They collaborate, pass context, and self-correct. By parallelizing the workflows, total project execution time dropped by 80%. It's my sandbox for testing what agentic AI can actually do end-to-end.",
-      nl: "Ik wilde zien hoe ver ik autonome AI kon pushen — zou een team van agents een volledig project kunnen afhandelen zonder dat ik er iets aan hoef te doen? Ik bouwde een systeem met 6 gespecialiseerde agents (onderzoek, code, review) georkestreerd via CrewAI en LangGraph. Elke agent heeft zijn eigen rol, tools en geheugen. Ze werken samen, geven context door en corrigeren zichzelf. Door de workflows te parallelliseren daalde de totale projectuitvoeringstijd met 80%. Het is mijn sandbox voor het testen van wat agentische AI end-to-end écht kan.",
+      nl: "Ik wilde zien hoe ver ik autonome AI kon pushen: zou een team van agents een volledig project kunnen afhandelen zonder dat ik er iets aan hoef te doen? Ik bouwde een systeem met 6 gespecialiseerde agents (onderzoek, code, review) georkestreerd via CrewAI en LangGraph. Elke agent heeft zijn eigen rol, tools en geheugen. Ze werken samen, geven context door en corrigeren zichzelf. Door de workflows te parallelliseren daalde de totale projectuitvoeringstijd met 80%. Het is mijn sandbox voor het testen van wat agentische AI end-to-end écht kan.",
     },
     technologies: ["CrewAI", "LangGraph", "Claude 3.5", "Python", "Agents"],
     siteUrl: null,
     image: "/images/ai_agents.png",
+    cover: {
+      tone: "ink",
+      icon: "UsersThree",
+      stat: {
+        value: "80%",
+        label: {
+          en: "less execution time",
+          nl: "kortere doorlooptijd",
+        },
+      },
+      flow: ["Research", "Code", "Review"],
+    },
     featured: false,
   },
   {
@@ -153,6 +239,18 @@ export const projects: Project[] = [
     technologies: ["GPT-4", "Outlook Graph", "Python", "Azure", "NLP"],
     siteUrl: null,
     image: "/images/ai_comm.png",
+    cover: {
+      tone: "signal",
+      icon: "CalendarCheck",
+      stat: {
+        value: "90%",
+        label: {
+          en: "of complex scheduling handled",
+          nl: "van complexe planning afgehandeld",
+        },
+      },
+      flow: ["Inbox", "GPT-4", "Calendar"],
+    },
     featured: false,
   },
   {
@@ -176,6 +274,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/ai_linkedin.png",
+    cover: {
+      tone: "ink",
+      icon: "LinkedinLogo",
+      stat: {
+        value: "150+",
+        label: {
+          en: "relevant connections per run",
+          nl: "relevante connecties per run",
+        },
+      },
+      flow: ["SerpAPI", "Gemini", "Puppeteer"],
+    },
     featured: false,
   },
   {
@@ -187,8 +297,8 @@ export const projects: Project[] = [
     year: 2024,
     priority: 8,
     description: {
-      en: "Manual note-taking in meetings was eating up hours every week, and important action items kept falling through the cracks. I built a meeting intelligence platform that captures live audio via WebRTC, transcribes in real-time, summarizes key points, and automatically assigns action items with calendar integration. For sensitive environments, there's a fully offline mode using Whisper.cpp and local LLMs — no data leaves the room. Even in noisy conditions it hits 85% accuracy. Teams using it save an average of 5 hours per week on meeting admin.",
-      nl: "Handmatig notities maken in vergaderingen kostte wekelijks uren, en belangrijke actiepunten bleven door de mazen vallen. Ik bouwde een meeting intelligence platform dat live audio opneemt via WebRTC, real-time transcribeert, kernpunten samenvat en actiepunten automatisch toewijst met agenda-integratie. Voor gevoelige omgevingen is er een volledig offline modus via Whisper.cpp en lokale LLMs — geen data verlaat de ruimte. Zelfs in lawaaierige omstandigheden haalt het 85% nauwkeurigheid. Teams die het gebruiken besparen gemiddeld 5 uur per week aan vergaderadministratie.",
+      en: "Manual note-taking in meetings was eating up hours every week, and important action items kept falling through the cracks. I built a meeting intelligence platform that captures live audio via WebRTC, transcribes in real-time, summarizes key points, and automatically assigns action items with calendar integration. For sensitive environments, there's a fully offline mode using Whisper.cpp and local LLMs, so no data leaves the room. Even in noisy conditions it hits 85% accuracy. Teams using it save an average of 5 hours per week on meeting admin.",
+      nl: "Handmatig notities maken in vergaderingen kostte wekelijks uren, en belangrijke actiepunten bleven door de mazen vallen. Ik bouwde een meeting intelligence platform dat live audio opneemt via WebRTC, real-time transcribeert, kernpunten samenvat en actiepunten automatisch toewijst met agenda-integratie. Voor gevoelige omgevingen is er een volledig offline modus via Whisper.cpp en lokale LLMs, dus geen data verlaat de ruimte. Zelfs in lawaaierige omstandigheden haalt het 85% nauwkeurigheid. Teams die het gebruiken besparen gemiddeld 5 uur per week aan vergaderadministratie.",
     },
     technologies: [
       "Whisper",
@@ -202,6 +312,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/ai_notulist.png",
+    cover: {
+      tone: "ink",
+      icon: "Microphone",
+      stat: {
+        value: "5 h",
+        label: {
+          en: "saved per team, every week",
+          nl: "bespaard per team, elke week",
+        },
+      },
+      flow: ["WebRTC", "Whisper", "Action items"],
+    },
     featured: false,
   },
   {
@@ -214,11 +336,23 @@ export const projects: Project[] = [
     priority: 9,
     description: {
       en: "Clients at Virelio would describe what they wanted for their website in a few sentences. I wanted to turn that into a working site without the usual back-and-forth. I built a pipeline that takes a simple customer brief, generates copy with GPT-4, creates images with DALL·E 3, and deploys a full Next.js site in under 10 minutes. It handles design tokens, layout generation, and asset creation automatically. 5+ client sites have been built and deployed through this pipeline so far.",
-      nl: "Klanten bij Virelio beschreven in een paar zinnen wat ze voor hun website wilden — ik wilde dat omzetten naar een werkende site zonder het gebruikelijke heen-en-weer. Ik bouwde een pipeline die een eenvoudige klantbrief aanneemt, tekst genereert met GPT-4, afbeeldingen maakt met DALL·E 3 en een complete Next.js site deployt in minder dan 10 minuten. Het regelt design tokens, layoutgeneratie en asset-aanmaak automatisch. Tot nu toe zijn er 5+ klantsites via deze pipeline gebouwd en live gezet.",
+      nl: "Klanten bij Virelio beschreven in een paar zinnen wat ze voor hun website wilden. Ik wilde dat omzetten naar een werkende site zonder het gebruikelijke heen-en-weer. Ik bouwde een pipeline die een eenvoudige klantbrief aanneemt, tekst genereert met GPT-4, afbeeldingen maakt met DALL·E 3 en een complete Next.js site deployt in minder dan 10 minuten. Het regelt design tokens, layoutgeneratie en asset-aanmaak automatisch. Tot nu toe zijn er 5+ klantsites via deze pipeline gebouwd en live gezet.",
     },
     technologies: ["GPT-4", "Vercel AI SDK", "DALL·E 3", "Next.js", "React"],
     siteUrl: null,
     image: "/images/ai_website.png",
+    cover: {
+      tone: "ink",
+      icon: "Browser",
+      stat: {
+        value: "<10 min",
+        label: {
+          en: "from brief to live site",
+          nl: "van briefing tot live site",
+        },
+      },
+      flow: ["Brief", "GPT-4", "Next.js"],
+    },
     featured: false,
   },
   {
@@ -230,12 +364,24 @@ export const projects: Project[] = [
     year: 2024,
     priority: 15,
     description: {
-      en: "I built myself a 24/7 operations agent that manages my email, calendar, and research tasks autonomously. It uses persistent memory so it knows my preferences and context, and custom tool APIs to actually take actions — not just suggest them. It handles daily logistics and information retrieval without me having to think about it. Documented result: +30% increase in daily efficiency. It's the tool I use most and nobody else sees.",
-      nl: "Ik bouwde mezelf een 24/7 operaties-agent die mijn e-mail, agenda en onderzoekstaken autonoom beheert. Het gebruikt persistent geheugen zodat het mijn voorkeuren en context kent, en aangepaste tool-API's om daadwerkelijk acties uit te voeren — niet alleen maar suggesties te doen. Het regelt dagelijkse logistiek en informatieophaling zonder dat ik er bij na hoef te denken. Gedocumenteerd resultaat: +30% toename in dagelijkse efficiëntie. Het is de tool die ik het meest gebruik en die niemand anders ziet.",
+      en: "I built myself a 24/7 operations agent that manages my email, calendar, and research tasks autonomously. It uses persistent memory so it knows my preferences and context, and custom tool APIs to actually take actions, not just suggest them. It handles daily logistics and information retrieval without me having to think about it. Documented result: +30% increase in daily efficiency. It's the tool I use most and nobody else sees.",
+      nl: "Ik bouwde mezelf een 24/7 operaties-agent die mijn e-mail, agenda en onderzoekstaken autonoom beheert. Het gebruikt persistent geheugen zodat het mijn voorkeuren en context kent, en aangepaste tool-API's om daadwerkelijk acties uit te voeren, niet alleen maar suggesties te doen. Het regelt dagelijkse logistiek en informatieophaling zonder dat ik er bij na hoef te denken. Gedocumenteerd resultaat: +30% toename in dagelijkse efficiëntie. Het is de tool die ik het meest gebruik en die niemand anders ziet.",
     },
     technologies: ["AutoGPT", "Memory Layers", "Tools API", "Python", "Docker"],
     siteUrl: null,
     image: "/images/ai_personal.png",
+    cover: {
+      tone: "paper",
+      icon: "Robot",
+      stat: {
+        value: "+30%",
+        label: {
+          en: "daily efficiency",
+          nl: "dagelijkse efficiëntie",
+        },
+      },
+      flow: ["Email", "Memory", "Tools"],
+    },
     featured: false,
   },
   {
@@ -247,8 +393,8 @@ export const projects: Project[] = [
     year: 2024,
     priority: 7,
     description: {
-      en: "I started using Claude heavily for my own work and realized the real power wasn't in one-off prompts but in structured, repeatable workflows. I built 30+ advanced prompt engineering pipelines using the Anthropic API, Artifacts, and MCP Servers — everything from generating complex documents to automated code review to client report generation. These are now integrated into 20+ core business processes at Vloto and Virelio. It's the backbone of how I scale my output across multiple projects simultaneously.",
-      nl: "Ik begon Claude intensief te gebruiken voor mijn eigen werk en merkte dat de echte kracht niet in losse prompts zat, maar in gestructureerde, herhaalbare workflows. Ik bouwde 30+ geavanceerde prompt engineering pipelines via de Anthropic API, Artifacts en MCP Servers — van het genereren van complexe documenten tot geautomatiseerde code-review en klantrapportages. Deze zijn nu geïntegreerd in 20+ kernbedrijfsprocessen bij Vloto en Virelio. Het is de ruggengraat van hoe ik mijn output opschaal over meerdere projecten tegelijk.",
+      en: "I started using Claude heavily for my own work and realized the real power wasn't in one-off prompts but in structured, repeatable workflows. I built 30+ advanced prompt engineering pipelines using the Anthropic API, Artifacts, and MCP Servers: everything from generating complex documents to automated code review to client report generation. These are now integrated into 20+ core business processes at Vloto and Virelio. It's the backbone of how I scale my output across multiple projects simultaneously.",
+      nl: "Ik begon Claude intensief te gebruiken voor mijn eigen werk en merkte dat de echte kracht niet in losse prompts zat, maar in gestructureerde, herhaalbare workflows. Ik bouwde 30+ geavanceerde prompt engineering pipelines via de Anthropic API, Artifacts en MCP Servers: van het genereren van complexe documenten tot geautomatiseerde code-review en klantrapportages. Deze zijn nu geïntegreerd in 20+ kernbedrijfsprocessen bij Vloto en Virelio. Het is de ruggengraat van hoe ik mijn output opschaal over meerdere projecten tegelijk.",
     },
     technologies: [
       "Anthropic API",
@@ -259,6 +405,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/ai_claude.png",
+    cover: {
+      tone: "signal",
+      icon: "Lightning",
+      stat: {
+        value: "30+",
+        label: {
+          en: "Claude pipelines in daily use",
+          nl: "Claude-pipelines in dagelijks gebruik",
+        },
+      },
+      flow: ["Anthropic API", "MCP", "Workflows"],
+    },
     featured: false,
   },
   {
@@ -282,6 +440,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/ai_research.png",
+    cover: {
+      tone: "ink",
+      icon: "Books",
+      stat: {
+        value: "10",
+        label: {
+          en: "page cited report from one topic",
+          nl: "pagina's rapport met bronnen, uit één onderwerp",
+        },
+      },
+      flow: ["Topic", "Web search", "Report"],
+    },
     featured: false,
   },
   {
@@ -293,8 +463,8 @@ export const projects: Project[] = [
     year: 2023,
     priority: 9,
     description: {
-      en: "The company needed AI capabilities but couldn't send data to external providers. Strict compliance requirements meant everything had to stay on-premise. I designed a fully private LLM platform running local 70B Llama models via Ollama, with Qdrant for vector storage and a multi-agent architecture that routes queries to specialized agents. The key challenge was getting acceptable inference speeds on standard enterprise hardware — after optimizing the pipeline, we hit <2s response times. The platform now serves around 400 employees across the organization with zero data leaving the premises.",
-      nl: "Het bedrijf had AI-capaciteiten nodig maar mocht geen data naar externe providers sturen — strikte compliance-eisen betekenden dat alles on-premise moest blijven. Ik ontwierp een volledig privaat LLM-platform dat lokale 70B Llama-modellen draait via Ollama, met Qdrant voor vectoropslag en een multi-agent architectuur die queries doorstuurt naar gespecialiseerde agents. De grootste uitdaging was acceptabele inferentiesnelheden halen op standaard bedrijfshardware — na optimalisatie van de pipeline kwamen we op minder dan 2 seconden responstijd. Het platform bedient nu zo'n 400 medewerkers in de organisatie zonder dat er ook maar één byte het pand verlaat.",
+      en: "The company needed AI capabilities but couldn't send data to external providers. Strict compliance requirements meant everything had to stay on-premise. I designed a fully private LLM platform running local 70B Llama models via Ollama, with Qdrant for vector storage and a multi-agent architecture that routes queries to specialized agents. The key challenge was getting acceptable inference speeds on standard enterprise hardware. After optimizing the pipeline, we hit <2s response times. The platform now serves around 400 employees across the organization with zero data leaving the premises.",
+      nl: "Het bedrijf had AI-capaciteiten nodig maar mocht geen data naar externe providers sturen. Strikte compliance-eisen betekenden dat alles on-premise moest blijven. Ik ontwierp een volledig privaat LLM-platform dat lokale 70B Llama-modellen draait via Ollama, met Qdrant voor vectoropslag en een multi-agent architectuur die queries doorstuurt naar gespecialiseerde agents. De grootste uitdaging was acceptabele inferentiesnelheden halen op standaard bedrijfshardware. Na optimalisatie van de pipeline kwamen we op minder dan 2 seconden responstijd. Het platform bedient nu zo'n 400 medewerkers in de organisatie zonder dat er ook maar één byte het pand verlaat.",
     },
     technologies: [
       "Llama 3 70B",
@@ -309,6 +479,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/ai_defgpt.png",
+    cover: {
+      tone: "signal",
+      icon: "LockKey",
+      stat: {
+        value: "~400",
+        label: {
+          en: "employees, no data leaves the building",
+          nl: "medewerkers, geen data naar buiten",
+        },
+      },
+      flow: ["Ollama", "Llama 3 70B", "Qdrant"],
+    },
     featured: true,
   },
 
@@ -338,6 +520,12 @@ export const projects: Project[] = [
     ],
     siteUrl: "https://vloto.nl/",
     image: "/images/portfolio-10.png",
+    cover: {
+      tone: "ink",
+      icon: "Car",
+      subject: "Car sharing",
+      flow: ["Admin", "Laravel APIs", "AI"],
+    },
     featured: false,
   },
   {
@@ -365,7 +553,25 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/fraud-prevention.jpeg",
+    cover: {
+      tone: "ink",
+      icon: "ShieldCheck",
+      subject: "Risk scoring",
+      flow: ["Transactions", "Risk score", "Micro-invoices"],
+    },
     featured: true,
+    showcase: {
+      client: "Vloto",
+      summary: {
+        en: "Behavioral risk scoring that flags high-risk customers before they are invoiced, plus micro-invoicing sized to each risk score.",
+        nl: "Gedragsgebaseerde risicoscores die risicoklanten markeren vóór de facturatie, plus micro-facturatie afgestemd op elke score.",
+      },
+      metrics: [
+        { value: "73%", label: { en: "Fewer payment defaults", nl: "Minder wanbetalingen" } },
+        { value: "€2M+", label: { en: "Outstanding payments recovered", nl: "Openstaande betalingen teruggehaald" } },
+        { value: "45%", label: { en: "Better cash flow", nl: "Betere cashflow" } },
+      ],
+    },
   },
   {
     id: "02",
@@ -392,6 +598,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/licenese-plate.jpeg",
+    cover: {
+      tone: "signal",
+      icon: "Scan",
+      stat: {
+        value: "97.3%",
+        label: {
+          en: "plate accuracy at 30 FPS",
+          nl: "nauwkeurigheid op 30 FPS",
+        },
+      },
+      flow: ["Camera", "OpenCV", "OCR"],
+    },
     featured: false,
   },
   {
@@ -403,8 +621,8 @@ export const projects: Project[] = [
     year: 2024,
     priority: 10,
     description: {
-      en: "The Dutch rental market is brutal. Good apartments disappear within hours. Instead of refreshing Funda all day, I built a Node.js scraper that monitors Funda, MVGM, VBO Verhuurders, and other major platforms every 10 minutes. It filters listings against my criteria and sends instant email notifications. I found my apartment in Amsterdam in 2 months — the average is 8-12 months. The platform runs 24/7 on my Raspberry Pi with anti-detection measures for continuous operation.",
-      nl: "De Nederlandse huurmarkt is meedogenloos — goede appartementen zijn binnen uren weg. In plaats van de hele dag Funda te verversen, bouwde ik een Node.js-scraper die Funda, MVGM, VBO Verhuurders en andere grote platforms elke 10 minuten monitort. Het filtert aanbiedingen op mijn criteria en stuurt directe e-mailmeldingen. Ik vond mijn appartement in Amsterdam in 2 maanden — het gemiddelde is 8 tot 12 maanden. Het platform draait 24/7 op mijn Raspberry Pi met anti-detectiemaatregelen voor continue werking.",
+      en: "The Dutch rental market is brutal. Good apartments disappear within hours. Instead of refreshing Funda all day, I built a Node.js scraper that monitors Funda, MVGM, VBO Verhuurders, and other major platforms every 10 minutes. It filters listings against my criteria and sends instant email notifications. I found my apartment in Amsterdam in 2 months, against an average of 8-12 months. The platform runs 24/7 on my Raspberry Pi with anti-detection measures for continuous operation.",
+      nl: "De Nederlandse huurmarkt is meedogenloos: goede appartementen zijn binnen uren weg. In plaats van de hele dag Funda te verversen, bouwde ik een Node.js-scraper die Funda, MVGM, VBO Verhuurders en andere grote platforms elke 10 minuten monitort. Het filtert aanbiedingen op mijn criteria en stuurt directe e-mailmeldingen. Ik vond mijn appartement in Amsterdam in 2 maanden, tegen een gemiddelde van 8 tot 12 maanden. Het platform draait 24/7 op mijn Raspberry Pi met anti-detectiemaatregelen voor continue werking.",
     },
     technologies: [
       "Node.js",
@@ -419,6 +637,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/portfolio-14.jpeg",
+    cover: {
+      tone: "paper",
+      icon: "House",
+      stat: {
+        value: "2 mo",
+        label: {
+          en: "to an apartment, against 8-12",
+          nl: "tot een woning, tegen 8-12",
+        },
+      },
+      flow: ["Funda", "Scraper", "Email"],
+    },
     featured: false,
   },
   {
@@ -444,6 +674,12 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/portfolio-12.png",
+    cover: {
+      tone: "paper",
+      icon: "SelectionAll",
+      subject: "Segment",
+      flow: ["Dataset", "Keras", "Masks"],
+    },
     featured: false,
   },
   {
@@ -455,8 +691,8 @@ export const projects: Project[] = [
     year: 2025,
     priority: 3,
     description: {
-      en: "Medical device companies spend months compiling technical dossiers for regulatory approval — FDA, CE marking, ISO standards. A client asked if AI could speed this up. I built a platform using NLP models trained on medical regulations that automatically extracts documentation requirements, generates compliance templates, and cross-references regulatory changes. What used to take 3 months now takes about a week. The system handles the tedious research and formatting while the compliance team focuses on review and sign-off. 5x faster than the traditional process.",
-      nl: "Fabrikanten van medische hulpmiddelen besteden maanden aan het samenstellen van technische dossiers voor regelgevingsgoedkeuring — FDA, CE-markering, ISO-normen. Een klant vroeg of AI dit kon versnellen. Ik bouwde een platform met NLP-modellen getraind op medische regelgeving dat automatisch documentatievereisten extraheert, compliance-sjablonen genereert en regelgevingswijzigingen kruisverwijst. Wat vroeger 3 maanden kostte, duurt nu ongeveer een week. Het systeem neemt het saaie onderzoek en de opmaak voor zijn rekening terwijl het compliance-team zich richt op review en aftekening. 5x sneller dan het traditionele proces.",
+      en: "Medical device companies spend months compiling technical dossiers for regulatory approval: FDA, CE marking, ISO standards. A client asked if AI could speed this up. I built a platform using NLP models trained on medical regulations that automatically extracts documentation requirements, generates compliance templates, and cross-references regulatory changes. What used to take 3 months now takes about a week. The system handles the tedious research and formatting while the compliance team focuses on review and sign-off. 5x faster than the traditional process.",
+      nl: "Fabrikanten van medische hulpmiddelen besteden maanden aan het samenstellen van technische dossiers voor regelgevingsgoedkeuring: FDA, CE-markering, ISO-normen. Een klant vroeg of AI dit kon versnellen. Ik bouwde een platform met NLP-modellen getraind op medische regelgeving dat automatisch documentatievereisten extraheert, compliance-sjablonen genereert en regelgevingswijzigingen kruisverwijst. Wat vroeger 3 maanden kostte, duurt nu ongeveer een week. Het systeem neemt het saaie onderzoek en de opmaak voor zijn rekening terwijl het compliance-team zich richt op review en aftekening. 5x sneller dan het traditionele proces.",
     },
     technologies: [
       "Python",
@@ -472,7 +708,23 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/portfolio-15.jpeg",
+    cover: {
+      tone: "paper",
+      icon: "FileText",
+      subject: "Regulatory AI",
+      flow: ["Regulations", "NLP", "Tech file"],
+    },
     featured: true,
+    showcase: {
+      client: "Virelio client",
+      summary: {
+        en: "NLP trained on medical regulation that drafts the technical files behind FDA, CE and ISO approval.",
+        nl: "NLP getraind op medische regelgeving die de technische dossiers opstelt voor FDA-, CE- en ISO-goedkeuring.",
+      },
+      metrics: [
+        { value: "1 week", label: { en: "Per dossier, down from 3 months", nl: "Per dossier, was 3 maanden" } },
+      ],
+    },
   },
   {
     id: "16",
@@ -483,8 +735,8 @@ export const projects: Project[] = [
     year: 2025,
     priority: 4,
     description: {
-      en: "For Virelio's own website, I needed a support system that could handle client inquiries without me being online 24/7. I built an AI assistant using OpenAI for conversation processing, ElevenLabs for natural voice synthesis, and n8n for workflow automation. It handles incoming meeting requests, answers questions about our services, and provides instant responses at any hour. It's essentially my digital front desk — professional, always available, and it lets me focus on actual project work instead of answering the same intro questions repeatedly.",
-      nl: "Voor de eigen website van Virelio had ik een supportsysteem nodig dat klantvragen kon afhandelen zonder dat ik 24/7 online hoef te zijn. Ik bouwde een AI-assistent met OpenAI voor gespreksverwerking, ElevenLabs voor natuurlijke spraaksynthese en n8n voor workflow-automatisering. Het handelt inkomende vergaderverzoeken af, beantwoordt vragen over onze diensten en geeft directe antwoorden op elk uur van de dag. Het is in wezen mijn digitale receptie — professioneel, altijd beschikbaar, en het stelt me in staat om te focussen op echt projectwerk in plaats van steeds dezelfde introducerende vragen te beantwoorden.",
+      en: "For Virelio's own website, I needed a support system that could handle client inquiries without me being online 24/7. I built an AI assistant using OpenAI for conversation processing, ElevenLabs for natural voice synthesis, and n8n for workflow automation. It handles incoming meeting requests, answers questions about our services, and provides instant responses at any hour. It's essentially my digital front desk: professional, always available, and it lets me focus on actual project work instead of answering the same intro questions repeatedly.",
+      nl: "Voor de eigen website van Virelio had ik een supportsysteem nodig dat klantvragen kon afhandelen zonder dat ik 24/7 online hoef te zijn. Ik bouwde een AI-assistent met OpenAI voor gespreksverwerking, ElevenLabs voor natuurlijke spraaksynthese en n8n voor workflow-automatisering. Het handelt inkomende vergaderverzoeken af, beantwoordt vragen over onze diensten en geeft directe antwoorden op elk uur van de dag. Het is in wezen mijn digitale receptie: professioneel, altijd beschikbaar, en het stelt me in staat om te focussen op echt projectwerk in plaats van steeds dezelfde introducerende vragen te beantwoorden.",
     },
     technologies: [
       "OpenAI API",
@@ -500,7 +752,23 @@ export const projects: Project[] = [
     ],
     siteUrl: "https://virelio.nl",
     image: "/images/ai-customer-support.jpeg",
+    cover: {
+      tone: "signal",
+      icon: "Headset",
+      subject: "Voice + chat",
+      flow: ["Caller", "OpenAI", "n8n"],
+    },
     featured: true,
+    showcase: {
+      client: "Virelio",
+      summary: {
+        en: "A voice and chat front desk that answers questions about the services and books meetings on its own.",
+        nl: "Een voice- en chatreceptie die vragen over de diensten beantwoordt en zelf afspraken inplant.",
+      },
+      metrics: [
+        { value: "24/7", label: { en: "Answering, even when I am offline", nl: "Bereikbaar, ook als ik offline ben" } },
+      ],
+    },
   },
   {
     id: "06",
@@ -511,8 +779,8 @@ export const projects: Project[] = [
     year: 2022,
     priority: 18,
     description: {
-      en: "Co-founded Bitsliced, an NFT marketplace for real-world asset digitization. Managed the platform's development, overseeing a team of four — handling deadlines, QA, hiring, and tech research alongside the actual coding in React, Node.js, and MongoDB.",
-      nl: "Medeoprichter van Bitsliced, een NFT-marktplaats voor de digitalisering van fysieke activa. Leidde de platformontwikkeling en stuurde een team van vier aan — verantwoordelijk voor deadlines, kwaliteitscontrole, werving en technologisch onderzoek, naast het zelf coderen in React, Node.js en MongoDB.",
+      en: "Co-founded Bitsliced, an NFT marketplace for real-world asset digitization. Managed the platform's development, overseeing a team of four, handling deadlines, QA, hiring, and tech research alongside the actual coding in React, Node.js, and MongoDB.",
+      nl: "Medeoprichter van Bitsliced, een NFT-marktplaats voor de digitalisering van fysieke activa. Leidde de platformontwikkeling en stuurde een team van vier aan, verantwoordelijk voor deadlines, kwaliteitscontrole, werving en technologisch onderzoek, naast het zelf coderen in React, Node.js en MongoDB.",
     },
     technologies: [
       "React",
@@ -524,6 +792,12 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/portfolio-08.jpg",
+    cover: {
+      tone: "signal",
+      icon: "Cube",
+      subject: "NFT",
+      flow: ["React", "Node.js", "MongoDB"],
+    },
     featured: false,
   },
   {
@@ -535,12 +809,18 @@ export const projects: Project[] = [
     year: 2019,
     priority: 25,
     description: {
-      en: "Built an event management platform for Yamba Festival Company — ticketing with payment processing, automated email notifications, and a merchandise store. Included an admin dashboard for real-time sales monitoring and analytics.",
-      nl: "Een evenementenbeheerplatform gebouwd voor Yamba Festival Company — ticketverkoop met betalingsverwerking, geautomatiseerde e-mailmeldingen en een merchandise-winkel. Inclusief een admin dashboard voor real-time verkoopmonitoring en analyses.",
+      en: "Built an event management platform for Yamba Festival Company: ticketing with payment processing, automated email notifications, and a merchandise store. Included an admin dashboard for real-time sales monitoring and analytics.",
+      nl: "Een evenementenbeheerplatform gebouwd voor Yamba Festival Company: ticketverkoop met betalingsverwerking, geautomatiseerde e-mailmeldingen en een merchandise-winkel. Inclusief een admin dashboard voor real-time verkoopmonitoring en analyses.",
     },
     technologies: ["Wordpress", "eCommerce plugin", "PHP", "VPS Hosting"],
     siteUrl: null,
     image: "/images/yamba.jpeg",
+    cover: {
+      tone: "ink",
+      icon: "Ticket",
+      subject: "Festival",
+      flow: ["Tickets", "Payments", "Merch"],
+    },
     featured: false,
   },
   {
@@ -558,6 +838,12 @@ export const projects: Project[] = [
     technologies: ["Javascript", "HTML/CSS"],
     siteUrl: null,
     image: "/images/portfolio-04.jpg",
+    cover: {
+      tone: "paper",
+      icon: "GridNine",
+      subject: "3×3",
+      flow: ["JavaScript", "State", "DOM"],
+    },
     featured: false,
   },
   {
@@ -575,6 +861,12 @@ export const projects: Project[] = [
     technologies: ["Unity", "C#", "Javascript"],
     siteUrl: null,
     image: "/images/portfolio-05.jpg",
+    cover: {
+      tone: "signal",
+      icon: "GameController",
+      subject: "3D",
+      flow: ["Unity", "C#", "Physics"],
+    },
     featured: false,
   },
   {
@@ -586,8 +878,8 @@ export const projects: Project[] = [
     year: 2020,
     priority: 22,
     description: {
-      en: "Built 'Excellent Taste' — a multi-user restaurant management system with reservation handling, online ordering, and role-based interfaces for customers, waitstaff, and kitchen staff. Implemented security with role-based permissions and PDF receipt generation in PHP and MySQL.",
-      nl: "Gebouwd 'Excellent Taste' — een multi-user restaurantbeheersysteem met reserveringsbeheer, online bestellingen en rolgebaseerde interfaces voor klanten, bediening en keukenmedewerkers. Beveiliging geïmplementeerd met rolgebaseerde permissies en PDF-bonnen-generatie in PHP en MySQL.",
+      en: "Built 'Excellent Taste', a multi-user restaurant management system with reservation handling, online ordering, and role-based interfaces for customers, waitstaff, and kitchen staff. Implemented security with role-based permissions and PDF receipt generation in PHP and MySQL.",
+      nl: "Gebouwd 'Excellent Taste', een multi-user restaurantbeheersysteem met reserveringsbeheer, online bestellingen en rolgebaseerde interfaces voor klanten, bediening en keukenmedewerkers. Beveiliging geïmplementeerd met rolgebaseerde permissies en PDF-bonnen-generatie in PHP en MySQL.",
     },
     technologies: [
       "PHP",
@@ -598,6 +890,18 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/restaurant.jpeg",
+    cover: {
+      tone: "signal",
+      icon: "ForkKnife",
+      stat: {
+        value: "3",
+        label: {
+          en: "roles: guests, staff, kitchen",
+          nl: "rollen: gasten, bediening, keuken",
+        },
+      },
+      flow: ["Reserve", "Order", "Kitchen"],
+    },
     featured: false,
   },
   {
@@ -621,6 +925,12 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/portfolio-07.jpg",
+    cover: {
+      tone: "paper",
+      icon: "BookOpen",
+      subject: "GraphQL",
+      flow: ["React", "GraphQL", "Ant Design"],
+    },
     featured: false,
   },
   {
@@ -632,8 +942,8 @@ export const projects: Project[] = [
     year: 2022,
     priority: 21,
     description: {
-      en: "A full-featured blog platform built with Laravel — user registration, profile management, post CRUD with the Blade template engine, follow system between creators, automated emails, and API endpoints. Deployed with Docker.",
-      nl: "Een volwaardig blogplatform gebouwd met Laravel — gebruikersregistratie, profielbeheer, post CRUD via de Blade-templateengine, een volgsysteem tussen makers, geautomatiseerde e-mails en API-endpoints. Gedeployd met Docker.",
+      en: "A full-featured blog platform built with Laravel: user registration, profile management, post CRUD with the Blade template engine, follow system between creators, automated emails, and API endpoints. Deployed with Docker.",
+      nl: "Een volwaardig blogplatform gebouwd met Laravel: gebruikersregistratie, profielbeheer, post CRUD via de Blade-templateengine, een volgsysteem tussen makers, geautomatiseerde e-mails en API-endpoints. Gedeployd met Docker.",
     },
     technologies: [
       "PHP",
@@ -646,6 +956,12 @@ export const projects: Project[] = [
     ],
     siteUrl: null,
     image: "/images/blog-site.jpeg",
+    cover: {
+      tone: "ink",
+      icon: "Article",
+      subject: "Blog",
+      flow: ["Laravel", "Blade", "Docker"],
+    },
     featured: false,
   },
 ];
@@ -662,6 +978,11 @@ const FEATURED_SLUGS = new Set([
 projects.forEach((p) => {
   p.featured = FEATURED_SLUGS.has(p.slug);
 });
+
+export const categoryLabels: Record<Project["category"], { en: string; nl: string }> = {
+  "ai/ml": { en: "AI & ML", nl: "AI & ML" },
+  professional: { en: "Web & app", nl: "Web & app" },
+};
 
 export const featuredProjects: Project[] = projects.filter((p) => p.featured);
 

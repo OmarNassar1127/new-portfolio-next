@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { projects, getProjectBySlug } from '@/data/projects';
-import ProjectCaseStudy from '@/components/sections/ProjectCaseStudy';
+import ProjectCaseStudy from '@/components/projects/ProjectCaseStudy';
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -19,6 +19,7 @@ export async function generateMetadata({
   if (!project) return {};
 
   const description = project.description.en.slice(0, 160);
+  const cover = `/covers/${slug}/cover.png`;
 
   return {
     title: project.title,
@@ -32,7 +33,7 @@ export async function generateMetadata({
       url: `https://omardev.xyz/projects/${slug}/`,
       images: [
         {
-          url: project.image,
+          url: cover,
           width: 1200,
           height: 630,
           alt: project.title,
@@ -44,7 +45,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: `${project.title} | Omar Nassar`,
       description,
-      images: [project.image],
+      images: [cover],
     },
   };
 }
@@ -85,7 +86,7 @@ export default async function ProjectPage({
         inLanguage: 'en',
         mainEntityOfPage: canonical,
         ...(project.siteUrl ? { url: project.siteUrl } : {}),
-        image: `https://omardev.xyz${project.image}`,
+        image: `https://omardev.xyz/covers/${slug}/cover.png`,
       },
       {
         '@type': 'BreadcrumbList',

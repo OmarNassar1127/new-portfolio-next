@@ -7,11 +7,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Omar Nassar | AI Agent Engineer & Full Stack Developer',
     short_name: 'Omar Nassar',
     description:
-      'AI Agent Engineer portfolio — building autonomous AI agents, multi-agent systems, and enterprise RAG platforms.',
+      'AI Agent Engineer portfolio: autonomous AI agents, multi-agent systems, and enterprise RAG platforms.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#0a0f1c',
-    theme_color: '#7C5CFC',
+    background_color: '#f4f4f2',
+    theme_color: '#f4f4f2',
     icons: [
       {
         src: '/images/me2.png',

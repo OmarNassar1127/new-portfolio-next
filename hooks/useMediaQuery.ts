@@ -1,32 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 /**
- * Returns true when the given media query matches the current viewport.
- *
- * Initialises to the LIVE match result on the client (via lazy useState),
- * so the first render already reflects the real viewport and there is no
- * hydration flash.  Falls back to `false` during SSR (no `window`).
+ * True when the media query matches. Renders `false` on the server and during
+ * hydration, then switches to the live value, so markup never mismatches.
  *
  * @example
- * const isMobile = useMediaQuery('(max-width: 768px)');
+ * const isDesktop = useMediaQuery('(min-width: 768px)');
  */
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState<boolean>(() => {
-    // During SSR there is no window — return false so it matches the
-    // server-rendered HTML and avoids a hydration mismatch.
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia(query).matches;
-  });
+  const subscribe = useCallback(
+    (onChange: () => void) => {
+      const mql = window.matchMedia(query);
+      mql.addEventListener('change', onChange);
+      return () => mql.removeEventListener('change', onChange);
+    },
+    [query],
+  );
 
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    // Sync immediately in case the query changed between renders
-    setMatches(mql.matches);
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
+}
 
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
-  }, [query]);
-
-  return matches;
+/**
+ * Hydration-safe reduced-motion check: false until after hydration, then live.
+ * Use it to gate scroll-linked effects and smooth scrolling. One-shot entrance
+ * animations are handled by <MotionConfig reducedMotion="user"> instead.
+ */
+export function usePrefersReducedMotion(): boolean {
+  return useMediaQuery('(prefers-reduced-motion: reduce)');
 }
