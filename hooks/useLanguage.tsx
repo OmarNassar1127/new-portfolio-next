@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useSyncExternalStore } from 'react';
 
 type Language = 'EN' | 'NL';
 
@@ -12,25 +12,43 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('EN');
+const listeners = new Set<() => void>();
+let current: Language | null = null;
 
-  useEffect(() => {
-    const stored = localStorage.getItem('language') as Language | null;
-    if (stored === 'EN' || stored === 'NL') {
-      setLanguage(stored);
+function readStored(): Language {
+  try {
+    return localStorage.getItem('language') === 'NL' ? 'NL' : 'EN';
+  } catch {
+    return 'EN';
+  }
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+const getSnapshot = (): Language => (current ??= readStored());
+const getServerSnapshot = (): Language => 'EN';
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const language = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  const toggleLanguage = useCallback(() => {
+    current = getSnapshot() === 'EN' ? 'NL' : 'EN';
+    document.documentElement.lang = current === 'NL' ? 'nl' : 'en';
+    try {
+      localStorage.setItem('language', current);
+    } catch {
+      // Private mode: the toggle still works for this visit.
     }
+    listeners.forEach((listener) => listener());
   }, []);
 
-  const toggleLanguage = () => {
-    setLanguage((prev) => {
-      const next: Language = prev === 'EN' ? 'NL' : 'EN';
-      localStorage.setItem('language', next);
-      return next;
-    });
-  };
-
-  const t = (en: string, nl: string): string => (language === 'NL' ? nl : en);
+  const t = useCallback(
+    (en: string, nl: string): string => (language === 'NL' ? nl : en),
+    [language],
+  );
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t }}>

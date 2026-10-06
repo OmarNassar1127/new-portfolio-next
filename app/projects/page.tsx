@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { projects } from '@/data/projects';
-import ProjectsGrid from '@/components/sections/ProjectsGrid';
+import { Suspense } from 'react';
+import ProjectsArchive, { ProjectsArchiveView } from '@/components/projects/ProjectsArchive';
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -9,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  return <ProjectsGrid projects={projects} />;
+  // The fallback is the full archive, so the static HTML lists every project.
+  return (
+    <Suspense fallback={<ProjectsArchiveView />}>
+      <ProjectsArchive />
+    </Suspense>
+  );
 }

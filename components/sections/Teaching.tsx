@@ -1,104 +1,75 @@
 'use client';
 
+import { ChalkboardTeacher, Lightning, Wrench } from '@phosphor-icons/react';
 import { useLanguage } from '@/hooks/useLanguage';
-import { useSectionInView } from '@/hooks/useSectionInView';
+import { Heading, Reveal } from '@/components/ui/Reveal';
 
-/* ─── Teaching — AI ownership + lessons / webinars ────────────────────── */
+const PRACTICES = [
+  {
+    Icon: Lightning,
+    title: { en: 'AI go-to engineer at Vloto', nl: 'AI go-to engineer bij Vloto' },
+    body: {
+      en: 'Half engineering, half teaching: showing the team how to automate their own workflows.',
+      nl: 'Half engineering, half lesgeven: het team laten zien hoe ze hun eigen workflows automatiseren.',
+    },
+  },
+  {
+    Icon: Wrench,
+    title: { en: 'Internal tools that cut dev time', nl: 'Interne tools die dev-tijd schrappen' },
+    body: {
+      en: 'Techniques and tools I build to compress development time, then teach the team to use.',
+      nl: 'Technieken en tools die ik bouw om ontwikkeltijd in te korten, en daarna aan het team leer.',
+    },
+  },
+  {
+    Icon: ChalkboardTeacher,
+    title: { en: 'AI lessons & webinars', nl: 'AI-lessen & webinars' },
+    body: {
+      en: 'Every session builds something real, live, instead of clicking through slides.',
+      nl: 'Elke sessie bouwt live iets echts, in plaats van door slides te klikken.',
+    },
+  },
+];
+
 export default function Teaching() {
   const { t } = useLanguage();
-  const ref = useSectionInView<HTMLDivElement>();
 
   return (
-    <section
-      id="teaching"
-      className="relative overflow-hidden bg-[var(--bg)] px-4 py-20 sm:px-6 sm:py-28 lg:px-10"
-    >
-      {/* Subtle violet wash from the right */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        style={{
-          background:
-            'radial-gradient(ellipse 50% 50% at 100% 50%, rgba(124,92,252,0.06) 0%, transparent 70%)',
-        }}
-      />
-
-      <div ref={ref} className="section-stagger relative z-10 mx-auto max-w-[1100px]">
-        {/* Editorial header */}
-        <div className="mb-10 flex items-center justify-between gap-4">
-          <span className="eyebrow">
-            <span className="text-[var(--accent)]">·</span>
-            <span>{t('Teaching · AI · Workshops', 'Teaching · AI · Workshops')}</span>
-          </span>
-          <span className="hidden font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--text-subtle)] sm:inline">
-            {t('Practice over slides', 'Praktijk boven slides')}
-          </span>
-        </div>
-
-        {/* Big editorial line */}
-        <h2 className="max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
-          {t('Best taught by ', 'Het best geleerd door ')}
-          <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
-            {t('doing.', 'doen.')}
-          </span>
-        </h2>
-
-        <span className="mt-8 block h-px w-full bg-[var(--rule)]" aria-hidden="true" />
-
-        {/* Body — two-column on lg, stacked on mobile */}
-        <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 lg:grid-cols-12">
-          {/* AI ownership at Vloto */}
-          <div className="lg:col-span-7">
-            <p className="text-balance text-lg leading-relaxed text-[var(--text)] sm:text-xl">
-              {t("I'm the ", 'Ik ben de ')}
-              <span className="font-semibold">
-                {t('AI go-to engineer', 'AI go-to engineer')}
-              </span>
+    <section id="teaching" className="px-4 py-28 sm:px-6 md:py-40 lg:px-10">
+      <div className="mx-auto grid max-w-[1400px] gap-14 lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-5">
+          <div className="lg:sticky lg:top-32">
+            <Heading className="type-display text-[clamp(2.75rem,6.5vw,5.5rem)]">
+              {t('Best taught by ', 'Het best geleerd door ')}
+              <em className="italic text-signal">{t('doing.', 'doen.')}</em>
+            </Heading>
+            <Reveal as="p" delay={0.1} className="mt-6 max-w-[40ch] text-lg leading-relaxed text-body">
               {t(
-                ' at Vloto. The work is half engineering, half teaching: showing the team how to automate their workflows with the techniques and internal tools I build to compress dev time.',
-                ' bij Vloto. Het werk is half engineering, half lesgeven: het team laten zien hoe ze hun workflows automatiseren met de technieken en interne tools die ik bouw om ontwikkeltijd in te korten.',
+                'The only way to teach AI is to build it in front of you. That holds inside Vloto and in every lesson I run outside it.',
+                'De enige manier om AI te leren is door het voor je ogen te bouwen. Dat geldt binnen Vloto en in elke les die ik daarbuiten geef.',
               )}
-            </p>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
-              {t(
-                'Outside the company I run AI lessons and webinars. Same principle: the only way to teach AI is to build it in front of you. No slide decks.',
-                'Buiten het bedrijf geef ik AI-lessen en webinars. Zelfde principe: de enige manier om AI te leren is door het voor je ogen te bouwen. Geen slides.',
-              )}
-            </p>
+            </Reveal>
           </div>
-
-          {/* Outcome stats — three-row editorial list */}
-          <ul className="flex flex-col divide-y divide-[var(--rule)] border-t border-[var(--rule)] lg:col-span-5 lg:border-l lg:border-t-0 lg:divide-y lg:pl-8">
-            {[
-              {
-                value: t('AI go-to', 'AI go-to'),
-                label: t('Engineer at Vloto', 'Engineer bij Vloto'),
-              },
-              {
-                value: t('Custom tools', 'Eigen tools'),
-                label: t('Cutting team dev time', 'Snijden in dev-tijd'),
-              },
-              {
-                value: t('Lessons · Webinars', 'Lessen · Webinars'),
-                label: t('Practice-first format', 'Praktijk-eerst opzet'),
-              },
-            ].map((item, i) => (
-              <li key={i} className="flex items-baseline justify-between gap-4 py-4">
-                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-subtle)]">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="flex flex-1 flex-col items-end gap-0.5 text-right">
-                  <span className="display-serif text-xl font-semibold leading-tight text-[var(--text)] sm:text-2xl">
-                    {item.value}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                    {item.label}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
+
+        <ol className="flex flex-col lg:col-span-6 lg:col-start-7">
+          {PRACTICES.map(({ Icon, title, body }, i) => (
+            <Reveal
+              as="li"
+              key={title.en}
+              delay={i * 0.08}
+              className="flex gap-6 border-t border-hairline py-10 first:border-t-0 first:pt-0 md:gap-8 md:py-14"
+            >
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-surface-2 text-ink">
+                <Icon weight="bold" aria-hidden="true" className="size-5" />
+              </span>
+              <div>
+                <h3 className="type-title text-[clamp(1.5rem,2.4vw,2.25rem)]">{t(title.en, title.nl)}</h3>
+                <p className="mt-3 max-w-[42ch] text-lg leading-relaxed text-body">{t(body.en, body.nl)}</p>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
       </div>
     </section>
   );

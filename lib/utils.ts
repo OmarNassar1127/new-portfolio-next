@@ -69,7 +69,8 @@ export function categorizeTechs(
   return result;
 }
 
-export const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
+/** Expo-out, the site's one easing curve (DESIGN.md motion.ease-out). */
+export const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export function slugify(text: string): string {
   return text

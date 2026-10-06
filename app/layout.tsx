@@ -1,34 +1,44 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Fraunces } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist_Mono, Mona_Sans } from "next/font/google";
 import Script from "next/script";
+import "lenis/dist/lenis.css";
 import "./globals.css";
-import "remixicon/fonts/remixicon.css";
-import { ThemeProvider } from "@/hooks/useTheme";
+import { ThemeProvider, THEME_COLORS } from "@/hooks/useTheme";
 import { LanguageProvider } from "@/hooks/useLanguage";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { CursorSpotlight } from "@/components/effects/CursorSpotlight";
-import { NoiseOverlay } from "@/components/effects/NoiseOverlay";
-import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { personal } from "@/data/personal";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const monaSans = Mona_Sans({
+  variable: "--font-mona",
   subsets: ["latin"],
+  axes: ["wdth"],
+  display: "swap",
+});
+
+// Italic only appears in below-the-fold headline emphasis: load it on demand.
+const monaSansItalic = Mona_Sans({
+  variable: "--font-mona-italic",
+  subsets: ["latin"],
+  axes: ["wdth"],
+  style: "italic",
+  display: "swap",
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: THEME_COLORS.light,
+};
+
+// Runs before paint: applies the stored theme and language so nothing flashes.
+const preferenceScript = `(function(){try{var d=localStorage.getItem('theme')==='dark';var r=document.documentElement;r.classList.toggle('dark',d);if(localStorage.getItem('language')==='NL')r.lang='nl';if(d)document.addEventListener('DOMContentLoaded',function(){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','${THEME_COLORS.dark}');});}catch(e){}})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://omardev.xyz"),
@@ -449,24 +459,32 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable}`}
+      className={`${monaSans.variable} ${monaSansItalic.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: preferenceScript }} />
+        {/* Without JS, entrance animations never run: show their end state. */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important}[style*="transform"]{transform:none!important}`}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-background text-foreground font-sans antialiased transition-colors duration-300">
+      <body className="min-h-dvh bg-canvas font-sans text-ink">
+        <a
+          href="#main"
+          className="fixed left-4 top-4 z-[var(--z-skip)] -translate-y-24 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-canvas transition-transform focus-visible:translate-y-0"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
           <LanguageProvider>
             <SmoothScroll>
-              <CursorSpotlight />
-              <NoiseOverlay />
-              <ScrollProgress />
               <Header />
-              <main>{children}</main>
+              <main id="main">{children}</main>
               <Footer />
             </SmoothScroll>
           </LanguageProvider>

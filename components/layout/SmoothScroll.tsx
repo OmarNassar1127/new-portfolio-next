@@ -1,50 +1,43 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ReactLenis, useLenis } from 'lenis/react';
+import { MotionConfig } from 'motion/react';
 import { usePathname } from 'next/navigation';
+import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
 
-type SmoothScrollProps = {
-  children: React.ReactNode;
-};
-
-function ScrollToTopOnRouteChange() {
+function ResetScrollOnRoute() {
   const lenis = useLenis();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    }
-    // Fallback for when Lenis is stopped
-    window.scrollTo(0, 0);
+    // Hash links (/#portfolio from a project page) land on their section.
+    if (window.location.hash) return;
+    lenis?.scrollTo(0, { immediate: true });
   }, [pathname, lenis]);
 
   return null;
 }
 
-export function SmoothScroll({ children }: SmoothScrollProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
+/**
+ * Inertia scrolling on wheel input. Touch stays native. Reduced motion keeps
+ * Lenis mounted (so the tree never remounts) but turns smoothing off.
+ */
+export function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const reduce = usePrefersReducedMotion();
 
   return (
     <ReactLenis
       root
       options={{
-        lerp: 0.1,
-        duration: 1.2,
-        smoothWheel: !isMobile,
+        lerp: 0.11,
+        smoothWheel: !reduce,
+        anchors: reduce ? { immediate: true } : { duration: 1.2 },
         autoResize: true,
       }}
     >
-      <ScrollToTopOnRouteChange />
-      {children}
+      <ResetScrollOnRoute />
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
     </ReactLenis>
   );
 }

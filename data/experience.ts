@@ -106,7 +106,7 @@ export const experienceData: ExperienceEntry[] = [
     color: "from-purple-500 to-purple-600",
     technologies: ["Blockchain", "Smart Contracts", "Cryptography", "Web3"],
     description: {
-      en: "Delved deep into blockchain and cryptography, gaining extensive knowledge about various blockchain types, consensus mechanisms, and the limitless possibilities of smart contracts for automating complex tasks.",
+      en: "Went deep on blockchain and cryptography, gaining extensive knowledge about various blockchain types, consensus mechanisms, and the limitless possibilities of smart contracts for automating complex tasks.",
       nl: "Dook diep in blockchain en cryptografie, uitgebreide kennis opgedaan over verschillende blockchain-types, consensus mechanismen en de grenzeloze mogelijkheden van smart contracts voor het automatiseren van complexe taken.",
     },
     current: false,
@@ -149,7 +149,7 @@ export const experienceData: ExperienceEntry[] = [
       en: "AI & Backend Engineer",
       nl: "AI & Backend Engineer",
     },
-    subtitle: "AI go-to · Voice · WhatsApp · Fraud",
+    subtitle: "AI, Voice, WhatsApp, Fraud",
     company: {
       en: "Vloto B.V.",
       nl: "Vloto B.V.",
@@ -169,8 +169,8 @@ export const experienceData: ExperienceEntry[] = [
       "MySQL",
     ],
     description: {
-      en: "Leading multiple AI initiatives at Vloto. Some sit on the data side — pulling signal out of fleet, booking, and operations data to make sharper calls. Others sit on the user side — shipping features that move real metrics: the WhatsApp agent that deflects 55% of support across 80K+ users, the voice AI for fleet and fine inquiries, a fraud-prevention layer that has caught €50K+ in invoice fraud before payout, and a computer-vision damage-triage system that locates, categorizes, and de-dupes user-submitted damage reports before they hit the ops queue. The work keeps expanding.",
-      nl: "Meerdere AI-initiatieven leiden bij Vloto. Een deel zit aan de data-kant — signaal uit vloot-, boekings- en operationele data halen om scherpere keuzes te maken. Een ander deel aan de gebruikerskant — features bouwen die echt impact maken: de WhatsApp-agent die 55% van supportvolume afvangt bij 80K+ gebruikers, de voice AI voor vloot- en boetevragen, een fraudepreventielaag die €50K+ aan factuurfraude heeft gevangen vóór uitbetaling, en een computer-vision damage-triage systeem dat schadefoto's van gebruikers lokaliseert, categoriseert en dedupliceert vóór ze in de ops-wachtrij belanden. Het werk blijft uitbreiden.",
+      en: "Leading multiple AI initiatives at Vloto. Some sit on the data side, pulling signal out of fleet, booking, and operations data to make sharper calls. Others sit on the user side, shipping features that move real metrics: the WhatsApp agent that deflects 55% of support across 80K+ users, the voice AI for fleet and fine inquiries, a fraud-prevention layer that has caught €50K+ in invoice fraud before payout, and a computer-vision damage-triage system that locates, categorizes, and de-dupes user-submitted damage reports before they hit the ops queue. The work keeps expanding.",
+      nl: "Meerdere AI-initiatieven leiden bij Vloto. Een deel zit aan de data-kant: signaal uit vloot-, boekings- en operationele data halen om scherpere keuzes te maken. Een ander deel aan de gebruikerskant: features bouwen die echt impact maken: de WhatsApp-agent die 55% van supportvolume afvangt bij 80K+ gebruikers, de voice AI voor vloot- en boetevragen, een fraudepreventielaag die €50K+ aan factuurfraude heeft gevangen vóór uitbetaling, en een computer-vision damage-triage systeem dat schadefoto's van gebruikers lokaliseert, categoriseert en dedupliceert vóór ze in de ops-wachtrij belanden. Het werk blijft uitbreiden.",
     },
     current: true,
   },

@@ -1,6 +1,6 @@
 export interface StackSkill {
   name: string;
-  /** Headliner — gets italic Fraunces emphasis */
+  /** Daily driver: set in bold on the stack bento */
   highlight?: boolean;
 }
 

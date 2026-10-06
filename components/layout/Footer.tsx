@@ -1,407 +1,92 @@
 'use client';
 
-import { useRef, MouseEvent } from 'react';
 import Link from 'next/link';
-import { useTheme } from '@/hooks/useTheme';
-import { useLanguage } from '@/hooks/useLanguage';
-import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
+import { useLenis } from 'lenis/react';
+import { ArrowUp, GithubLogo, LinkedinLogo, XLogo } from '@phosphor-icons/react';
 import { personal } from '@/data/personal';
+import { useLanguage } from '@/hooks/useLanguage';
+import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+const LINKS = [
+  { href: '#portfolio', en: 'Work', nl: 'Werk' },
+  { href: '#about-me', en: 'About', nl: 'Over' },
+  { href: '#journey', en: 'Journey', nl: 'Reis' },
+  { href: '#tools', en: 'Tools', nl: 'Tools' },
+  { href: '#contact', en: 'Contact', nl: 'Contact' },
+];
 
-interface SocialCard {
-  href: string;
-  icon: string;
-  label: string;
-  handle: string;
-  colorClass: string;
-  glowColor: string;
-}
-
-interface NavLink {
-  href: string;
-  label: string;
-}
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
+const SOCIALS = [
+  { href: personal.github, label: 'GitHub', Icon: GithubLogo },
+  { href: personal.linkedin, label: 'LinkedIn', Icon: LinkedinLogo },
+  { href: personal.twitter, label: 'X', Icon: XLogo },
+];
 
 export default function Footer() {
-  const { isDarkMode } = useTheme();
   const { t } = useLanguage();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const lenis = useLenis();
+  const reduce = usePrefersReducedMotion();
 
-  const currentYear = new Date().getFullYear();
-
-  const navLinks: NavLink[] = [
-    { href: '#about',          label: t('Home',    'Home')    },
-    { href: '#portfolio',      label: t('Work',    'Werk')    },
-    { href: '#about-me',       label: t('About',   'Over')    },
-    { href: '#journey',        label: t('Journey', 'Reis')    },
-    { href: '#certifications', label: t('Certs',   'Certs')   },
-    { href: '#contact',        label: t('Contact', 'Contact') },
-  ];
-
-  const socialCards: SocialCard[] = [
-    {
-      href: `mailto:${personal.email}`,
-      icon: 'ri-mail-fill',
-      label: 'Email',
-      handle: personal.email,
-      colorClass: 'group-hover:text-[var(--primary)]',
-      glowColor: 'rgba(124, 92, 252,0.25)',
-    },
-    {
-      href: personal.linkedin,
-      icon: 'ri-linkedin-box-fill',
-      label: 'LinkedIn',
-      handle: 'Omar Nassar',
-      colorClass: 'group-hover:text-[#0A66C2]',
-      glowColor: 'rgba(10,102,194,0.25)',
-    },
-    {
-      href: personal.github,
-      icon: 'ri-github-fill',
-      label: 'GitHub',
-      handle: 'OmarNassar1127',
-      colorClass: 'group-hover:text-[var(--text)]',
-      glowColor: 'rgba(255,255,255,0.12)',
-    },
-    {
-      href: personal.twitter,
-      icon: 'ri-twitter-x-fill',
-      label: 'X / Twitter',
-      handle: '@GodelTrabuco69',
-      colorClass: 'group-hover:text-[var(--text)]',
-      glowColor: 'rgba(255,255,255,0.12)',
-    },
-  ];
-
-  const scrollToSection = (href: string) => {
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  const linkClass = 'text-body transition-colors duration-200 hover:text-ink';
 
   return (
-    <footer
-      className={cn(
-        'relative overflow-hidden',
-        'bg-[var(--bg)] border-t border-[var(--border)]',
-        'transition-colors duration-300',
-      )}
-    >
-      {/* Ambient gradient blobs */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div
-          className="absolute -top-48 -left-24 w-96 h-96 rounded-full opacity-[0.04] blur-3xl"
-          style={{ background: 'var(--primary)' }}
-        />
-        <div
-          className="absolute -bottom-32 -right-16 w-80 h-80 rounded-full opacity-[0.04] blur-3xl"
-          style={{ background: 'var(--accent-cyan)' }}
-        />
-      </div>
-
-      {/* ── Main content grid ──────────────────────────────────────────── */}
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-
-          {/* ── Left column: CTA + badges ────────────────────────────── */}
-          <div className="lg:col-span-5 flex flex-col gap-8">
-            {/* Eyebrow — editorial */}
-            <span className="eyebrow">
-              <span className="text-[var(--accent)]">·</span>
-              <span>{t("Let's work together", 'Laten we samenwerken')}</span>
-            </span>
-
-            {/* Headline */}
-            <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.05] tracking-tight text-[var(--text)]">
-                {t("Let's build something ", 'Laten we iets ')}
-                <span className="display-serif-italic font-medium text-[var(--accent-deep)]">
-                  {t('extraordinary', 'buitengewoons')}
-                </span>
-                {t('.', '.')}
-              </h2>
-              <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--text-muted)]">
-                {t(
-                  'Multi-agent systems, RAG platforms, and the full-stack code underneath. From concept to production.',
-                  'Multi-agent systemen, RAG-platformen en de full-stack code eronder. Van concept tot productie.',
+    <footer className="border-t border-hairline px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-10 sm:px-6 lg:px-10">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-8 md:flex-row md:items-center md:justify-between">
+        <nav aria-label={t('Footer', 'Footer')}>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
+            {LINKS.map((link) => (
+              <li key={link.href}>
+                {isHome ? (
+                  <a href={link.href} className={linkClass}>
+                    {t(link.en, link.nl)}
+                  </a>
+                ) : (
+                  <Link href={`/${link.href}`} className={linkClass}>
+                    {t(link.en, link.nl)}
+                  </Link>
                 )}
-              </p>
-            </div>
+              </li>
+            ))}
+            <li>
+              <Link href="/projects/" className={linkClass}>
+                {t('All projects', 'Alle projecten')}
+              </Link>
+            </li>
+          </ul>
+        </nav>
 
-            {/* CTA button — editorial ink */}
-            <div>
-              <a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }}
-                className={cn(
-                  'group inline-flex items-center gap-3',
-                  'bg-[var(--text)] text-[var(--bg)] font-semibold px-7 py-3.5 rounded-full',
-                  'shadow-[0_8px_24px_-6px_rgba(10,11,17,0.4)]',
-                  'transition-all duration-300',
-                  'hover:bg-[var(--primary)] hover:text-white',
-                  'hover:shadow-[0_10px_28px_-6px_rgba(124,92,252,0.5)]',
-                  'hover:-translate-y-0.5 active:translate-y-0',
-                )}
-              >
-                <i className="ri-chat-3-line text-lg" />
-                <span className="text-sm">{t('Start a conversation', 'Start een gesprek')}</span>
-                <i className="ri-arrow-right-line text-base group-hover:translate-x-0.5 transition-transform" />
-              </a>
-            </div>
-
-            {/* Status badges */}
-            <div className="flex flex-wrap gap-3">
-              <span
-                className={cn(
-                  'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium',
-                  isDarkMode
-                    ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                    : 'bg-green-50 text-green-700 border border-green-200',
-                )}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 pulse-dot" />
-                {t('Available for AI projects', 'Beschikbaar voor AI projecten')}
-              </span>
-
-              <span
-                className={cn(
-                  'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium',
-                  isDarkMode
-                    ? 'bg-[var(--accent-cyan)]/10 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/20'
-                    : 'bg-blue-50 text-blue-700 border border-blue-200',
-                )}
-              >
-                <i className="ri-map-pin-line text-xs" />
-                {t('Based in Amsterdam', 'Gevestigd in Amsterdam')}
-              </span>
-            </div>
-
-            {/* Virelio mention */}
+        <div className="flex items-center gap-1">
+          {SOCIALS.map(({ href, label, Icon }) => (
             <a
-              href={personal.virelio.site}
+              key={label}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(
-                'group inline-flex items-center gap-2.5 text-xs',
-                'text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors duration-200',
-              )}
+              aria-label={label}
+              className="flex size-11 items-center justify-center rounded-full text-body transition-colors hover:bg-surface-2 hover:text-ink"
             >
-              <span
-                className={cn(
-                  'w-6 h-6 rounded-md flex items-center justify-center',
-                  'bg-[var(--primary)]/10 group-hover:bg-[var(--primary)]/20 transition-colors',
-                )}
-              >
-                <i className="ri-robot-2-line text-[var(--primary)] text-sm" />
-              </span>
-              <span>
-                {t(
-                  'Founder of Virelio · AI agents on demand',
-                  'Oprichter van Virelio · AI agents op aanvraag',
-                )}
-              </span>
-              <i className="ri-external-link-line text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Icon weight="bold" aria-hidden="true" className="size-5" />
             </a>
-          </div>
-
-          {/* ── Right column: nav + social ───────────────────────────── */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-10">
-
-            {/* Quick links */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-5">
-                {t('Navigation', 'Navigatie')}
-              </h3>
-              <nav aria-label="Footer navigation">
-                <ul className="space-y-2" role="list">
-                  {navLinks.map((link) => (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                        className={cn(
-                          'group inline-flex items-center gap-2 text-sm',
-                          'text-[var(--text-muted)] hover:text-[var(--primary)]',
-                          'transition-all duration-200',
-                        )}
-                      >
-                        <span
-                          className={cn(
-                            'block h-px transition-all duration-300',
-                            'bg-[var(--primary)] opacity-0 group-hover:opacity-100',
-                            'w-0 group-hover:w-4',
-                          )}
-                        />
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-
-            {/* Social cards */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-5">
-                {t('Connect', 'Verbinden')}
-              </h3>
-              <div className="space-y-2">
-                {socialCards.map((card) => (
-                  <SpotlightCard
-                    key={card.label}
-                    card={card}
-                    isDarkMode={isDarkMode}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+          ))}
+          <button
+            type="button"
+            onClick={() => (lenis ? lenis.scrollTo(0, { immediate: !!reduce }) : window.scrollTo(0, 0))}
+            aria-label={t('Back to top', 'Terug naar boven')}
+            className="ml-2 flex size-11 items-center justify-center rounded-full border border-hairline-strong text-ink transition-colors hover:bg-ink hover:text-canvas"
+          >
+            <ArrowUp weight="bold" aria-hidden="true" className="size-4" />
+          </button>
         </div>
       </div>
 
-      {/* ── Footer bottom bar ──────────────────────────────────────────── */}
-      <div className="relative border-t border-[var(--border)]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--text-muted)]">
-            <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
-              <span>
-                {t(
-                  `© ${currentYear} Omar Nassar. All rights reserved.`,
-                  `© ${currentYear} Omar Nassar. Alle rechten voorbehouden.`,
-                )}
-              </span>
-              <span aria-hidden="true" className="hidden sm:block opacity-30">·</span>
-              <span>
-                {t('Made with code in Amsterdam', 'Gemaakt met code in Amsterdam')}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Link
-                href="/projects"
-                className="hover:text-[var(--primary)] transition-colors"
-              >
-                {t('All Projects', 'Alle Projecten')}
-              </Link>
-            </div>
-          </div>
-        </div>
+      <div className="mx-auto mt-8 flex max-w-[1400px] flex-col gap-2 border-t border-hairline pt-6 text-sm text-mute sm:flex-row sm:justify-between">
+        <p>
+          © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Omar Nassar
+        </p>
+        <p>{t('Built with Next.js. Set in Mona Sans.', 'Gebouwd met Next.js. Gezet in Mona Sans.')}</p>
       </div>
     </footer>
-  );
-}
-
-// ─── SpotlightCard ────────────────────────────────────────────────────────────
-
-/**
- * Social link card with a radial spotlight that follows the cursor,
- * inspired by the SpotlightCard pattern popular in Awwwards-level portfolios.
- */
-function SpotlightCard({
-  card,
-  isDarkMode,
-}: {
-  card: SocialCard;
-  isDarkMode: boolean;
-}) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
-
-  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    const el = cardRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    el.style.setProperty('--spotlight-x', `${x}px`);
-    el.style.setProperty('--spotlight-y', `${y}px`);
-  };
-
-  const handleMouseLeave = () => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.removeProperty('--spotlight-x');
-    el.style.removeProperty('--spotlight-y');
-  };
-
-  const isEmail = card.href.startsWith('mailto:');
-
-  return (
-    <a
-      ref={cardRef}
-      href={card.href}
-      target={isEmail ? '_self' : '_blank'}
-      rel={isEmail ? undefined : 'noopener noreferrer'}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={cn(
-        'group relative flex items-center gap-3.5 px-3.5 py-3',
-        'rounded-xl border border-[var(--border)]',
-        'bg-[var(--card)] overflow-hidden',
-        'transition-all duration-300',
-        'hover:border-[var(--primary)]/40',
-        'hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)]',
-        'hover:-translate-y-0.5',
-        // spotlight layer via CSS variable
-        'before:pointer-events-none before:absolute before:inset-0',
-        'before:opacity-0 hover:before:opacity-100',
-        'before:transition-opacity before:duration-300',
-        'before:rounded-xl',
-      )}
-      style={{
-        ['--spotlight-x' as string]: '-100px',
-        ['--spotlight-y' as string]: '-100px',
-      }}
-    >
-      {/* Spotlight radial gradient */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(180px circle at var(--spotlight-x, -100px) var(--spotlight-y, -100px), ${card.glowColor}, transparent 70%)`,
-        }}
-      />
-
-      {/* Icon */}
-      <span
-        className={cn(
-          'relative z-10 w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0',
-          'bg-[var(--card-hover)] border border-[var(--border)]',
-          'group-hover:scale-110 group-hover:border-[var(--primary)]/30',
-          'transition-all duration-300',
-        )}
-      >
-        <i
-          className={cn(
-            card.icon,
-            'text-base text-[var(--text-muted)]',
-            card.colorClass,
-            'transition-colors duration-300',
-          )}
-        />
-      </span>
-
-      {/* Text */}
-      <span className="relative z-10 flex flex-col gap-0 flex-1 min-w-0">
-        <span className="text-xs font-semibold text-[var(--text)] group-hover:text-[var(--primary)] transition-colors duration-200">
-          {card.label}
-        </span>
-        <span className="text-[11px] text-[var(--text-muted)] truncate">
-          {card.handle}
-        </span>
-      </span>
-
-      {/* Arrow */}
-      <i
-        className={cn(
-          'relative z-10 ri-arrow-right-up-line text-sm',
-          'text-[var(--text-muted)] opacity-0 group-hover:opacity-100',
-          'group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
-          'transition-all duration-300',
-        )}
-      />
-    </a>
   );
 }
