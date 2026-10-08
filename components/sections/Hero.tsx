@@ -70,7 +70,7 @@ export default function Hero() {
 
       <motion.h1
         style={reduce ? undefined : { y: nameY }}
-        className="mx-auto mt-16 w-full max-w-[1400px] type-hero text-[20.5vw] text-ink sm:text-[17vw] lg:text-[min(12.3vw,11.4rem)]"
+        className="mx-auto mt-16 w-full max-w-[1400px] type-hero text-[20.5vw] text-ink sm:text-[17vw] lg:text-[min(calc((100vw-5rem)/8),11.4rem)]"
       >
         <span className="sr-only">Omar Nassar</span>
         <span aria-hidden="true" className="flex flex-wrap items-center gap-x-[0.1em]">
