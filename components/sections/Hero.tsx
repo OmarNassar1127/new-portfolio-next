@@ -9,6 +9,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
 import { MagneticLink, buttonStyles } from '@/components/ui/Button';
 import { startHealingName } from '@/lib/healing-name';
+import OmarLab from '@/components/three/OmarLab';
 
 const inlineLink =
   'underline decoration-hairline-strong decoration-[0.07em] underline-offset-[0.16em] transition-[text-decoration-color] duration-200 hover:decoration-signal';
@@ -88,6 +89,13 @@ export default function Hero() {
             {t('Email me', 'Mail me')}
           </a>
         </div>
+      </motion.div>
+
+      <motion.div
+        style={reduce ? undefined : { opacity: copyOpacity }}
+        className="relative mx-auto mt-6 h-[min(82vw,360px)] w-full max-w-[560px] lg:absolute lg:right-[max(1.5rem,calc((100vw-1400px)/2))] lg:top-20 lg:mt-0 lg:h-[min(44vw,620px)] lg:w-[min(44vw,620px)] lg:max-w-none"
+      >
+        <OmarLab className="size-full" />
       </motion.div>
 
       <motion.h1
