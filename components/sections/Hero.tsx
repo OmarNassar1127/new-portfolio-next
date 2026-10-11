@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowDown } from '@phosphor-icons/react';
 import { personal } from '@/data/personal';
 import { useLanguage } from '@/hooks/useLanguage';
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
 import { MagneticLink, buttonStyles } from '@/components/ui/Button';
+import { startHealingName } from '@/lib/healing-name';
 
 const inlineLink =
   'underline decoration-hairline-strong decoration-[0.07em] underline-offset-[0.16em] transition-[text-decoration-color] duration-200 hover:decoration-signal';
@@ -16,6 +17,27 @@ export default function Hero() {
   const { t } = useLanguage();
   const reduce = usePrefersReducedMotion();
   const ref = useRef<HTMLElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
+  const dotRef = useRef<HTMLSpanElement>(null);
+
+  // Once the letters have risen, the name becomes breakable and self-healing.
+  useEffect(() => {
+    const host = ref.current, name = nameRef.current, base = dotRef.current;
+    if (!host || !name || !base || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let stop: (() => void) | null = null, cancelled = false;
+    const letters = [...name.querySelectorAll<HTMLElement>('[data-glyph]')];
+    const settled = letters.flatMap((el) => el.getAnimations().map((a) => a.finished.catch(() => undefined)));
+    Promise.all([document.fonts.ready, ...settled]).then(() => {
+      if (cancelled) return;
+      const css = () => getComputedStyle(document.documentElement);
+      stop = startHealingName({
+        host, name, base, letters,
+        ink: () => css().getPropertyValue('--ink').trim(),
+        signal: () => css().getPropertyValue('--signal').trim(),
+      });
+    });
+    return () => { cancelled = true; stop?.(); };
+  }, []);
 
   // Hand-off to the work section: copy fades and lifts, the name drifts up slower.
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
@@ -34,7 +56,7 @@ export default function Hero() {
         className="mx-auto w-full max-w-[1400px] pt-8 sm:pt-12 lg:pt-16"
       >
         <p className="hero-fade inline-flex items-center gap-2.5 font-mono text-xs text-body" style={{ animationDelay: '0.35s' }}>
-          <span className="relative flex size-2" aria-hidden="true">
+          <span ref={dotRef} className="relative flex size-2" aria-hidden="true">
             <span className="absolute inset-0 animate-ping rounded-full bg-signal opacity-60" />
             <span className="relative size-2 rounded-full bg-signal" />
           </span>
@@ -69,8 +91,9 @@ export default function Hero() {
       </motion.div>
 
       <motion.h1
+        ref={nameRef}
         style={reduce ? undefined : { y: nameY }}
-        className="mx-auto mt-16 w-full max-w-[1400px] type-hero text-[20.5vw] text-ink sm:text-[17vw] lg:text-[min(calc((100vw-5rem)/8),11.4rem)]"
+        className="relative mx-auto mt-16 w-full touch-pan-y max-w-[1400px] type-hero text-[20.5vw] text-ink sm:text-[17vw] lg:text-[min(calc((100vw-5rem)/8),11.4rem)]"
       >
         <span className="sr-only">Omar Nassar</span>
         <span aria-hidden="true" className="flex flex-wrap items-center gap-x-[0.1em]">
@@ -88,7 +111,7 @@ function Letters({ word, offset }: { word: string; offset: number }) {
   return (
     <span className="inline-flex overflow-hidden pb-[0.05em] pt-[0.03em]">
       {word.split('').map((char, i) => (
-        <span key={i} className="hero-rise inline-block" style={{ animationDelay: `${0.05 + (offset + i) * 0.045}s` }}>
+        <span key={i} data-glyph className="hero-rise inline-block" style={{ animationDelay: `${0.05 + (offset + i) * 0.045}s` }}>
           {char}
         </span>
       ))}
