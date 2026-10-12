@@ -9,7 +9,9 @@
  * World units: px on the floor. x right, y down (toward the viewer), z up.
  */
 import {
+  Children,
   createContext,
+  isValidElement,
   forwardRef,
   useContext,
   useEffect,
@@ -97,11 +99,30 @@ export const Group = forwardRef<HTMLDivElement, { children: ReactNode; style?: C
 });
 
 /** A label or icon standing at (x,y,z) and always facing the viewer. */
-export const Bill = forwardRef<HTMLDivElement, { x: number; y: number; z?: number; children: ReactNode; style?: CSSProperties }>(
-  function Bill({ x, y, z = 0, children, style }, ref) {
+/** True when a Chip sits anywhere in this subtree. */
+function hasChip(node: ReactNode): boolean {
+  let found = false;
+  Children.forEach(node, (c) => {
+    if (found || !isValidElement(c)) return;
+    if (c.type === Chip) found = true;
+    else found = hasChip((c.props as { children?: ReactNode }).children);
+  });
+  return found;
+}
+
+/**
+ * Labels (anything holding a Chip) are pulled toward the camera so they always
+ * draw on top: never sliced by the floor, never hidden behind a part.
+ * Icons, people and trees keep their true depth.
+ */
+const LABEL_LIFT = 220;
+
+export const Bill = forwardRef<HTMLDivElement, { x: number; y: number; z?: number; children: ReactNode; style?: CSSProperties; front?: boolean }>(
+  function Bill({ x, y, z = 0, children, style, front }, ref) {
+    const lift = front ?? hasChip(children) ? LABEL_LIFT : 0;
     return (
       <div style={{ ...F, left: x, top: y, width: 0, height: 0, transform: `translateZ(${z}px)` }}>
-        <div ref={ref} style={{ position: 'absolute', left: 0, bottom: 0, width: 'max-content', transformOrigin: '50% 100%', transform: `${BILLBOARD} translateX(-50%)`, ...style }}>
+        <div ref={ref} style={{ position: 'absolute', left: 0, bottom: 0, width: 'max-content', transformOrigin: '50% 100%', transform: `${BILLBOARD} translateZ(${lift}px) translateX(-50%)`, ...style }}>
           {children}
         </div>
       </div>

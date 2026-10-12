@@ -147,8 +147,8 @@ export default function InvoiceFraudScene({ project, className }: { project: Pro
       {SCORES.map((_, i) => <Invoice key={i} i={i} onScan={onScan} />)}
 
       <Bill x={594} y={95} z={40}><Chip tone="light">approved</Chip></Bill>
-      <Bill x={500} y={270} z={34}><Chip tone="signal">micro-invoices</Chip></Bill>
-      <Bill x={70} y={60} z={30}><Chip tone="dark">50k+ transactions / month</Chip></Bill>
+      <Bill x={590} y={318} z={10}><Chip tone="signal">micro-invoices</Chip></Bill>
+      <Bill x={150} y={92} z={30}><Chip tone="dark">50k+ transactions / month</Chip></Bill>
       <Bill x={200} y={300} z={20}><Chip tone="dark"><span style={{ color: P.signal }}>€2M+</span> recovered</Chip></Bill>
     </Stage>
   );
