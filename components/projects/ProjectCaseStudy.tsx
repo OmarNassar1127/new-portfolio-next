@@ -7,7 +7,7 @@ import { personal } from '@/data/personal';
 import { useLanguage } from '@/hooks/useLanguage';
 import { MagneticLink, buttonStyles } from '@/components/ui/Button';
 import { Heading, Reveal } from '@/components/ui/Reveal';
-import { ProjectCover } from '@/components/ui/ProjectCover';
+import { ProjectScene } from '@/components/scenes';
 import { categorizeTechs, parseDescription } from '@/lib/utils';
 
 type Props = {
@@ -64,7 +64,7 @@ export default function ProjectCaseStudy({ project, prevProject, nextProject }: 
         </header>
 
         {/* Rendered immediately (no in-view reveal) so it is there on load. */}
-        <ProjectCover project={project} className="mt-10 aspect-[4/3] rounded-2xl md:mt-12 md:aspect-[2/1]" />
+        <ProjectScene project={project} className="mt-10 aspect-[4/3] rounded-2xl md:mt-12 md:aspect-[2/1]" />
 
         {showcase && (
           <dl className="mt-12 grid grid-cols-2 gap-y-10 border-b border-hairline pb-12 md:mt-16 md:grid-cols-3">
