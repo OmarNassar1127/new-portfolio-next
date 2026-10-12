@@ -33,7 +33,7 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
   const key = new THREE.DirectionalLight(0xffffff, 2.0);
   key.position.set(-3, 8, 7); key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024); key.shadow.radius = 6; key.shadow.bias = -0.0005;
-  Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -4, near: 1, far: 25 });
+  Object.assign(key.shadow.camera, { left: -6, right: 6, top: 6, bottom: -6, near: 1, far: 30 });
   scene.add(key);
 
   const loader = new THREE.TextureLoader();
@@ -50,9 +50,9 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
 
   // desk: a thin slab the laptop sits on, with a soft contact shadow
   const deskMat = new THREE.MeshPhysicalMaterial({ color: 0xE9E8E3, roughness: 0.55, clearcoat: 0.4 });
-  const desk = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.09, 3.9), deskMat);
-  desk.position.set(0, -0.045, -0.65); desk.receiveShadow = true; scene.add(desk);
-  const edge = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.02, 0.02), new THREE.MeshBasicMaterial({ color: SIGNAL }));
+  const desk = new THREE.Mesh(new THREE.BoxGeometry(6.6, 0.09, 5.3), deskMat);
+  desk.position.set(0, -0.045, -1.35); desk.receiveShadow = true; scene.add(desk);
+  const edge = new THREE.Mesh(new THREE.BoxGeometry(6.6, 0.02, 0.02), new THREE.MeshBasicMaterial({ color: SIGNAL }));
   edge.position.set(0, -0.005, 1.3); scene.add(edge);
   const blob = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d')!; const r = g.createRadialGradient(64, 64, 4, 64, 64, 62); r.addColorStop(0, 'rgba(15,15,14,.30)'); r.addColorStop(1, 'rgba(15,15,14,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); const t = new THREE.CanvasTexture(c); return t; })();
   const contact = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 0.9), new THREE.MeshBasicMaterial({ map: blob, transparent: true, depthWrite: false }));
@@ -62,7 +62,7 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
   const M = (color: number, o: Record<string, unknown> = {}) => new THREE.MeshPhysicalMaterial({ color, roughness: 0.55, ...o });
   const wall = M(0xEFEDE8, { clearcoat: 0.2 }), roof = M(0xD3D0C9), steel = M(0xBFC2C6, { metalness: 0.6, roughness: 0.35 });
   const dark = M(INK, { roughness: 0.4 }), band = M(SIGNAL, { roughness: 0.4, clearcoat: 0.6 });
-  const glow = new THREE.MeshStandardMaterial({ color: 0xFFB08A, emissive: SIGNAL, emissiveIntensity: 0.9 });
+  const glow = new THREE.MeshStandardMaterial({ color: 0xFFB08A, emissive: SIGNAL, emissiveIntensity: 1.25 });
   const put = (geo: ConstructorParameters<Three['Mesh']>[0], m: InstanceType<Three['Material']>, parent: InstanceType<Three['Object3D']>, x: number, y: number, z: number) => {
     const o = new THREE.Mesh(geo, m); o.position.set(x, y, z); o.castShadow = true; o.receiveShadow = true; parent.add(o); return o;
   };
@@ -73,7 +73,7 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
   };
 
   // factory: hall, sawtooth roof with lit glass, chimneys, a glowing door and a conveyor
-  const factory = new THREE.Group(); factory.position.set(-2.05, 0, -1.75); scene.add(factory);
+  const factory = new THREE.Group(); factory.position.set(-2.25, 0, -2.9); factory.scale.setScalar(1.6); scene.add(factory);
   put(new THREE.BoxGeometry(1.5, 0.78, 1.05), wall, factory, 0, 0.39, 0);
   const tooth = new THREE.Shape(); tooth.moveTo(0, 0); tooth.lineTo(0.35, 0); tooth.lineTo(0.35, 0.3); tooth.lineTo(0, 0);
   const toothGeo = new THREE.ExtrudeGeometry(tooth, { depth: 1.46, bevelEnabled: false });
@@ -86,19 +86,23 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
     const h = 0.95 + i * 0.2;
     put(new THREE.CylinderGeometry(0.075, 0.09, h, 16), wall, factory, c.x, 0.78 + h / 2, c.z);
     const ring = put(new THREE.TorusGeometry(0.083, 0.018, 8, 24), band, factory, c.x, 0.78 + h - 0.12, c.z); ring.rotation.x = Math.PI / 2;
-    return new THREE.Vector3(c.x, 0.78 + h, c.z).add(factory.position);
+    factory.updateMatrixWorld(true);
+    return factory.localToWorld(new THREE.Vector3(c.x, 0.78 + h, c.z));
   });
   put(new THREE.BoxGeometry(0.56, 0.48, 0.04), dark, factory, 0.25, 0.24, 0.53);
   const door = put(new THREE.PlaneGeometry(0.46, 0.4), glow, factory, 0.25, 0.22, 0.553); door.castShadow = false;
   const doorMat = new THREE.MeshStandardMaterial({ color: 0xFFB08A, emissive: SIGNAL, emissiveIntensity: 0.9 }); door.material = doorMat;
   // conveyor out of the door toward the front
-  const beltTex = (() => { const c = document.createElement('canvas'); c.width = 32; c.height = 128; const g = c.getContext('2d')!; g.fillStyle = '#1d1d1c'; g.fillRect(0, 0, 32, 128); g.fillStyle = '#3a3a38'; for (let y = 0; y < 128; y += 16) g.fillRect(0, y, 32, 4); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1, 6); return t; })();
-  put(new THREE.BoxGeometry(0.4, 0.05, 1.5), new THREE.MeshStandardMaterial({ map: beltTex, roughness: 0.8 }), scene, -1.8, 0.1, -0.5);
-  for (const sx of [-1, 1]) put(new THREE.BoxGeometry(0.03, 0.09, 1.5), steel, scene, -1.8 + sx * 0.215, 0.1, -0.5);
-  for (const z of [-1.1, -0.5, 0.1]) for (const sx of [-1, 1]) put(new THREE.CylinderGeometry(0.02, 0.02, 0.1, 8), steel, scene, -1.8 + sx * 0.18, 0.04, z);
+  factory.updateMatrixWorld(true);
+  const doorAt = factory.localToWorld(new THREE.Vector3(0.25, 0.1, 0.56));
+  const beltLen = 0.15 - doorAt.z, beltZ = (doorAt.z + 0.15) / 2;
+  const beltTex = (() => { const c = document.createElement('canvas'); c.width = 32; c.height = 128; const g = c.getContext('2d')!; g.fillStyle = '#1d1d1c'; g.fillRect(0, 0, 32, 128); g.fillStyle = '#3a3a38'; for (let y = 0; y < 128; y += 16) g.fillRect(0, y, 32, 4); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1, 10); return t; })();
+  put(new THREE.BoxGeometry(0.42, 0.05, beltLen), new THREE.MeshStandardMaterial({ map: beltTex, roughness: 0.8 }), scene, doorAt.x, 0.1, beltZ);
+  for (const sx of [-1, 1]) put(new THREE.BoxGeometry(0.03, 0.09, beltLen), steel, scene, doorAt.x + sx * 0.225, 0.1, beltZ);
+  for (let z = doorAt.z + 0.2; z < 0.15; z += 0.55) for (const sx of [-1, 1]) put(new THREE.CylinderGeometry(0.02, 0.02, 0.1, 8), steel, scene, doorAt.x + sx * 0.18, 0.04, z);
 
   // refinery: two tanks, a distillation column with platforms, a flare stack, pipework
-  const refinery = new THREE.Group(); refinery.position.set(2.05, 0, -1.7); scene.add(refinery);
+  const refinery = new THREE.Group(); refinery.position.set(2.3, 0, -2.85); refinery.scale.setScalar(1.6); scene.add(refinery);
   const tank = (r: number, h: number, x: number, z: number) => {
     put(new THREE.CylinderGeometry(r, r, h, 40), wall, refinery, x, h / 2, z);
     put(new THREE.SphereGeometry(r, 40, 16, 0, Math.PI * 2, 0, Math.PI / 2), wall, refinery, x, h, z).scale.y = 0.35;
@@ -113,12 +117,46 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
   tube([[-0.35, 0.45, 0.15], [-0.05, 0.75, -0.05], [0.3, 0.7, -0.3]], 0.03, steel, refinery);
   tube([[0.3, 0.35, 0.4], [0.4, 0.45, 0.05], [0.3, 0.4, -0.3]], 0.03, steel, refinery);
   // the pipeline: refinery to factory, low behind Omar; data packets ride it
-  const pipe = tube([[1.55, 0.3, -1.85], [0.6, 0.3, -2.0], [-0.6, 0.3, -2.0], [-1.3, 0.35, -1.85]], 0.045, steel, scene);
+  const pipe = tube([[1.45, 0.45, -2.95], [0.6, 0.5, -3.3], [-0.6, 0.5, -3.3], [-1.05, 0.55, -2.95]], 0.06, steel, scene);
   const packets = Array.from({ length: 5 }, () => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 8), glow); scene.add(m); return m; });
   // steam from the chimneys
   const puffMat = () => new THREE.MeshBasicMaterial({ color: 0xD6D3CD, transparent: true, opacity: 0.8, depthWrite: false });
   const puffs = chimneys.flatMap((c, ci) => Array.from({ length: 5 }, (_, j) => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 12), puffMat()); scene.add(m); return { m, c, phase: j / 5 + ci * 0.1 }; }));
-  const DOOR = new THREE.Vector3(-1.8, 0.25, -1.2), BELT_END = new THREE.Vector3(-1.8, 0.25, 0.15);
+  const DOOR = new THREE.Vector3(doorAt.x, 0.25, doorAt.z), BELT_END = new THREE.Vector3(doorAt.x, 0.25, 0.15);
+
+  // assembly arm beside the belt: it swings over and fits each agent as it rolls out
+  const arm = new THREE.Group(); arm.position.set(doorAt.x + 0.45, 0, -0.6); arm.scale.setScalar(1.4); scene.add(arm);
+  put(new THREE.CylinderGeometry(0.1, 0.12, 0.08, 24), dark, arm, 0, 0.04, 0);
+  const turret = new THREE.Group(); turret.position.y = 0.08; arm.add(turret);
+  put(new THREE.CylinderGeometry(0.06, 0.07, 0.1, 16), band, turret, 0, 0.05, 0);
+  const shoulder = new THREE.Group(); shoulder.position.y = 0.1; turret.add(shoulder);
+  put(new THREE.CapsuleGeometry(0.035, 0.32, 6, 12), wall, shoulder, 0, 0.18, 0);
+  const elbow = new THREE.Group(); elbow.position.y = 0.36; shoulder.add(elbow);
+  put(new THREE.SphereGeometry(0.05, 16, 12), dark, elbow, 0, 0, 0);
+  put(new THREE.CapsuleGeometry(0.03, 0.26, 6, 12), wall, elbow, 0, 0.15, 0);
+  const tool = put(new THREE.SphereGeometry(0.035, 12, 8), glow, elbow, 0, 0.31, 0); tool.castShadow = false;
+
+  // refinery front: a pumpjack nodding away, and the wellhead that pumps agents out
+  const jack = new THREE.Group(); jack.position.set(1.55, 0, -1.25); jack.rotation.y = -0.35; jack.scale.setScalar(1.35); scene.add(jack);
+  put(new THREE.BoxGeometry(0.85, 0.05, 0.22), dark, jack, 0, 0.025, 0);
+  for (const sz of [-1, 1]) { const leg = put(new THREE.BoxGeometry(0.04, 0.58, 0.04), steel, jack, 0, 0.3, sz * 0.07); leg.rotation.x = -sz * 0.12; }
+  const beam = new THREE.Group(); beam.position.set(0, 0.58, 0); jack.add(beam);
+  put(new THREE.BoxGeometry(0.9, 0.06, 0.07), band, beam, 0, 0, 0);
+  const headGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.08, 24, 1, false, -Math.PI / 2, Math.PI);
+  const horse = put(headGeo, wall, beam, -0.45, -0.04, 0); horse.rotation.x = Math.PI / 2;
+  const crank = new THREE.Group(); crank.position.set(0.32, 0.2, 0); jack.add(crank);
+  put(new THREE.BoxGeometry(0.28, 0.06, 0.04), dark, crank, 0.08, 0, 0.13);
+  put(new THREE.BoxGeometry(0.14, 0.14, 0.06), wall, crank, 0.2, 0, 0.13);
+  const rod = put(new THREE.CylinderGeometry(0.012, 0.012, 0.5, 8), steel, jack, -0.6, 0.3, 0);
+  put(new THREE.CylinderGeometry(0.06, 0.08, 0.12, 16), dark, jack, -0.6, 0.06, 0);
+  const WELL = new THREE.Vector3(1.95, 0.32, -0.12);
+  const well = new THREE.Group(); well.position.copy(WELL).setY(0); scene.add(well);
+  put(new THREE.CylinderGeometry(0.1, 0.12, 0.2, 24), steel, well, 0, 0.1, 0);
+  const mouth = put(new THREE.CylinderGeometry(0.2, 0.09, 0.14, 32, 1, true), band, well, 0, 0.27, 0);
+  (mouth.material as InstanceType<Three['MeshPhysicalMaterial']>).side = THREE.DoubleSide;
+  const mouthGlow = new THREE.Mesh(new THREE.CircleGeometry(0.17, 32), new THREE.MeshStandardMaterial({ color: 0xFFB08A, emissive: SIGNAL, emissiveIntensity: 0.6 }));
+  mouthGlow.rotation.x = -Math.PI / 2; mouthGlow.position.y = 0.3; well.add(mouthGlow);
+  tube([[2.75, 0.5, -2.3], [2.5, 0.35, -1.2], [2.05, 0.2, -0.35], [1.92, 0.15, -0.12]], 0.045, steel, scene);
 
   // agents
   const botMat = new THREE.MeshPhysicalMaterial({ color: SIGNAL, roughness: 0.32, clearcoat: 0.9, clearcoatRoughness: 0.1 });
@@ -161,7 +199,7 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
     const t = ((T % CYCLE) + CYCLE) % CYCLE;
     ptr.sx += (ptr.x - ptr.sx) * 0.08; ptr.sy += (ptr.y - ptr.sy) * 0.08;
     const az = ptr.sx * 0.12 + Math.sin((T / CYCLE) * Math.PI * 2) * 0.03, el = ptr.sy * 0.06;
-    camera.position.set(Math.sin(az) * 11.6, 3.7 + el * 6, Math.cos(az) * 11.6);
+    camera.position.set(Math.sin(az) * 12.8, 3.9 + el * 6, Math.cos(az) * 12.8);
     camera.lookAt(0, 1.95, -0.4);
 
     // each launch is an Enter press: he dips a little
@@ -185,6 +223,22 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
     let doorGlow = 0;
     for (let i = 0; i < N; i++) { const b = FIRST + i * GAP; doorGlow = Math.max(doorGlow, Math.sin(Math.PI * seg(t, b - 0.25, b + 0.15))); }
     doorMat.emissiveIntensity = 0.7 + doorGlow * 1.6;
+    // pumpjack nods, the arm works the belt, the wellhead swells when it pumps
+    const nodA = T * 2.4;
+    beam.rotation.z = Math.sin(nodA) * 0.32;
+    crank.rotation.z = -nodA;
+    rod.position.y = 0.3 + Math.sin(nodA) * 0.14;
+    let tap = 0, pump = 0;
+    for (let i = 0; i < N; i++) {
+      const b = FIRST + i * GAP;
+      if (i % 2 === 0) tap = Math.max(tap, Math.sin(Math.PI * seg(t, b + 0.15, b + 0.55)));
+      else pump = Math.max(pump, Math.sin(Math.PI * seg(t, b - 0.2, b + 0.25)));
+    }
+    turret.rotation.y = -1.25 + Math.sin(T * 1.3) * 0.35 * (1 - tap);
+    shoulder.rotation.z = 0.35 + tap * 0.55;
+    elbow.rotation.z = 0.9 + tap * 0.5 + Math.sin(T * 3) * 0.06;
+    mouth.scale.set(1 + pump * 0.25, 1 - pump * 0.2, 1 + pump * 0.25);
+    (mouthGlow.material as InstanceType<Three['MeshStandardMaterial']>).emissiveIntensity = 0.6 + pump * 2.2;
 
     const labels: LabLabel[] = [];
     bots.forEach((b, i) => {
@@ -194,8 +248,11 @@ export function createOmarLab(THREE: Three, canvas: HTMLCanvasElement, opts: Lab
       const cheer = Math.sin(Math.PI * seg(t, SHIP, SHIP + 0.45)) * 0.32 + (waving ? Math.abs(Math.sin(T * 9)) * 0.12 : 0);
       b.g.visible = t > born && out < 0.999;
       // rise out of the lid, then arc to the slot with a little overshoot
-      const ride = seg(k, 0, 0.42), fly = eob(seg(k, 0.42, 1));
-      v.copy(DOOR).lerp(BELT_END, ride).lerp(b.slot, fly);
+      // even agents roll out of the factory on the belt; odd ones are pumped out of the well
+      const fly = eob(seg(k, 0.42, 1));
+      if (i % 2 === 0) v.copy(DOOR).lerp(BELT_END, seg(k, 0, 0.42));
+      else v.copy(WELL).add(new THREE.Vector3(0, -0.25 + eio(seg(k, 0.05, 0.42)) * 0.55, 0));
+      v.lerp(b.slot, fly);
       v.y += Math.sin(Math.PI * seg(k, 0.42, 1)) * 0.8;
       v.y += Math.sin(T * 2.1 + i * 1.3) * 0.05 * fly + cheer;
       v.add(new THREE.Vector3(Math.sign(b.slot.x || 1) * 1.5, 4.5, -1.5).multiplyScalar(out));
