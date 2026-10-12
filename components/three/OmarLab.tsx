@@ -2,13 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 
-/** The agents that hop out of the laptop: real projects, each one a link. */
+/** The agents the works turn out: real projects with their real numbers (data/projects.ts), each one a link. */
 const AGENTS = [
-  { name: 'WhatsApp agent', slug: 'whatsapp-ai-business-agent' },
-  { name: 'RAG platform', slug: 'enterprise-rag-platform' },
-  { name: 'Research agent', slug: 'autonomous-research-agent' },
-  { name: 'Posture coach', slug: 'slouch-ai-posture-coach' },
-  { name: 'Meeting assistant', slug: 'ai-meeting-assistant-voice-automation' },
+  { name: 'WhatsApp agent', metric: '55% solved solo', slug: 'whatsapp-ai-business-agent' },
+  { name: 'RAG platform', metric: '95% accuracy', slug: 'enterprise-rag-platform' },
+  { name: 'Research agent', metric: '10-page cited reports', slug: 'autonomous-research-agent' },
+  { name: 'Medical dossiers', metric: '3 months to 1 week', slug: 'medical-technical-file-builder' },
+  { name: 'Fraud guard', metric: '€2M+ recovered', slug: 'invoice-fraud-prevention-platform' },
 ];
 
 /**
@@ -100,6 +100,7 @@ export default function OmarLab({ className = '' }: { className?: string }) {
           className="absolute left-0 top-0 whitespace-nowrap rounded-full border border-hairline bg-surface px-2.5 py-1 font-mono text-[11px] text-ink transition-colors duration-150 hover:border-signal hover:text-signal-ink focus-visible:outline-2 focus-visible:outline-signal"
         >
           {a.name}
+          <span className="hidden lg:inline"> · {a.metric}</span>
         </a>
       ))}
     </div>
