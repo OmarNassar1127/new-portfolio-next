@@ -108,7 +108,7 @@ function WorkCard({
 
           <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 md:mt-auto md:pt-8 lg:grid-cols-3">
             {showcase.metrics.map((metric) => (
-              <div key={metric.value} className="flex flex-col-reverse gap-2">
+              <div key={metric.value} className="flex flex-col-reverse justify-end gap-2">
                 <dt className="text-sm leading-snug text-mute">{t(metric.label.en, metric.label.nl)}</dt>
                 <dd className="type-metric text-[clamp(2rem,3.4vw,3.25rem)] text-ink">{metric.value}</dd>
               </div>

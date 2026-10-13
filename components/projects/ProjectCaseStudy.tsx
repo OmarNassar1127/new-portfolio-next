@@ -69,7 +69,7 @@ export default function ProjectCaseStudy({ project, prevProject, nextProject }: 
         {showcase && (
           <dl className="mt-12 grid grid-cols-2 gap-y-10 border-b border-hairline pb-12 md:mt-16 md:grid-cols-3">
             {showcase.metrics.map((metric) => (
-              <div key={metric.value} className="flex flex-col-reverse gap-3">
+              <div key={metric.value} className="flex flex-col-reverse justify-end gap-3">
                 <dt className="text-sm text-mute">{t(metric.label.en, metric.label.nl)}</dt>
                 <dd className="type-metric text-[clamp(2.75rem,5vw,4.5rem)]">{metric.value}</dd>
               </div>

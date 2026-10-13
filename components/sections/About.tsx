@@ -40,7 +40,7 @@ export default function About() {
 
         <dl className="mt-20 grid grid-cols-2 gap-y-12 border-t border-hairline pt-10 md:mt-28 md:grid-cols-4 md:pt-12">
           {personal.stats.map((stat, i) => (
-            <Reveal key={stat.value} delay={i * 0.08} className="flex flex-col-reverse gap-3 md:border-l md:border-hairline md:pl-8 md:first:border-l-0 md:first:pl-0">
+            <Reveal key={stat.value} delay={i * 0.08} className="flex flex-col-reverse justify-end gap-3 md:border-l md:border-hairline md:pl-8 md:first:border-l-0 md:first:pl-0">
               <dt className="text-sm text-mute">{t(stat.label.en, stat.label.nl)}</dt>
               <dd className="type-metric text-[clamp(2.75rem,5vw,4.5rem)] text-ink">{stat.value}</dd>
             </Reveal>
