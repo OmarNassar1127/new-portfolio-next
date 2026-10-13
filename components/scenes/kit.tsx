@@ -196,6 +196,20 @@ type StageProps = {
  * little pointer parallax, pauses when off screen, and goes still under
  * reduced motion. The cover's subject and flow stay as a caption.
  */
+function Caption({ subject, flow, chip }: { subject?: string; flow?: string[]; chip: string }) {
+  return (
+    <>
+      {subject && <span className="mr-2 text-[max(13px,min(2.6cqw,1.15rem))] font-semibold tracking-[-0.01em]">{subject}</span>}
+      {flow?.map((s, i) => (
+        <span key={s} className="flex items-center gap-2">
+          {i > 0 && <ArrowRight weight="bold" aria-hidden="true" className="size-3 opacity-50" />}
+          <span translate="no" className={cn('whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[11px]', chip)}>{s}</span>
+        </span>
+      ))}
+    </>
+  );
+}
+
 export function Stage({ w, d, tone, label, flow, subject, stillAt = 4, zoom = 1, offset = [0, 4], floorStyle, overlay, className, children }: StageProps) {
   const frame = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -251,17 +265,17 @@ export function Stage({ w, d, tone, label, flow, subject, stillAt = 4, zoom = 1,
         </div>
         {overlay}
         {(subject || flow) && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-wrap items-center gap-2 p-[min(4.5cqw,2rem)]">
-            {subject && <span className="mr-2 text-[max(13px,min(2.6cqw,1.15rem))] font-semibold tracking-[-0.01em]">{subject}</span>}
-            {flow?.map((s, i) => (
-              <span key={s} className="hidden items-center gap-2 @sm:flex">
-                {i > 0 && <ArrowRight weight="bold" aria-hidden="true" className="size-3 opacity-50" />}
-                <span translate="no" className={cn('whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[11px]', tn.chip)}>{s}</span>
-              </span>
-            ))}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden flex-wrap items-center gap-2 p-[min(4.5cqw,2rem)] md:flex">
+            <Caption subject={subject} flow={flow} chip={tn.chip} />
           </div>
         )}
       </div>
+      {/* on phones the caption sits below the scene so it never covers it */}
+      {(subject || flow) && (
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-ink md:hidden">
+          <Caption subject={subject} flow={flow} chip={tn.chip} />
+        </div>
+      )}
     </ClockCtx.Provider>
   );
 }
