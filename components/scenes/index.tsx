@@ -13,6 +13,7 @@ import { ProjectCover } from '@/components/ui/ProjectCover';
 type SceneProps = { project: Project; className?: string };
 
 const SCENES: Record<string, ComponentType<SceneProps>> = {
+  'ai-qa-agents': dynamic(() => import('./ai-qa-agents'), { ssr: false }),
   'invoice-fraud-prevention-platform': dynamic(() => import('./invoice-fraud-prevention-platform'), { ssr: false }),
   'slouch-ai-posture-coach': dynamic(() => import('./slouch-ai-posture-coach'), { ssr: false }),
   'whatsapp-ai-business-agent': dynamic(() => import('./whatsapp-ai-business-agent'), { ssr: false }),

@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // three.js simulator sources, bundled by the teardown kit into public/sims
+    "sims/**",
+    "public/sims/**",
   ]),
 ]);
 
