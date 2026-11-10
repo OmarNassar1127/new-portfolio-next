@@ -529,6 +529,53 @@ export const projects: Project[] = [
     featured: false,
   },
   {
+    id: "qa-agents",
+    slug: "ai-qa-agents",
+    title: "AI QA Agents for a Car-Sharing App",
+    category: "professional",
+    date: "2026-10",
+    year: 2026,
+    priority: 0,
+    description: {
+      en: "Vloto is a small team with no dedicated QA, shipping a mobile app, a dashboard and an API on top of several payment systems and detailed charge rules. Manual testing covered the obvious screens, but not the edge cases where money or customer trust is at stake. So I designed and built an AI-driven QA system. Scripted end-to-end tests run first, including exact-euro money checks. Then AI agents with different personas use the app on their own iOS simulators the way real customers do: a careful customer, one who doesn't pay, one who tries to game the system, a brand-new signup, a family sharing an account, and cheaper sweeper agents that each cover one area. Every result is checked against the backend and the business rules. A separate verifier agent re-checks every claimed pass and every finding independently, and only confirmed results count. The team rules each finding with one click in a QA dashboard I built, and those rulings become memory the agents read on the next run, so settled items are never reported twice. A test build reports every screen and API call the agents reach, measured against a catalog of 74 customer journeys on the newest build. The agents only touch staging, test-mode payments and test accounts. In the first two weeks: 52 runs, about 1,270 logged steps, 301 findings flagged and filtered down to 90 confirmed real bugs, 55 of them already fixed, and 64 of 74 journeys verified, at about $6 per agent run. After a live demo the team decided to invest in dedicated hardware to run it full time.",
+      nl: "Vloto is een klein team zonder vaste tester, met een mobiele app, een dashboard en een API bovenop meerdere betaalsystemen en gedetailleerde tariefregels. Handmatig testen dekte de bekende schermen, maar niet de randgevallen waar geld of klantvertrouwen op het spel staat. Daarom ontwierp en bouwde ik een AI-gedreven QA-systeem. Eerst draaien gescripte end-to-end tests, inclusief controles tot op de euro. Daarna gebruiken AI-agents met verschillende persona's de app op hun eigen iOS-simulator zoals echte klanten: een zorgvuldige klant, een klant die niet betaalt, een klant die het systeem probeert te bespelen, een nieuwe aanmelder, een gezin dat één account deelt, en goedkopere sweeper-agents die elk één deel van de app afdekken. Elk resultaat wordt gecontroleerd tegen de backend en de bedrijfsregels. Een aparte verifier-agent controleert elke geclaimde pass en elke bevinding onafhankelijk, en alleen bevestigde resultaten tellen. Het team beoordeelt elke bevinding met één klik in een QA-dashboard dat ik bouwde, en die oordelen worden geheugen dat de agents bij de volgende run lezen, zodat afgehandelde punten nooit twee keer terugkomen. Een testbuild meldt elk scherm en elke API-call die de agents bereiken, gemeten tegen een catalogus van 74 klantreizen op de nieuwste build. De agents raken alleen staging, testbetalingen en testaccounts. In de eerste twee weken: 52 runs, zo'n 1.270 gelogde stappen, 301 bevindingen teruggebracht tot 90 bevestigde echte bugs, waarvan 55 al opgelost, en 64 van de 74 klantreizen geverifieerd, voor ongeveer $6 per agent-run. Na een live demo besloot het team te investeren in eigen hardware om het fulltime te draaien.",
+    },
+    technologies: [
+      "AI Agents",
+      "iOS Simulator",
+      "React Native",
+      "Laravel",
+      "MySQL",
+      "Node.js",
+      "TypeScript",
+      "GitHub Actions",
+    ],
+    siteUrl: null,
+    image: "/images/qa-agents.png",
+    cover: {
+      tone: "paper",
+      icon: "Scan",
+      stat: {
+        value: "90",
+        label: { en: "real bugs confirmed in two weeks", nl: "echte bugs bevestigd in twee weken" },
+      },
+      flow: ["Agents", "Verifier", "Rulings"],
+    },
+    featured: true,
+    showcase: {
+      client: "Vloto",
+      summary: {
+        en: "AI agents use the app on iOS simulators like real customers, a separate verifier re-checks every finding, and the team's rulings become the agents' memory.",
+        nl: "AI-agents gebruiken de app op iOS-simulators zoals echte klanten, een aparte verifier controleert elke bevinding opnieuw, en de oordelen van het team worden het geheugen van de agents.",
+      },
+      metrics: [
+        { value: "90", label: { en: "Real bugs confirmed in two weeks", nl: "Echte bugs bevestigd in twee weken" } },
+        { value: "55", label: { en: "Already fixed", nl: "Al opgelost" } },
+        { value: "64/74", label: { en: "Customer journeys verified", nl: "Klantreizen geverifieerd" } },
+      ],
+    },
+  },
+  {
     id: "17",
     slug: "invoice-fraud-prevention-platform",
     title: "Invoice Fraud Prevention Platform",
@@ -968,6 +1015,7 @@ export const projects: Project[] = [
 
 // Slug-based IDs for the featured projects shown on the homepage
 const FEATURED_SLUGS = new Set([
+  "ai-qa-agents",
   "invoice-fraud-prevention-platform",
   "whatsapp-ai-business-agent",
   "medical-technical-file-builder",
